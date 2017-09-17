@@ -1,5 +1,5 @@
 % latex table generated in R 3.4.0 by xtable 1.8-2 package
-% Mon Aug 28 19:59:27 2017
+% Sun Sep 17 21:09:39 2017
 \begin{pmatrix}{}
   0.365 & -0.218 & -0.084 \\ 
   -0.218 & 0.184 & 0.027 \\ 
