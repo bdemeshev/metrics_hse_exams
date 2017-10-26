@@ -5367,6 +5367,6 @@ mean_asv <- sample(c(40, 50, 60, 70), size = 1)
 
 \section{2017-2018}
 
-
+\input{chapters/year_2017_2018.tex}
 
 \end{document}

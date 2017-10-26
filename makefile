@@ -2,7 +2,7 @@
 # .Rnw extension is automatically added
 file_name = metrics_hse_exams
 
-$(file_name).pdf: $(file_name).tex
+$(file_name).pdf: $(file_name).tex chapters/*
 	# protection against biber error
 	# http://tex.stackexchange.com/questions/140814/
 	rm -rf `biber --cache`
