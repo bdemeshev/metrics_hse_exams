@@ -2901,24 +2901,37 @@ $(X'X)^{-1}=\begin{bmatrix}{}
 \end{enumerate}
 
 
-% \subsection{Праздник номер 2, 10 ноября 2015, ответы}
+\subsection{Праздник номер 2, 10 ноября 2015, некоторые ответы}
 
-% \begin{enumerate}
-% \item $\E(\hat\varepsilon) = 0$, $\Var(\hat\varepsilon) = \sigma^2 (I - H)$, $\Cov(\hat\varepsilon, y) =  \sigma^2 (I - H)$.
-% \item
-% \begin{enumerate}
-% \item $\hb_1 = 0.4$, $\hb_2 = \frac{22}{171}$, $\hb_3 = -\frac{7}{19}$
-% \item $TSS = 5$
-% \item
-% \end{enumerate}
-% \item
-% \item
-% \begin{enumerate}
-% \item $\hb_1 = 83$, $se(\hb_2) = 0.22$, $t_{obs} = 1$
-% \item $\hb_1$, $\hb_2$
-% \item $[-0.89  - 2.021 \cdot 0.22; -0.89 + 2.021 \cdot 0.22]$
-% \end{enumerate}
-% \end{enumerate
+\begin{enumerate}
+\item $\E(\hat\varepsilon) = 0$, $\Var(\hat\varepsilon) = \sigma^2 (I - H)$, $\Cov(\hat\varepsilon, y) =  \sigma^2 (I - H)$.
+\item
+%\begin{enumerate}
+%\item $\hb_1 = \frac{899}{342}$, $\hb_2 = \frac{22}{171}$, $\hb_3 = -\frac{7}{19}$
+%\item $TSS = 5$
+%\item
+%\end{enumerate}
+\item При добавлении нового наблюдения TSS и RSS не уменьшаются, а ESS может меняться в обе стороны.
+При добавлении дополнительного регрессора RSS не увеличивается, TSS не меняется, ESS не уменьшается.
+\item[5.]
+\begin{enumerate}
+\item $\hb_1 = 83$, $se(\hb_2) = 0.22$, $t_{obs} = 1$
+\item $\hb_1$, $\hb_2$
+\item $[-0.89  - 2.021 \cdot 0.22; -0.89 + 2.021 \cdot 0.22]$
+\end{enumerate}
+\item[8.]
+\begin{enumerate}
+\item $n=47$, $\sum x_iz_i = 23121$, $\sum(x_i-\bar{x})(z_i-\bar{z}) = 23121 - \frac{23121}{47}$
+\item
+\item $\Var(\hb_j) = \sigma^2/RSS_j$, где $RSS_j$ — сумма квадратов остатков в регресси j-ой объясняющей переменной на остальные объясняющие перменные, включая константу.
+\end{enumerate}
+\item[9.]
+\begin{enumerate}
+\item Да, $\lambda=0$
+\item Да, $\lambda=1$
+\item Да, $\lambda=1$
+\end{enumerate}
+\end{enumerate}
 
 \subsection{Блокбастер, 28-12-2015}
 
@@ -3027,6 +3040,22 @@ y_i = \b_1 + \b_2 x_i + \b_3 z_i + \e_i
 \begin{center}
 \includegraphics[scale=0.6]{figures/50_bored.png}
 \end{center}
+
+
+\subsection{Блокбастер, 28-12-2015, ответы}
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item $(\hb_1 \quad \hb_2 \quad \hb_3)' = (3 \quad 1.5 \quad -1.5)'$
+\item $R^2=0.9$
+\item $t_{obs} = \frac{-1.5}{\sqrt{0.5\cdot1.5}} \approx -1.73$, $t_{crit} = 4.3$, нет оснований отвергать $H_0$
+\item $\hat y_6 = 6$
+
+$[6 - 4.3\sqrt{3.5 + 0.5}; 6 + 4.3\sqrt{3.5+0.5}]$
+\end{enumerate}
+\end{enumerate}
+
 
 \subsection{Максимально правдоподобно, 25-02-2016}
 
@@ -4590,6 +4619,41 @@ se_forecast_error <- se_y_hat + 1.45
 t_crit <- qt(0.975, df = 30 - 2)
 @
 
+\begin{enumerate}
+\item
+Или руками:
+
+\textbf{B1}: Воспользуемся следующим соотношением:
+\[
+\frac{\text{Residual SS}}{\text{Residual df}} = \text{Residual MS} \Rightarrow \textbf{B1} = \text{Residual df} = 17
+\]
+\textbf{B2}: $\text{Residual df} = n - k \Rightarrow n = 21$
+
+\textbf{B3}: $\text{Total df} = n - 1 = 20$
+
+\textbf{B4}: $TSS = RSS + ESS \Rightarrow TSS = 2920.4$
+
+\textbf{B5}: $F = \frac{\text{Regression MS}}{\text{Residual MS}} = \frac{879.4}{16.6} = 52.98$
+
+\textbf{B6}: $\hat{\sigma}^2 = \frac{RSS}{n-k} = \frac{282.1}{21-4} = 16.59$
+
+\textbf{B7}: $R^2_{adj} = 1 - \frac{RSS/(n-k)}{TSS/(n-1)} = 1 - \frac{282.1/17}{2920.4/20} = 0.87$
+
+\textbf{B8} и \textbf{B9} получаются из следующей системы, где $2.11$ берётся из таблицы распределения Стьюдента, $t_{21-4;0.025}$:
+\[
+\begin{cases}
+\hb_{age} - 2.11 \cdot se(\hb_{age}) = 4.13 \\
+\hb_{age} + 2.11 \cdot se(\hb_{age}) = 7.06
+\end{cases}
+\Rightarrow
+\begin{cases}
+\hb_{age} = 5.63 \\
+se(\hb_{age}) = 0.71
+\end{cases}
+\]
+\textbf{B10}: $t_{obs} = \frac{\hb_{sex}}{se(\hb_{sex})} \Rightarrow t_{obs} = -5.99$
+\item Не изменятся
+\end{enumerate}
 \item
 <<echo=TRUE>>=
 t_obs <- (0.385-0.5) / 0.085
@@ -4598,6 +4662,104 @@ F_obs <- (0.943 - 0.74) / (1 - 0.943) * (27 - 3)
 F_crit <- qf(0.95, df1 = 1, df2 = 27 - 3)
 @
 
+Или руками:
+\begin{enumerate}
+\item $\widehat{time}_f = 12 + 0.2 \cdot 15 = 15$
+\item Доверительный интервал для среднего значения иммет вид:
+\[
+[\widehat{time}_f - z_{cr} \cdot se(\widehat{time}_f); \widehat{time}_f + z_{cr} \cdot se(\widehat{time}_f)]
+\]
+\begin{multline*}
+\Var(\widehat{time}_f - \E(time_f | X)|X) = \Var(\widehat{time}_f|X) = \Var(\beta_1 + 15\beta_2 | X) = \\
+= \Var(\beta_1|X) + 225 \Var(\beta_2|X) + 2 \cdot 15 \Cov(\beta_1, \beta_2|X) = 8.15 \\
+\end{multline*}
+\[
+[15 - 2 \sqrt{8.15}; 15 + 2 \sqrt{8.15} ]
+\]
+\item Доверительный (предиктивный) интервал для конкретного значения иммет вид:
+\[
+[\widehat{time}_f - z_{cr} \cdot se(\widehat{time}_f - \varepsilon_f); \widehat{time}_f+ z_{cr} \cdot se(\widehat{time}_f - \varepsilon_f)]
+\]
+\begin{multline*}
+\Var(\widehat{time}_f - time_f | X) = \Var(\widehat{time}_f - \E(time_f | X) - \varepsilon_f |X) = \\
+= \Var(\widehat{time}_f - \varepsilon_f |X) = \Var(\widehat{time}_f|X) + \Var(\varepsilon_f |X) = 1.45 + 8.15 = 9.6
+\end{multline*}
+\[
+[15 - 2 \sqrt{9.6}; 15 + 2 \sqrt{9.6}]
+\]
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Гипотеза об адекватности множественной регрессии проверяется, с помощью следующей статистики:
+\[
+F = \frac{ESS/(k-1)}{RSS_{UR} / (n-k)} = \frac{R^2/(k-1)}{(1-R^2)/(n-k)}
+\]
+где $F \sim F_{k-1, n-k}$ при верной $H_0$. Найдём наблюдаеомое и критическое значения статистики:
+\[
+F_{obs} = \frac{0.943/2}{(1-0.943)/(27-3)} = 198.5 \quad \quad F_{crit} = 3.4
+\]
+Поскольку $F_{obs} > F_{crit}$, основная гипотеза отвергается.
+
+Также можно было заметить, что в таблице уже дано $F = 200.24$ и сделать тот же вывод.
+
+Проверим $H_0: \beta_3 = 0.5$:
+\[
+t_{obs} = \frac{\hb_3 - \beta_3}{se(\hb_3)} = \frac{0.375 - 0.5}{0.085} = -1.47 \quad \quad t_{crit} = 2.06
+\]
+Так как $|t_{obs}| < t_{crit}$, оснований отвергать $H_0$ нет.
+
+\item Модель (2) получается из модели (1) при $\beta_3 = -\beta_2$. Будем проверять гипотезу $H_0: \beta_3 + \beta_2 = 0$.
+\[
+F_{obs} = \frac{RSS_{R} - RSS_{UR}/q}{RSS_{UR}/(n-k_{UR})} = \frac{(R^2_{UR} - R^2_{R})/q}{(1-R^2_{UR})/(n-k_{UR})} = \frac{(0.943-0.74)/1}{(1-0.943)/(27-3)}=85.47
+\]
+$F_{obs} > F_{crit} = 4.26 \Rightarrow$ основная гипотеза отвергается.
+\item Введём дополнительную переменную:
+\[
+d_i = \begin{cases}
+1, & i \leq 14 \\
+0, & i > 14
+\end{cases}
+\]
+Тогда можем записать неограниченную и ограниченную модели:
+\[
+UR: \ln Y_i = \beta_1 + \Delta_1 d_i + (\beta_2 + \Delta_2 d_i) \ln L_i + (\beta_3 + \Delta_3 d_i) \ln K_i + u_i
+\]
+\[
+R: \ln Y_i =  \beta_1 + \beta_2  \ln L_i + \beta_3 \ln K_i + u_i
+\]
+Заметим, что $RSS_{UR} = 0.119 + 0.362 = 0.481$.
+
+Будем проверять следующую гипотезу:
+\[
+H_0: \begin{cases}
+\Delta_1 = 0 \\
+\Delta_2 = 0 \\
+\Delta_3 = 0
+\end{cases}
+\quad
+H_a: \Delta_1^2 + \Delta_2^2 + \Delta_3^2 >0
+\]
+Для этого считаем F-статистику, $F \sim F_{3, 21}$ при верной $H_0$:
+\[
+F_{obs} = \frac{(RSS_R - RSS_{UR})/q}{RSS_{UR} / (n-k_{UR})} = \frac{(0.851-0.481)/3}{0.481/(27-6)} = 5.38 \quad \quad F_{crit} = 3.07
+\]
+Поскольку $F_{obs} > F_{crit}$, основная гипотеза отвергается.
+\end{enumerate}
+
+\item Гипотезы $H_0: \lambda = \theta = -1$ и $H_0: \lambda = \theta = 1$ (последняя соответсвует линейной спецификации) отвергаются.
+Гипотеза $H_0: \lambda = \theta = 0$ (соответсвует логарифмической спецификации) не отвергается. Значит, преподпочтительной является логарифмическая модель.
+
+\item
+\begin{enumerate}
+\item $H_0: gini_i = \beta_1 + \beta_2 \cdot gdp_i + u_i$, то есть в модели нет пропущенных переменных; $H_A:$ есть неизвсетные нам пропущенные регрессоры.
+\item
+\begin{itemize}
+\item Оценить модель $gini_i = \beta_1 + \beta_2 \cdot gdp_i + u_i$, получить прогнозы $\widehat{gini}_i$.
+\item Оценить вспомогательную регрессию $gini_i = \beta_1 + \beta_2 \cdot gdp_i + \gamma_1 \widehat{gini}_i^2 + \gamma_2 \widehat{gini}_i^3 + \ldots + \gamma_p \widehat{gini}_i^{p+1} + u_i$
+\item Посчитать F-статистику, проверяющую гипотезу о равенстве всех $\gamma_i$ нулю. При верной $H_0$ и нормальности остатков $F \sim F_{p, n-k-p}$.
+\end{itemize}
+\item Основная гипотеза отвергается на любом разумном уровне значимости. Значит, в модели есть пропущенные факторы.
+\end{enumerate}
 \end{enumerate}
 
 
@@ -4766,7 +4928,7 @@ ESS_new <- sample(c(150, 160, 170), 1)
 
 \item По квартальным данным 1958-1976 годов была оценена модель с тремя объясняющими факторами:
 \[
-\hat Y_i = 2.2 + 0.104 X_i - 3.48 Z_i + 0.34 W_i, \; ESS = \Sexpr{ESS_old}, \; RSS = 20
+\hat Y_i = 2.2 + 0.104 X_i - 3.48 Z_i + 0.34 W_i, \; ESS = \Sexpr{ESS_old}, \; RSS = 120
 \]
 
 \begin{enumerate}
@@ -4828,6 +4990,140 @@ xmatrix(XXm)
 \end{enumerate}
 
 
+\end{enumerate}
+
+\subsection{Кр 2, экзамен за I семестр, 24.12.2016, решения}
+
+\begin{enumerate}
+\item $\textbf{B1} = n - k = 200 - 4 = 196$
+
+Из условия, $\textbf{B2} = n = 200$
+
+$\textbf{B3} = n - 1  = 199$
+
+Для нахождения \textbf{B4} воспользуемся знанием значения $R^2$:
+\[
+R^2 = 1 - \frac{RSS}{TSS} = 1 - \frac{830.1}{\textbf{B4}} = 0.911 \Rightarrow \textbf{B4} = 9326.97
+\]
+Для того, чтобы найти \textbf{B5}, понадобится $\textbf{B9} = TSS - RSS = 8496.87$. Тогда:
+\[
+\textbf{B5} = F = \frac{\text{Regression MS}}{\text{Residual MS}} = \frac{8496.87/3}{830.1/196} = 668.75
+\]
+\[
+\textbf{B6} = \hat{\sigma}^2 = \frac{RSS}{n-k} = 4.24
+\]
+\[
+\textbf{B7} = R^2_{adj} = 1 - \frac{RSS/(n-k)}{TSS/(n-1)} = 0.91
+\]
+Значение \textbf{B8} находится из соотношения:
+\[
+\frac{\hb}{se(\hb)} = t_{obs} \Rightarrow \textbf{B8} = 5.8
+\]
+Аналогично, для \textbf{B10}, $\textbf{B10} = 5.36$.
+
+% TODO: ответ на пункт б!
+
+\item
+\begin{enumerate}
+\item Необходимо проверить следующую гипотезу:
+\[
+H_0: \begin{cases}
+\beta_1 = 0 \\
+\beta_2 = 0 \\
+\beta_3 = 0
+\end{cases}
+\quad
+H_a: \beta_1^2 + \beta_2^2 + \beta_3^2 >0
+\]
+Для этого вопользуемся F-статистикой, $F \sim F_{2,97}$, она дана в таблице:
+\[
+F_{obs} = \frac{ESS/(k-1)}{RSS_{UR}/(n-k_{UR})} = 14.464
+\]
+Находим $F_{crit} = 3.09$. Поскольку $F_{obs} > F_{crit}$, гипотеза отвергается.
+
+\item Для того, чтобы записать спецификацию неограниченной модели, введём дополнительную переменную $d_i$:
+\[
+d_i = \begin{cases}
+1 & \text{городская местность} \\
+0 & \text{сельская местоность}
+\end{cases}
+\]
+Пусть коэффициенты для городской местности отличаются на некоторое $\Delta_i$, тогда неограниченная модель имеет вид:
+\[
+milk_i = \beta_1 + \Delta_1 d_i + (\beta_2 + \Delta_2 d_i) price_i + (\beta_3 + \Delta_3 d_i) income_i + \varepsilon_i
+\]
+\[
+RSS_{UR} = RSS_{Urban} + RSS_{Rural} = 1115.693 + 865.08 = 1980.773
+\]
+Проверяем следующую гипотезу:
+\[
+H_0: \begin{cases}
+\Delta_1 = 0 \\
+\Delta_2 = 0 \\
+\Delta_3 = 0
+\end{cases}
+\quad
+H_a: \Delta_1^2 + \Delta_2^2 + \Delta_3^2 >0
+\]
+Для этого считаем F-статистику, $F \sim F_{3, 94}$ при верной $H_0$:
+\[
+F_{obs} = \frac{(2123 - 1980.773)/3}{1980.773/94} \approx 2.25
+\]
+Сравниваем с $F_{crit} = 2.7$, $F_{obs} < F_{crit} \Rightarrow$ нет оснований отвергать гипотезу.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item $\widehat{milk} = 1.4791 + 0.2524 \cdot 100 - 0.3354 \cdot 30 = 16.6571$
+\item $\sCorr(milk, \widehat{milk}) = \sqrt{R^2} = \sqrt{0.23}$
+\item $R^2 = \sum_{j=2}^{k} \hb_j \frac{\sCov(x_j, y)}{\sVar(y)} = 0.2524 \cdot \frac{22.83}{27.84} - 0.3354 \cdot \frac{(-1.89)}{27.84}$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item В модель необходимо добавить фиктивные переменные $Q_1$, $Q_2$ и $Q_3$, соответствующие первым трём кварталам года:
+\[
+Y_i = \beta_1 + \beta_2 X_i + \beta_3 Z_i + \beta_4 W_i + \beta_5 Q_{1i} + \beta_6 Q_{2i} + \beta_7 Q_{3i} + \varepsilon_i
+\]
+\item Гипотеза о наличии (а на самом деле отсутствии) сезонности записывается следущим образом:
+\[
+H_0: \begin{cases}
+\beta_5 = 0 \\
+\beta_6 = 0 \\
+\beta_7 = 0
+\end{cases}
+\quad
+H_{a}: \beta_5^2 + \beta_6^2 + \beta_7^2 > 0
+\]
+Поскольку гипотезы оцениваются по одним и тем же данным, $TSS$ в них совпадает и равен $ESS_{R} + RSS_{R} = 100 + 120 = 220$
+
+Тогда в неограниченной модели $RSS_{UR} = 220 - 160 = 60$.
+
+Количество наблюдений: $(1976-1958+1)\cdot 4 = 76$. Считаем, что данные взяты с первого квартала 1958 года по четвёртый квартал 1976 года.
+
+Теперь можно проверять гипотезу, $F \sim F(3, 69)$:
+\[
+F_{obs} = \frac{(RSS_{R} - RSS_{UR}) / q}{RSS_{UR}/(n-k_{UR})} = \frac{(120 - 60) / 3}{40/69} = 34.5
+\]
+Так как $F_{obs} > F_{crit} = 2.73$, гипотеза отвергается.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Чтобы найти $se(\beta_Z)$, сначала найдём стандартную ошибку регрессии $\sigma^2$:
+\[
+\sigma^2 = \frac{RSS}{n-k} = \frac{180}{24-3} \approx 8.57
+\]
+Тогда $se(\beta_Z) = \sqrt{8.57 \cdot 0.184} = \sqrt{1.57688}$. Теперь можно проверять гипотезу:
+\[
+t_{obs} = \frac{-4}{\sqrt{1.57688}} \approx -3.19 \quad t_{crit} = -2.08
+\]
+Основная гипотеза отвергается.
+\item t-статистика имеет вид:
+\[
+t_{obs} = \frac{\hb_Z + \hb_W - 0}{se(\hb_Z + \hb_W)} = \frac{-4 + 3}{\sqrt{8.57(0.184 + 0.046 + 2 \cdot 0.027)}} \approx -0.64 \quad t_{crit} \approx 2.08
+\]
+Нет оснований отвергать $H_0$.
+\item $u_i \sim \cN(0, \sigma_u^2)$
+\end{enumerate}
 \end{enumerate}
 
 
