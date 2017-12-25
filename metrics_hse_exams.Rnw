@@ -4652,7 +4652,7 @@ se(\hb_{age}) = 0.71
 \end{cases}
 \]
 \textbf{B10}: $t_{obs} = \frac{\hb_{sex}}{se(\hb_{sex})} \Rightarrow t_{obs} = -5.99$
-\item Не изменятся
+\item $\hb_{4, new} = -\hb_{4, old}$, $\hb_{1, new} = \hb_{1, old} - \hb_{4, new}$, остальные не изменятся.
 \end{enumerate}
 \item
 <<echo=TRUE>>=
@@ -4995,7 +4995,10 @@ xmatrix(XXm)
 \subsection{Кр 2, экзамен за I семестр, 24.12.2016, решения}
 
 \begin{enumerate}
-\item $\textbf{B1} = n - k = 200 - 4 = 196$
+\item
+\begin{enumerate}
+  \item
+$\textbf{B1} = n - k = 200 - 4 = 196$
 
 Из условия, $\textbf{B2} = n = 200$
 
@@ -5021,8 +5024,8 @@ R^2 = 1 - \frac{RSS}{TSS} = 1 - \frac{830.1}{\textbf{B4}} = 0.911 \Rightarrow \t
 \]
 Аналогично, для \textbf{B10}, $\textbf{B10} = 5.36$.
 
-% TODO: ответ на пункт б!
-
+\item  $\hb_{4, new} = -\hb_{4, old}$, $\hb_{1, new} = \hb_{1, old} - \hb_{4, new}$, остальные не изменятся.
+\end{enumerate}
 \item
 \begin{enumerate}
 \item Необходимо проверить следующую гипотезу:
