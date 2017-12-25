@@ -4514,8 +4514,8 @@ $sex$ & -10.73 & 1.79 & \textbf{В10} & 0.000 & -14.49 & -6.95 \\
 
 Оценка ковариационной матрицы коэффициентов,
 $\hVar(\hb) = \begin{pmatrix}
-5 & 0.03 \\
-0.03 & 0.01\\
+5 & -0.03 \\
+-0.03 & 0.01\\
 \end{pmatrix}$
 
 Оценка дисперсии ошибок равна $\hs^2=1.45$.
@@ -4671,10 +4671,10 @@ F_crit <- qf(0.95, df1 = 1, df2 = 27 - 3)
 \]
 \begin{multline*}
 \Var(\widehat{time}_f - \E(time_f | X)|X) = \Var(\widehat{time}_f|X) = \Var(\beta_1 + 15\beta_2 | X) = \\
-= \Var(\beta_1|X) + 225 \Var(\beta_2|X) + 2 \cdot 15 \Cov(\beta_1, \beta_2|X) = 8.15 \\
+= \Var(\beta_1|X) + 225 \Var(\beta_2|X) + 2 \cdot 15 \Cov(\beta_1, \beta_2|X) = 6.35 \\
 \end{multline*}
 \[
-[15 - 2 \sqrt{8.15}; 15 + 2 \sqrt{8.15} ]
+[15 - 2 \sqrt{6.35}; 15 + 2 \sqrt{6.35}]
 \]
 \item Доверительный (предиктивный) интервал для конкретного значения иммет вид:
 \[
@@ -4682,10 +4682,10 @@ F_crit <- qf(0.95, df1 = 1, df2 = 27 - 3)
 \]
 \begin{multline*}
 \Var(\widehat{time}_f - time_f | X) = \Var(\widehat{time}_f - \E(time_f | X) - \varepsilon_f |X) = \\
-= \Var(\widehat{time}_f - \varepsilon_f |X) = \Var(\widehat{time}_f|X) + \Var(\varepsilon_f |X) = 1.45 + 8.15 = 9.6
+= \Var(\widehat{time}_f - \varepsilon_f |X) = \Var(\widehat{time}_f|X) + \Var(\varepsilon_f |X) = 6.35 + 1.45 = 7.8
 \end{multline*}
 \[
-[15 - 2 \sqrt{9.6}; 15 + 2 \sqrt{9.6}]
+[15 - 2 \sqrt{7.8}; 15 + 2 \sqrt{7.8}]
 \]
 \end{enumerate}
 \item
