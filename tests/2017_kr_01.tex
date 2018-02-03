@@ -1,0 +1,199 @@
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{1} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Совместное распределение случайных величин $X$ и $Y$ задано с помощью таблицы
+
+\begin{tabular}{llll}
+\toprule
+    & $X=3$     &  $X=4$    & $X=5$    \\ 
+\midrule
+ $Y= 3$  & 0.1   &  0.3  & 0.1   \\ 
+ $Y= 4$  & 0.15  &  0.05 & 0.05  \\ 
+ $Y =6$  & 0.05  &  0.15 & 0.05  \\ 
+\bottomrule
+\end{tabular}
+
+Математическое ожидание случайной величины $Y$ при условии, что $X=3$, равно
+
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{4}
+       \wrongchoice{2}
+       \wrongchoice{3.4}
+       \wrongchoice{2.4}
+       \wrongchoice{6}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{2} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Оценка МНК коэффициента регрессии без свободного члена $Y_i = \beta X_i + \e_i, i = 1, \ldots, n$, где $x_i = X_i - \overline{X}, y_i = Y_i - \overline{Y}$, находится по формуле
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$\hb = \frac{\sum_{i=1}^n X_i Y_i }{\sum_{i=1}^n X_i^2}$}
+       \wrongchoice{$\hb = \frac{\sum_{i=1}^n x_i y_i }{\sum_{i=1}^n x_i^2}$}
+       \wrongchoice{$\hb = \frac{\sum_{i=1}^n x_i y_i }{\sum_{i=1}^n y_i^2}$}
+       \wrongchoice{$\hb = \frac{\sum_{i=1}^n X_i Y_i }{\sum_{i=1}^n Y_i^2}$}
+       \wrongchoice{$\hb = \frac{\sum_{i=1}^n x_i y_i }{\sum_{i=1}^n X_i^2}$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{3} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Оценка МНК неизвестного параметра $\theta$ для модели $Y_i = \theta X_{1i} + (1 + \theta) X_{2i} + \e_i, i = 1, \ldots, n$ равна
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$\frac{\sum_{i=1}^n (X_{1i} + X_{2i}) (Y_i - X_{2i}) }{\sum_{i=1}^n (X_{1i} + X_{2i})^2 }$}
+       \wrongchoice{$\frac{\sum_{i=1}^n (X_{1i} + X_{2i}) (Y_i - X_{1i}) }{\sum_{i=1}^n (X_{1i} + X_{2i})^2 }$}
+       \wrongchoice{$\frac{\sum_{i=1}^n (X_{1i} - Y_{i}) (Y_i - X_{2i}) }{\sum_{i=1}^n (X_{1i} + X_{2i})^2 }$}
+       \wrongchoice{$\frac{\sum_{i=1}^n (X_{1i} + X_{2i}) (Y_i - X_{2i}) }{\sum_{i=1}^n (Y_{i} - X_{2i})^2 }$}
+       \wrongchoice{$\frac{\sum_{i=1}^n (X_{1i} + X_{2i}) (Y_i - X_{2i}) }{\sum_{i=1}^n (X_{1i} - Y_{i})^2 }$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+% bad style
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{4} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Для оцениваемой по 30 наблюдениям регрессии $Y_i = \alpha + \beta X_i + \e_i, i = 1, \ldots, n$ известны суммы $\sum_{i=1}^{30} X_i = -15, \sum_{i=1}^{30} X_i^2 = 60, \sum_{i=1}^{30} X_i Y_i = 15, \sum_{i=1}^{30} Y_i = 75$. Система нормальных уравнений для оценок коэффициентов регрессии $\alpha, \beta$ методом наименьших квадратов равносильна системе
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$2 \alpha -  \beta = 5;  \alpha - 4 \beta = -1$}
+       \wrongchoice{$2 \alpha - \beta = -1; \alpha - 4 \beta = 5$}
+       \wrongchoice{$30 \alpha + 15 \beta = 75; 15 \alpha + 60 \beta = 15$}
+       \wrongchoice{$30 \alpha - 15 \beta = 15; -15 \alpha - 12 \beta = 1$}
+       \wrongchoice{$4 \alpha - 6 \beta = 1; 6 \alpha + 60 \beta = 75$}
+    \end{choices}
+\end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{5} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Для модели парной регрессии $Y = \beta_1 I_n + \beta_2 X + \e$, где $Y = (Y_1, \ldots, Y_n), X = (X_1, \ldots, X_n), I_n = (1, \ldots, 1), \e = (\e_1, \ldots, \e_n), \hY = \hb_1 I_n + \hb_2 X, e = Y - \hY$ в пространстве $\R^n$ ортогональны вектора
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$e$ и $I_n$}
+       \wrongchoice{$\e$ и $\hY$}
+       \wrongchoice{$Y$ и $\hY$}
+       \wrongchoice{$Y$ и $I_n$}
+       \wrongchoice{$X$ и $\hY$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{6} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Эмманюэль и Владимир оценили зависимость стоимости подержанных Пежо (одной серии) $Y$ от пробега $X$ (измеряемого в км) с помощью модели парной регрессии $Y = \alpha + \beta X + \e$ по по одной и той же выборке, однако Эмманюэль измерял стоимость машин в евро, а Владимир – в рублях, 1 евро = 65 рублей. Оценки МНК коэффициента наклона регрессии, полученные Эмманюэлем $\beta_E$ и Владимиром $\beta_B$ связаны следующим образом:
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$\hb_B = 65 \hb_E$}
+       \wrongchoice{$\hb_B = \hb_E$}
+       \wrongchoice{$\hb_E = 65 \hb_B$}
+       \wrongchoice{$\hb_E = 4225 \hb_B$}
+       \wrongchoice{$\hb_B = 4225 \hb_E$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+% \AMCnoCompleteMulti
+\begin{questionmult}{7} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+При проверке гипотезы о значимости коэффициента линейной регрессии p-значение, соответствующее тестовой статистике, оказалось равным 0.07. Отсюда следует, что
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       %\correctchoice{нет верного ответа}
+       \correctchoice{соответствующий коэффициент не значим при уровне значимости 5\%}
+       \wrongchoice{соответствующий коэффициент значим при уровне значимости 1\%}
+       \wrongchoice{длина 95\% доверительного интервала для этого коэффициента равна 0.07}
+       \wrongchoice{длина 95\% доверительного интервала для этого коэффициента больше 0.07}
+       \wrongchoice{длина 95\% доверительного интервала для этого коэффициента меньше 0.07}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{8} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Для модели $Y_i = \beta_1 + \beta_2 X_i + \e_i, i = 1, \ldots, n, \e_i`\sim \cN(0, \sigma^2_{\e})$ тестовая статистика $\frac{ \hb_2 - \beta^0_2 }{ se(\hb_2)} $ имеет распределение
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$\ t_{n-2}$}
+       \wrongchoice{$\cN(0,1)$}
+       \wrongchoice{$\cN(0, \sigma_{\e})$}
+       \wrongchoice{$\chi^2_1$}
+        \wrongchoice{$\chi^2_{n-2}$}
+    \end{choices}
+\end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+ %\AMCnoCompleteMulti
+  \begin{questionmult}{9} % тип вопроса (questionmult --- множественный выбор) и в фигурных --- номер вопроса
+С помощью t-теста проверяется гипотеза о том, что 
+ \begin{multicols}{2} % располагаем ответы в 3 колонки
+   \begin{choices} % опция [o] не рандомизирует порядок ответов
+      \correctchoice{коэффициент регрессии равен единице}
+      \wrongchoice{оценка коэффициента регрессии равна единице}
+      \wrongchoice{стандартная ошибка коэффициента регрессии равна единице}
+      \wrongchoice{оценка стандартной ошибки коэффициента регрессии равна единице}
+      \wrongchoice{надо ходить на семинары по эконометрике}
+   \end{choices}
+  \end{multicols}
+  \end{questionmult}
+}
+
+
+
+
+\element{2017_kr_01}{ % в фигурных скобках название группы вопросов
+ %\AMCnoCompleteMulti
+  \begin{questionmult}{10} % тип вопроса (questionmult --- множественный выбор) и в фигурных --- номер вопроса
+Для регрессии $Y_i = \beta_1 + \beta_2 X_i + \e_i$, оценённой по 30 наблюдениям с суммой квадратов остатков, равной 15, несмещенная оценка дисперсии случайной составляющей равна
+ \begin{multicols}{3} % располагаем ответы в 3 колонки
+   \begin{choices} % опция [o] не рандомизирует порядок ответов
+      \correctchoice{$15/28$}
+      \wrongchoice{$0.5$}
+      \wrongchoice{$13/30$}
+      \wrongchoice{$13/28$}
+      \wrongchoice{$2$}
+      \wrongchoice{$15/32$}
+   \end{choices}
+  \end{multicols}
+  \end{questionmult}
+}
+

@@ -1,0 +1,289 @@
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{1} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+Рассмотрим модель $Y = X \beta + \varepsilon$. Условия теоремы Гаусса-Маркова выполнены, причём $\Var(\varepsilon_i) = \sigma^2_{\varepsilon}$, $\hY = PY$, $P = X (X'X)^{-1} X'$ и $I$ - единичная матрица. Ковариационная матрица случайного вектора $e=Y-\hY$ равна
+
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{$\sigma^2_{\varepsilon} (I - P)$}
+       \wrongchoice{$\sigma^2_{\varepsilon} P$}
+       \wrongchoice{$\sigma^2_{\varepsilon} (P-I)$}
+       \wrongchoice{$\sigma^2_{\varepsilon} I$}
+       \wrongchoice{$\sigma^2_{\varepsilon} (I+P)$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{2} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Для регрессии $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \varepsilon$, оцененной по 36 наблюдениям с $R^2 = 0.9$, значение тестовой статистики для проверки гипотезы об адекватности регрессии равно
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{96}
+       \wrongchoice{99}
+       \wrongchoice{32/27}
+       \wrongchoice{11/9}
+       \wrongchoice{невозможно вычислить по имеющимся данным}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{3} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+Если в уравнение регрессии не включена константа, то
+
+%\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices}[o] % опция [o] не рандомизирует порядок ответов
+       \correctchoice{К этой модели применима теорема Гаусса-Маркова}
+       \wrongchoice{$R^2_{adj}$ в этой модели всегда неотрицательный}
+       \wrongchoice{$R^2$ является показателем качества подгонки регрессии}
+       \wrongchoice{Значимость коэффициентов регрессии нельзя проверять при помощи t-статистики}
+       \wrongchoice{Сумма остатков регрессии равна 0}
+    \end{choices}
+   %\end{multicols}
+\end{questionmult}
+}
+
+
+% bad style
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{4} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+По 546 наблюдениям за 1987 г. оценили зависимость стоимости частных домов в канаде price (измеряемой в долларах США) от общей площади square (измеряемой в кв. м.) наличия подъездного пути driveway  (1 — если есть, 0 — если нет):
+
+\begin{tabular}{lrrrr}
+\toprule
+переменная & коэффициент & ст. ошибка & $t$-статистика & $P$-значение \\
+\midrule
+square & 2.724 & 2.15 & 1.27 & 0.206 \\
+  driveway & -922.563 & 8602.312 & -0.11 & 0.915 \\
+  square*driveway & 3.479 & 1.43 & 2.42 & 0.016 \\
+ $const$ & 38731.07 & 8156.39 & 4.75 & 0.000 \\
+\bottomrule
+\end{tabular}
+
+
+
+Согласно полученным результатам, при уровне значимости 5\%, наличие подъездного пути увеличивает стоимость каждого квадратного метра жилья на
+
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{3.479 \$}
+       \wrongchoice{-922.563 \$}
+       \wrongchoice{2.724 \$}
+       \wrongchoice{6.203 \$}
+       \wrongchoice{0}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{5} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+Оценена зависимость расходов потребителей на газ и электричество Y в США в 1977-1999 г. в постоянных ценах I квартала 1977 г. от времени ($t = 1$ для 1977, $t = 2$ для 1978 и т.д.) с учётом сезонных факторов ($D_i = 1$, если наблюдение относится к i-ому кварталу и 0 иначе, $i = 1, \ldots, 4$):
+
+$\hY = 8 + 0.1t - 3 D_2 - 2.6 D_3 - 2 D_4$
+
+Если в качестве базовой категории будет принят не первый квартал, а третий, уравнение регрессии примет вид
+
+\begin{multicols}{1} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{ $\hY = 5.4 + 0.1t + 2.6 D_1 - 0.4 D_2 + 0.6D_4$ }
+       \wrongchoice{ $\hY = 8 + 0.1t - 3 D_1 - 2.6 D_2 - 2 D_4$ }
+       \wrongchoice{ $\hY = 5.4 + 0.1t - 3 D_1 - 0.4 D_2 - D_4$ }
+       \wrongchoice{ $\hY = 5.4 + 0.1t - 3 D_1 - 2.6 D_2 - 2 D_4$ }
+       \wrongchoice{ $\hY = 8 + 0.1t + 3 D_1 + 2.6 D_2 + 2D_4$ }
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{6} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+Для выбора между линейной и полулогарифмической моделями (где EARNINGS — почасовая заработная плата в \$, S — длительность обучения, ASVABC - результаты тестов, характеризующие успеваемость) был проведен тест Дэвидсона, Уайта и МакКиннона и получены следующие результаты:
+
+\begin{tabular}{l c c c c }
+\toprule
+ & Зависимая: $Y$ & Зависимая: $\ln Y$  \\
+\midrule
+(Intercept) & $-26.148$     &  $-1.941$    \\
+            & $(4.17)$     &  $(3.2499)$   \\
+S           &  $2.008$     &  $0.087$ \\
+            & $(0.276)$    &  $(0.035)$ \\ 
+ASVABC      &  $0.393$    &   $0.017$ \\
+            & $(0.079)$   &   $(0.007)$ \\
+lin\_add    &  $-15.373$   &     \\
+            &   $(5.984)$  &     \\
+ 
+semilog\_add    &              & $-0.029$    \\
+            &              & $(0.065)$  \\
+\midrule
+$R^2$        & 0.2071         & 0.2212        \\
+F            & 46.59          & 50.74          \\
+Adj. $R^2$   & 0.2027         & 0.2168        \\
+Num. obs.    & 540            & 540           \\
+RSS          & 90975.57          & 148.1      \\
+$\hat\sigma$ & 13.04        & 0.5256      \\
+\bottomrule
+\end{tabular}
+
+
+
+
+Где $\text{lin\_add} = \ln(\hY) - \widehat{\ln} Y, \text{semilog\_add} = \hY - \exp(\widehat{\ln} Y)$ и в скобках указаны стандартные ошибки. 
+
+На уровне значимости 5\% можно сделать вывод, что 
+
+
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{Лучше полулогарифмическая модель}
+       \wrongchoice{Лучше линейная в логарифмах модель}
+       \wrongchoice{Лучше линейная модель}
+       \wrongchoice{Между линейной и полулогарифмической моделями нет статистической разницы}
+       \wrongchoice{Невозможно выбрать лучшую модель}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+% \AMCnoCompleteMulti
+\begin{questionmult}{7} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+По данным для 27 фирм была оценена зависимость выпуска Y от труда L и капитала K с помощью моделей:
+
+$\ln Y_i = b_1 + b_2 \ln L_i + b_3 \ln K_i + \varepsilon_i$ (1)
+
+$\ln Y_i = b_1 + b_2 (\ln L_i + \ln K_i) + \varepsilon_i$ (2)
+
+Суммы квадратов остатков в этих моделях известны, $RSS_1=8$ и $RSS_2=10$. $F$-статистика для проверки гипотезы о равенстве эластичностей по труду и по капиталу равна
+
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{6}
+       \wrongchoice{2}
+       \wrongchoice{4}
+       \wrongchoice{8}
+       \wrongchoice{12}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+%  %\AMCnoCompleteMulti
+\begin{questionmult}{8} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+По одним и тем же наблюдениям оценили две регрессии: $\hY = 1 + 3X_1$ и $\hY = 2 + 5X_2$.
+
+Известно, что $\hCov(X_1, X_2) > 0$. Оценки МНК коэффициентов регрессии $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon$:
+
+\begin{multicols}{2} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{оценки коэффициентов невозможно найти по имеющимся данным}
+       \wrongchoice{$\hb_0$ найти невозможно, $\hb_1 = 3, \hb_2 = 5$}
+       \wrongchoice{$\hb_0 = 3, \hb_1 = 3, \hb_2 = 5$}
+       \wrongchoice{$\hb_0 = 1.5, \hb_1 = 3, \hb_2 = 5$}
+       \wrongchoice{$\hb_1, \hb_2$ найти невозможно, $\hb_0 = 3$}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+ %\AMCnoCompleteMulti
+\begin{questionmult}{9} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+
+По данным для 27 фирм исследована зависимость прибыли Y от числа работников X вида\\ 
+$Y = \beta_0 + \beta_1 X + \varepsilon$
+и получено $\hb_0 = 8, \hb_1 = 2, \hs^2 = 25$ и матрица $(X'X)^{-1} = \begin{pmatrix}
+0.36 & -0.03 \\
+-0.03 & 0.09 
+\end{pmatrix}$.\\ 95\% доверительный интервал для $\beta_1$:
+
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{ [-1.09; 5.09] }
+       \wrongchoice{ [-0.94; 4.94] }
+       \wrongchoice{ [1.82; 14.18] }
+       \wrongchoice{ [0.04; 3.96] }
+       \wrongchoice{ невозможно вычислить по имеющимся данным }
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
+
+\element{2017_kr_02_midterm}{ % в фигурных скобках название группы вопросов
+ %\AMCnoCompleteMulti
+\begin{questionmult}{10} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
+Исследователь Борис оценил параметры нескольких моделей:
+
+\begin{tabular}{rl}
+\toprule
+Модель & Уравнение \\ 
+ \midrule
+1 &  $Y = \beta_1 + \beta_2 X_2 + \beta_3 X_3 + u$ \\
+2 &  $\ln Y = \beta_1 + \beta_2 X_2 + \beta_3 X_3 + u$ \\
+3 &  $Y = \beta_1 + \beta_4 X_4 + \beta_5 X_5 + u$ \\ 
+4 &  $\ Y/X_2 = \beta_1 + \beta_2 X_2 + \beta_3 X_3 + u$ \\ 
+\bottomrule
+\end{tabular}
+
+С помощью $R^2_{adj}$ можно выбрать лучшую из пар моделей
+
+\begin{multicols}{3} % располагаем ответы в 3 колонки
+\begin{choices} % опция [o] не рандомизирует порядок ответов
+       \correctchoice{1 и 3}
+       \wrongchoice{1 и 2}
+       \wrongchoice{1 и 4}
+       \wrongchoice{2 и 3}
+       \wrongchoice{2 и 4}
+%       \wrongchoice{3 и 4}
+    \end{choices}
+   \end{multicols}
+\end{questionmult}
+}
+
+
+
