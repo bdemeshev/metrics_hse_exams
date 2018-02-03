@@ -58,9 +58,9 @@ A=\begin{pmatrix}
 
 \item Для классической регрессионной модели $Y_i = \beta_1 + \beta_2 X_i + \e_i , i = 1,\ldots, 20$ известно, что $\sum_{i=1}^{20} X_i = 12, \sum_{i=1}^{20} X_i^2 = 12, \sum_{i=1}^{20} Y_i = 60, \sum_{i=1}^{20} Y_i^2 = 220, \sum_{i=1}^{20} X_i Y_i = 48$. Найдите
 \begin{enumerate}
-\item $\hb_1, \hb_2$, 
-\item $TSS$, 
-\item $R^2$, 
+\item $\hb_1, \hb_2$,
+\item $TSS$,
+\item $R^2$,
 \item $\hs_{\e}^2$
 \end{enumerate}
 
@@ -131,34 +131,34 @@ MARKET		& 0.52 		& 0.14 		& \ldots 	& \ldots 		& \ldots \\
 \[
 \widehat\ln Q = 14 -6 \ln P_{apple} + 3 \ln P_{orange} + 2 \ln P_{banana},
 \]
-где $Q$ — спрос на яблоки, а $P_{apple}$ — цена яблок, $P_{orange}$ — цена апельсинов и $P_{banana}$ — цена бананов. 
+где $Q$ — спрос на яблоки, а $P_{apple}$ — цена яблок, $P_{orange}$ — цена апельсинов и $P_{banana}$ — цена бананов.
 
 Известна оценка ковариационной матрицы коэффициентов регрессии:
 \[
-\hVar(\hb) = 
+\hVar(\hb) =
 \begin{pmatrix}
 1 & 0.1 & -0.2 & 0.3 \\
 0.1 & 2 & 0.5 & 0.7 \\
 -0.2 & 0.5 & 3 & 0.6 \\
 0.3 & 0.7 & 0.6 &  4
-\end{pmatrix} 
+\end{pmatrix}
 \]
 
-На уровне значимости 5\% проверьте гипотезу о том, что 
-$\beta_{orange}=\beta_{banana}$. 
+На уровне значимости 5\% проверьте гипотезу о том, что
+$\beta_{orange}=\beta_{banana}$.
 
 
-\item По ежегодным данным за 25 лет была оценена зависимость расходов на жилье Y от доходов индивидуумов $I$ и относительного индекса цен $P$ с помощью трёх моделей:
+\item По ежегодным данным за 25 лет была оценена зависимость расходов на жилье $Y$ от доходов индивидуумов $I$ и относительного индекса цен $P$ с помощью трёх моделей:
 
-$\hY = \underset{(46.9)}{-39.9} + \underset{(0.009)}{0.179} P + \underset{(0.409)}{0.113} I, R^2 = 0.987$ 
+$\hY = \underset{(46.9)}{-39.9} + \underset{(0.009)}{0.179} P + \underset{(0.409)}{0.113} I, R^2 = 0.987$
 
-$\hY = \underset{(3.34)}{-27.03} + \underset{(0.004)}{0.177} I, R^2 = 0.987$ 
+$\hY = \underset{(3.34)}{-27.03} + \underset{(0.004)}{0.177} I, R^2 = 0.987$
 
-$\hY = \underset{(24.2)}{813.3} + \underset{(0.019)}{-7.08} P, R^2 = 0.76$ 
+$\hY = \underset{(24.2)}{813.3} + \underset{(0.019)}{-7.08} P, R^2 = 0.76$
 
-Известно, что $\hCorr (P, I) = -0.88$, в скобках указаны стандартные отклонения коэффициентов. 
+Известно, что $\hCorr (P, I) = -0.88$, в скобках указаны стандартные отклонения коэффициентов.
 
-Какую модель Вы предпочтёте и почему? 
+Какую модель Вы предпочтёте и почему?
 
 
 \item Для регрессии в отклонениях $y = \beta_1 x + \beta_2 z + \varepsilon$, оцененной по 100 наблюдениям, известны следующие суммы:
@@ -166,7 +166,7 @@ $\hY = \underset{(24.2)}{813.3} + \underset{(0.019)}{-7.08} P, R^2 = 0.76$
 \sum y^2_i = 400, \sum x_i^2 = 30, \sum z_i^2 = 3, \sum x_i y_i = 30, \sum z_i y_i = 24, \sum x_i z_i = 0
 \]
 
-Найдите оценки МНК коэффициентов $\beta_1, \beta_2$ и коэффициент детерминации $R^2$. 
+Найдите оценки МНК коэффициентов $\beta_1, \beta_2$ и коэффициент детерминации $R^2$.
 
 
 \item Приведены результаты оценки зависимости логарифма арендной платы жилья в России, lnPRICE, от общей площади,  GENSQUARE (кв. м.), наличия газа, GAS, (1 – есть, 0 – нет), наличия телефона, PHONE (1 – есть, 0 – нет).
@@ -187,7 +187,7 @@ $\hY = \underset{(24.2)}{813.3} + \underset{(0.019)}{-7.08} P, R^2 = 0.76$
 (Intercept) & $7.168$      & $6.884$    & $7.459$      & $7.448$    \\
             & $(0.1334)$   & $(0.2398)$ & $(0.059)$   & $(0.0569)$ \\
 GENSQUARE   &  $0.012$     & $0.012$    & $0.0064$     & $0.00683$   \\
-            & $(0.002687)$ & $(0.0027)$ & $(0.000913)$ & $(0.00086)$ \\         
+            & $(0.002687)$ & $(0.0027)$ & $(0.000913)$ & $(0.00086)$ \\
 GAS         &              & $0.119$    & $-0.262$      & $-0.272$    \\
             &              & $(0.166)$  & $(0.038)$    & $(0.0354)$  \\
 PHONE       &              & $0.197$    & $0.372$      & $0.3505$    \\
@@ -203,6 +203,118 @@ $\hat\sigma$ & 0.42113        & 0.41921     & 0.575        & 0.956    \\
 \end{tabular}
 
 
+\end{enumerate}
 
+\subsection{Контрольная 2, 26.10.2017, решения}
 
+\begin{enumerate}
+\item Для проверки гипотезы используем $t$-статистику:
+\[
+t_{obs} = \frac{\hat\beta_{orange} - \hat\beta_{banana} - \beta_{orange} - \beta_{banana}}{se(\hat\beta_{orange} - \hat\beta_{banana})} \sim t_{n-k} = t_{29 -4} = t_{25}
+\]
+Сначала найдём стандартное отклонение:
+\begin{align*}
+\widehat{se}(\hat\beta_{orange} - \hat\beta_{banana}) &= \sqrt{\widehat{\Var}(\hat\beta_{orange}) + \widehat{\Var}(\hat\beta_{banana}) - 2 \widehat{\Cov}(\hat\beta_{orange}, \hat\beta_{banana})} \\
+&= \sqrt{3 + 4 - 2\cdot 0.6} \approx 2.41
+\end{align*}
+Тогда наблюдаемое значение статистики равно $t_{obs} = \frac{3-4}{2.41} \approx -0.42$,
+а $t_{crit} \approx 2.06$. Значит, оснований отвергать нулевую гипотезу нет.
+\item В модели (1) $\widehat{\Corr}(P,I)=-0.8$ свидетельствует о проблеме мультиколлинеарности в данных.
+В модели (3) значение $R^2$ самое низкое. Предпчтительной является модель $(2)$.
+\item Заметим, что
+\begin{align*}
+\sum x_i y_i &= \sCov(X,Y) = 30 \\
+\sum x_i z_i &= \sCov(Z,Y) = 20 \\
+\sum x_i^2 &= \sVar(X) = 30 \\
+\sum z_i^2 &= \sVar(Z) = 3 \\
+\sum y_i^2 &= \sVar(Y) = \frac{493}{3} \\
+\end{align*}
+Тогда соответствующие коэффициенты равны:
+\begin{align*}
+\hat \beta_1 &= \frac{\sCov(X,Y)}{\sVar(X)} = \frac{30}{30} = 1 \\
+\hat \beta_2 &= \frac{\sCov(Z,Y)}{\sVar(Z)} = \frac{20}{3}
+\end{align*}
+Для нахождения коэффициента детерминации воспользуемся факторным разложением:
+\[
+R^2 = \hat\beta_1 \frac{\sCov(X,Y)}{\sVar(Y)} + \hat\beta_2 \frac{\sCov(Z,Y)}{\sVar(Y)} = 1 \cdot \frac{30}{\frac{493}{3}} + \frac{20}{3} \cdot \frac{20}{\frac{493}{3}} = \frac{490}{493}
+\]
+\item
+\begin{enumerate}
+\item $n=132$, $k=3 \Rightarrow n-k = 128$, в таблице находим,
+что при $\alpha = 0.05$ $t_{crit} = 1.98$.
+
+$t_{obs} = \frac{6.884 - 0}{0.2398} = 28.7 > t_{crit} \Rightarrow \hat \beta_{Intercept}$ значим.
+
+$t_{obs} = \frac{0.012 - 0}{0.0027} = 4.(4) > t_{crit} \Rightarrow \hat \beta_{GENSQUARE}$ значим.
+
+$t_{obs} = \frac{0.119 - 0}{0.166} = 0.72 < t_{crit} \Rightarrow \hat \beta_{GAS}$ незначим.
+
+$t_{obs} = \frac{0.197 - 0}{0.123} = 1.6 < t_{crit} \Rightarrow \hat \beta_{PHONE}$ незначим.
+
+При прочих равных общая площадь оказывает влияние на логарифм арендной платы,
+а наличие газа и наличие телефона — нет.
+\item При верной $H_0$ и $\alpha = 0.1$ $t_{crit} = 1.658$.
+\[
+t_{obs} = \frac{0.199 - 0.02}{0.166} = -0.596
+\]
+Поскольку $|t_{obs}| < t_{crit}$, оснований отвергать нулевую гипотезу нет.
+\item
+\[H_0:
+\begin{cases}
+  \beta_{GAS} = 0 \\
+  \beta_{PHONE} = 0
+\end{cases}
+\qquad
+H_a: \beta_{GAS}^2 + \beta_{PHONE}^2 > 0
+\]
+Выпишем ограниченную и неограниченную модели:
+\begin{multline*}
+R: lnPRICE_i = \beta_{Intercept} + \beta_{GENSQUARE} GENSQUARE_i + \varepsilon_i \\
+UR: lnPRICE_i = \beta_{Intercept} + \beta_{GENSQUARE} GENSQUARE_i + \beta_{GAS} GAS_i \\
++ \beta_{PHONE} PHONE_i + \varepsilon_i
+\end{multline*}
+Из условия находим: $RSS_{R} = 23.05$, $RSS_{UR} = 22.494$.
+
+При верной $H_0$ $F \sim F_{2, 128}$ и $F_{crit} \approx 3.8$ ($\alpha = 0.05$).
+\[
+F_{obs} = \frac{(RSS_R - RSS_{UR}) / q}{RSS_{UR}/(n - k_{UR})} = \frac{(23.05 - 22.494) / 2}{22.494 / (132 - 4)} = 1.58
+\]
+Так как $F_{obs} < F_{crit}$, нет оснований отвергать $H_0$.
+\item Чтобы записать неограниченную модель, введём вспомогательную переменную
+\[
+d_i = \begin{cases}
+1, & \text{если город крупный} \\
+0, & \text{иначе}
+\end{cases}
+\]
+Тогда неограниченная модель примет вид:
+\begin{multline*}
+lnPRICE_i = (\beta_{Intercept} + \Delta_1 di) + (\beta_{GENSQUARE} + \Delta_2 d_i) GENSQUARE_i \\
++ (\beta_{GAS} + \Delta_3 d_i) GAS_i + (\beta_{PHONE} + \Delta_4 d_i) PHONE_i + \varepsilon_i \\
+RSS_{UR} = 22.494 + 616.709 = 639.203
+\end{multline*}
+Выпишем также ограниченную модель:
+\begin{multline*}
+lnPRICE_i = \beta_{Intercept} + \beta_{GENSQUARE} GENSQUARE_i + \beta_{GAS} GAS_i \\
++ \beta_{PHONE} PHONE_i + \varepsilon_i \\
+RSS_{R} = 710.21
+\end{multline*}
+Проверятеся следующая гипотеза:
+\[H_0:
+\begin{cases}
+  \Delta_1 = 0 \\
+  \Delta_2 = 0 \\
+  \Delta_3 = 0 \\
+  \Delta_4 = 0 \\
+\end{cases}
+\qquad
+H_a: \Delta_1^2 + \Delta_2^2 + \Delta_3^2+ \Delta_4^2 > 0
+\]
+При верной $H_0$ $F \sim F_{4, 1173}$ и $F_{crit} \approx 2.8$ ($\alpha = 0.05$).
+\[
+F_{obs} = \frac{(RSS_R - RSS_{UR}) / q}{RSS_{UR}/(n - k_{UR})} = \frac{(710.21 - 639.203)/4}{639.203/(1181-8)} \approx 32.58
+\]
+Поскольку $F_{obs} > F_{crit}$, основная гипотеза отвергается,
+а значит, зависимость нельзя считать единой.
+\end{enumerate}
 \end{enumerate}
