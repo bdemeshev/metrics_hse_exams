@@ -4,4 +4,4 @@ metrics_hse_exams.bbl
 metrics_hse_exams.run.xml
 junk.txt
 .DS_Store
-metrics_hse_exams.xdv
+*.xdv
