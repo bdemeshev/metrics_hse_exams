@@ -60,11 +60,11 @@ A=\begin{pmatrix}
 \begin{enumerate}
 \item $\hb_1, \hb_2$,
 \item $TSS$,
-\item $R^2$,
-\item $\hs_{\e}^2$
+\item $ESS$,
+\item $\hat\sigma^2_{\varepsilon}$
 \end{enumerate}
 
-\item Для предыдущей задачи постройте точечный и 95\% интервальный индивидуальный прогноз в точке $X = 10$.
+\item Для предыдущей задачи постройте точечный и 95\% интервальный индивидуальный прогноз в точке $X = 2$.
 
 \item Заполните клетки с точками в приведенной ниже таблице. Клетки с XXX заполнять не надо.
 
@@ -74,7 +74,7 @@ A=\begin{pmatrix}
 Multiple R          & XXX \\
 $R^2$     			& \ldots \\
 Standart error 		& XXX \\
-Observations		& 50 \\
+Observations		& 60 \\
 \bottomrule
 \end{tabular}
 
@@ -83,9 +83,9 @@ ANOVA:
 \begin{tabular}{lrrrrr} \toprule
       	   	 &  df 	& SS		& MS 	& F & Significance F \\
 \midrule
-Regression   & 1 	& 0.06  	& 	 	&  	& 		\\
-Residual     & 48  	& 0.3   	&     	&  	&     	\\
-Total        & 49  	& \ldots  	&    	&  	&     	\\
+Regression   & 1 	& 0.1  	& 	 	&  	& 		\\
+Residual     & 59  	& 0.4  	&     	&  	&     	\\
+Total        & 60  	& \ldots  	&    	&  	&     	\\
 \bottomrule
 \end{tabular}
 
@@ -94,12 +94,77 @@ Total        & 49  	& \ldots  	&    	&  	&     	\\
   \hline
  			& Coef. 	& St. error	& t-stat 	& Lower 95\% 	& Upper 95\% \\
   \hline
-Intercept 	& 0.0044 	& 0.011 	& XXX 		& XXX 			& XXX \\
-MARKET		& 0.52 		& 0.14 		& \ldots 	& \ldots 		& \ldots \\
+Intercept 	& 0.0045 	& 0.015 	& XXX 		& XXX 			& XXX \\
+MARKET		& 0.56 		& 0.14 		& \ldots 	& \ldots 		& \ldots \\
    \hline
 \end{tabular}
 
+\end{enumerate}
 
+
+
+
+\subsection{Контрольная 1, 26.10.2017}
+
+\begin{enumerate}
+\item Воспользуемся свойством о том, что в парной рергессии точка $(\bar X, \bar Y)$
+лежит на линии выборочной регрессии. Тогда
+\begin{align*}
+\sum_i e_i &= \sum_i (Y_i - \hat \beta_1 - \hat \beta_2 X_i) \\
+\frac{1}{n} \sum_i e_i &= \bar Y_i -  \hat \beta_1 - \hat \beta_2 \bar X = 0 \\
+\sum_i e_i &= 0
+\end{align*}
+
+\item МНК-оценки в регрессиях будут равны:
+\begin{align*}
+\hb_2 = \frac{\sum_{i=1}^n (X_i - \overline X)(Y_i - \overline Y)}{\sum_{i=1}^n (X_i - \overline X)^2} \\
+\hat\alpha_2 = \frac{\sum_{i=1}^n (Y_i - \overline Y)(X_i - \overline X)}{\sum_{i=1}^n (Y_i - \overline Y)^2}
+\end{align*}
+Тогда их произведение равно
+\begin{multline*}
+\hb_2 \hat\alpha_2 = \frac{\sum_{i=1}^n (X_i - \overline X)(Y_i - \overline Y) \cdot \sum_{i=1}^n (Y_i - \overline Y)(X_i - \overline X)}{\sum_{i=1}^n (X_i - \overline X)^2 \cdot \sum_{i=1}^n (Y_i - \overline Y)^2} \\
+= \frac{\frac{1}{n-1} \sum_{i=1}^n (X_i - \overline X)(Y_i - \overline Y) \cdot \frac{1}{n-1}  \sum_{i=1}^n (Y_i - \overline Y)(X_i - \overline X)}{\frac{1}{n-1} \sum_{i=1}^n (X_i - \overline X)^2 \cdot \frac{1}{n-1} \sum_{i=1}^n (Y_i - \overline Y)^2} \\
+= \frac{\sCov^2(X,Y)}{\sVar(X)\sVar(Y)} = \sCorr^2(X,Y) = R^2
+\end{multline*}
+Поскольку $\sCorr^2(X,Y) = \sCorr^2(Y,X)$, коэффициенты детерминации в обеих регрессиях равны.
+
+\item
+\begin{enumerate}
+\item По формулам МНК-оценок получаем:
+\begin{align*}
+&\hb_2 = \frac{\sum_{i=1}^{20} X_i Y_i - \overline X \sum_{i=1}^{20} Y_i}{\sum_{i=1}^{20} (X_i - \overline X)} = 2.5 \\
+&\hb_1 = \overline Y - \hb_2 \overline X = 1.5
+\end{align*}
+\item $TSS = \sum_{i=1}^{20} (Y_i - \overline Y) = 40$
+\item $ESS = \sum_{i=1}^{20} (\hat Y_i - \overline Y) = 30$
+\item $\hat\sigma^2_{\varepsilon} = \frac{RSS}{n-k} = \frac{5}{9}$
+\end{enumerate}
+
+\item Точечный прогноз:
+\[
+\hat Y_f = 1.5 + 2.5 \cdot 2 = 6.5
+\]
+Для индивидуального прогноза понадобится:
+\begin{align*}
+\widehat{\Var}(Y_f - \hat Y_f) &= \widehat{\Var}(\beta_1 + \beta_2 X_f + \varepsilon_f - \hat Y_f) = \widehat{\Var}(\varepsilon_f - \hat Y_f) = \widehat{\Var}(\varepsilon_f) + \widehat{\Var}(\hat Y_f) \\
+&= \hat\sigma^2_{\varepsilon_f} + \widehat{\Var}(\hb_1 + \hb_2 \cdot 2) = \hat\sigma^2_{\varepsilon_f} + \widehat{\Var}(\hb_1) + 4 \widehat{\Var}(\hb_2) + 4 \widehat{\Cov}(\hat \beta_1, \hat \beta_2) \\
+&= \hat\sigma^2_{\varepsilon_f} + \frac{\hat\sigma^2_{\varepsilon_f}\sum_{i=1}^{20} X_i^2}{20\sum_{i=1}^{20}(X_i - \overline X)^2} + 4 \cdot \frac{\hat\sigma^2_{\varepsilon_f}}{\sum_{i=1}^{20}(X_i - \overline X)^2} - 4 \cdot \frac{\overline X \hat\sigma^2_{\varepsilon_f}}{\sum_{i=1}^{20}(X_i - \overline X)^2} \\
+&\approx 0.81
+\end{align*}
+Из таблицы для $t_{20-2}$ получаем  $t = 2.1$. И интервальный прогноз примет вид:
+\[
+[6.5 - 2.1\sqrt{0.81}; 6.5 + 2.1\sqrt{0.81}]
+\]
+\[
+[4.61; 8.39]
+\]
+\item $R^2 = ESS / TSS = 0.2$
+
+$TSS = RSS + ESS = 0.5$
+
+$t-stat = (0.56 - 0) / 0.14 = 4$
+
+Доверительный интервал: $[0.56 - 2\cdot 0.14; 0.56 + 2\cdot 0.14] = [0.28; 0.84]$, где $t_{60-2;0.975} = 2$.
 \end{enumerate}
 
 
@@ -210,11 +275,11 @@ $\hat\sigma$ & 0.42113        & 0.41921     & 0.575        & 0.956    \\
 \begin{enumerate}
 \item Для проверки гипотезы используем $t$-статистику:
 \[
-t_{obs} = \frac{\hat\beta_{orange} - \hat\beta_{banana} - \beta_{orange} - \beta_{banana}}{se(\hat\beta_{orange} - \hat\beta_{banana})} \sim t_{n-k} = t_{29 -4} = t_{25}
+t_{obs} = \frac{\hb_{orange} - \hb_{banana} - \beta_{orange} - \beta_{banana}}{se(\hb_{orange} - \hb_{banana})} \sim t_{n-k} = t_{29 -4} = t_{25}
 \]
 Сначала найдём стандартное отклонение:
 \begin{align*}
-\widehat{se}(\hat\beta_{orange} - \hat\beta_{banana}) &= \sqrt{\widehat{\Var}(\hat\beta_{orange}) + \widehat{\Var}(\hat\beta_{banana}) - 2 \widehat{\Cov}(\hat\beta_{orange}, \hat\beta_{banana})} \\
+\widehat{se}(\hb_{orange} - \hb_{banana}) &= \sqrt{\widehat{\Var}(\hb_{orange}) + \widehat{\Var}(\hb_{banana}) - 2 \widehat{\Cov}(\hb_{orange}, \hb_{banana})} \\
 &= \sqrt{3 + 4 - 2\cdot 0.6} \approx 2.41
 \end{align*}
 Тогда наблюдаемое значение статистики равно $t_{obs} = \frac{3-4}{2.41} \approx -0.42$,
@@ -236,7 +301,7 @@ t_{obs} = \frac{\hat\beta_{orange} - \hat\beta_{banana} - \beta_{orange} - \beta
 \end{align*}
 Для нахождения коэффициента детерминации воспользуемся факторным разложением:
 \[
-R^2 = \hat\beta_1 \frac{\sCov(X,Y)}{\sVar(Y)} + \hat\beta_2 \frac{\sCov(Z,Y)}{\sVar(Y)} = 1 \cdot \frac{30}{\frac{493}{3}} + \frac{20}{3} \cdot \frac{20}{\frac{493}{3}} = \frac{490}{493}
+R^2 = \hb_1 \frac{\sCov(X,Y)}{\sVar(Y)} + \hb_2 \frac{\sCov(Z,Y)}{\sVar(Y)} = 1 \cdot \frac{30}{\frac{493}{3}} + \frac{20}{3} \cdot \frac{20}{\frac{493}{3}} = \frac{490}{493}
 \]
 \item
 \begin{enumerate}
