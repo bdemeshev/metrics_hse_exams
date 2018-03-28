@@ -2,31 +2,10 @@
 
 
 
-<<"init", echo=FALSE, include=FALSE>>=
-library(tidyverse)
-library(knitr)
-library(reshape2)
-library(xtable)
-library(gridExtra)
-library(lmtest)
-library(texreg)
-library(pander)
-library(memisc)
-# dev cairo_pdf does not work :(
-opts_chunk$set(cache = FALSE,
-               dev = "png",
-               warning = FALSE,
-               tidy = FALSE,
-               echo = FALSE)
-options(scipen = 10)
-theme_set(theme_bw())
-
-load(file = "exam_data.Rdata")
-@
-
-
 \input{title_bor_utf8} % use local copy
 \input{emetrix_preamble} % use local copy
+
+\usepackage{minted}
 
 \unitlength=0.6mm
 
@@ -282,20 +261,20 @@ BLUE-оценки мы предъявим людям! \\
 Если:
 
 \begin{enumerate}
-\item Истинная зависимость имеет вид $y_i=\beta_1 + \beta_2 x_{i2} + \ldots + \beta_k x_{ik}+\varepsilon_i$
+\item Истинная зависимость имеет вид $y_i=\beta_1 + \beta_2 x_{i2} + \ldots + \beta_k x_{ik}+\e_i$
 
-В матричном виде: $y=X\beta + \varepsilon$
+В матричном виде: $y=X\beta + \e$
 \item С помощью МНК оценивается регрессия $y$ на константу, $x_{.2}$, $x_{.3}$, \ldots, $x_{.k}$
 
 В матричном виде: $\hb=(X'X)^{-1}X'y$
 \item Наблюдений больше, чем оцениваемых коэффициентов $\beta$: $n>k$
-\item Строгая экзогенность: $\E(\varepsilon_i | \text{ все } x_{ij})=0$
+\item Строгая экзогенность: $\E(\e_i | \text{ все } x_{ij})=0$
 
-В матричном виде: $\E(\varepsilon_i | X)=0$
-\item Условная гомоскедастичность: $E(\varepsilon_i^2 | \text{ все } x_{ij})=\sigma^2$
+В матричном виде: $\E(\e_i | X)=0$
+\item Условная гомоскедастичность: $E(\e_i^2 | \text{ все } x_{ij})=\sigma^2$
 
-В матричном виде: $\E(\varepsilon_i^2 | X)=\sigma^2$
-\item  $\Cov(\varepsilon_i,\varepsilon_j | X)=0$ при $i \neq j$
+В матричном виде: $\E(\e_i^2 | X)=\sigma^2$
+\item  $\Cov(\e_i,\e_j | X)=0$ при $i \neq j$
 \item  вектора $(x_{i.},y_i)$ — независимы и одинаково распределены
 \item  с вероятностью 1 среди регрессоров нет линейно зависимых
 $rank(X)=k$
@@ -304,7 +283,7 @@ $(X'X)^{-1}$ существует
 \end{enumerate}
 
 То:
-% (свойства для конечных выборок, не требующие нормальности $\varepsilon$):
+% (свойства для конечных выборок, не требующие нормальности $\e$):
 
 \begin{enumerate}
 \item (тГМ) МНК оценки $\hb$ линейны по $y$:
@@ -314,11 +293,11 @@ $\hb_j=c_1 y_1 + ... + c_n y_n$
 $\Var(\hb_j^{alt} | X)\geq \Var(\hb_j | X)$
 $\Var(\hb_j^{alt} )\geq \Var(\hb_j )$
 \item  $\Var(\hb | X )=\sigma^2 (X'X)^{-1}$
-\item $\Cov(\hb,\hat{\varepsilon} | X)=0$
+\item $\Cov(\hb,\hat{\e} | X)=0$
 \item  $\E(\hs^2 |X ) = \sigma^2$, и $\E(\hs^2 ) = \sigma^2$ ?остается ли при условной ГК?
 \end{enumerate}
 
-Если дополнительно к предпосылкам теоремы Гаусса-Маркова известно, что $\varepsilon |X \sim \cN$, то:
+Если дополнительно к предпосылкам теоремы Гаусса-Маркова известно, что $\e |X \sim \cN$, то:
 
 \begin{enumerate}
 \item МНК оценки эффективны среди всех несмещённых оценок.
@@ -617,8 +596,8 @@ $A=\left(%
 \item Какова вероятность того, что он действительно доверяет, если известно, что он ответил
 «Да»?
 \end{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -738,10 +717,13 @@ $X'X=\left(
 
 \item По 47 наблюдениям оценивается зависимость доли мужчин занятых в сельском хозяйстве от уровня образованности и доли католического населения по Швейцарским кантонам в 1888 году.
 
-\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\varepsilon_i\]
+\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\e_i\]
 
-<<echo=FALSE,message=FALSE>>=
-# library(Hmisc)
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 library("lmtest")
 library("apsrtable")
 library("xtable")
@@ -753,11 +735,24 @@ coef.t <- coef.t[, -4]
 coef.t[1, 1] <- NA
 coef.t[2, 2] <- NA
 coef.t[3, 3] <- NA
-@
-
-<<echo=FALSE,results='asis'>>=
 xtable(coef.t)
-@
+\end{minted}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Оценка & Ст. ошибка & t-статистика \\ 
+  \hline
+(Intercept) &  & 8.72 & 9.44 \\ 
+  Examination & -1.94 &  & -5.08 \\ 
+  Catholic & 0.01 & 0.07 &  \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
 
 \begin{enumerate}
 \item Заполните пропуски в таблице.
@@ -768,18 +763,50 @@ xtable(coef.t)
 
 \item Оценивается зависимость уровня фертильности всё тех же швейцарских кантонов в 1888 году от ряда показателей. В таблице представлены результаты оценивания двух моделей.
 
-Модель 1: $Fertility_i=\beta_1+\beta_2 Agriculture_i+\beta_3 Education_i+\beta_4 Examination_i+\beta_5 Catholic_i+\varepsilon_i$
+Модель 1: $Fertility_i=\beta_1+\beta_2 Agriculture_i+\beta_3 Education_i+\beta_4 Examination_i+\beta_5 Catholic_i+\e_i$
 
 Модель 2: $Fertility_i=\gamma_1+\gamma_2 (Education_i+Examination_i)+\gamma_3 Catholic_i+u_i$
 
-<<echo=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 m1 <- lm(Fertility ~ Agriculture + Education + Examination + Catholic, data = h)
 m2 <- lm(Fertility ~ I(Education + Examination) + Catholic, data = h)
-@
-
-<<echo=FALSE, results='asis'>>=
 apsrtable(m1, m2)
-@
+\end{minted}
+
+\begin{table}[!ht]
+\caption{}
+\label{} 
+\begin{tabular}{ l D{.}{.}{2}D{.}{.}{2} } 
+\hline 
+  & \multicolumn{ 1 }{ c }{ Model 1 } & \multicolumn{ 1 }{ c }{ Model 2 } \\ \hline
+ %                          & Model 1  & Model 2 \\ 
+(Intercept)                & 91.06 ^* & 80.52 ^*\\ 
+                           & (6.95)   & (3.31)  \\ 
+Agriculture                & -0.22 ^* &         \\ 
+                           & (0.07)   &         \\ 
+Education                  & -0.96 ^* &         \\ 
+                           & (0.19)   &         \\ 
+Examination                & -0.26    &         \\ 
+                           & (0.27)   &         \\ 
+Catholic                   & 0.12 ^*  & 0.07 ^* \\ 
+                           & (0.04)   & (0.03)  \\ 
+I(Education + Examination) &          & -0.48 ^*\\ 
+                           &          & (0.08)   \\
+ $N$                        & 47       & 47      \\ 
+$R^2$                      & 0.65     & 0.55    \\ 
+adj. $R^2$                 & 0.62     & 0.53    \\ 
+Resid. sd                  & 7.74     & 8.56     \\ \hline
+ \multicolumn{3}{l}{\footnotesize{Standard errors in parentheses}}\\
+\multicolumn{3}{l}{\footnotesize{$^*$ indicates significance at $p< 0.05 $}} 
+\end{tabular} 
+\end{table}
+
+
+
 
 \begin{enumerate}
 \item Посчитайте $RSS$ для каждой модели.
@@ -844,7 +871,7 @@ C 1-м апреля!!!
 \item Рождается старичком, умирает младенцем, сегодня празднует день рождения, но не Гоголь.
 Кто это? Опишите внешний вид, характер, или нарисуйте его :)
 
-\item Для борьбы с гетероскедастичностью в модели $y_i=\beta_1+\beta_2 x_i+\varepsilon_i$ исследователь перешёл к модели $\tilde{y}_i=\beta_1 \frac{1}{z_i}+\beta_2 \tilde{x}_i+\tilde{\varepsilon}_i$, где $\tilde{x}_i=x_i/z_i$, $\tilde{y}_i=y_i/z_i$, $\tilde{\varepsilon}_i=\varepsilon_i/z_i$.
+\item Для борьбы с гетероскедастичностью в модели $y_i=\beta_1+\beta_2 x_i+\e_i$ исследователь перешёл к модели $\tilde{y}_i=\beta_1 \frac{1}{z_i}+\beta_2 \tilde{x}_i+\tilde{\e}_i$, где $\tilde{x}_i=x_i/z_i$, $\tilde{y}_i=y_i/z_i$, $\tilde{\e}_i=\e_i/z_i$.
 
 Какой вид гетероскедастичности предполагался?
 
@@ -858,10 +885,10 @@ C 1-м апреля!!!
 
 \item Писатель Василий Аспушкин пишет Большой Роман. Количество страниц, которое он пишет ежедневно, зависит от количества съеденных пирожков, выпитого лимонада и числа посещений Музы.
 \[
-Stranitsi_i = \beta_1 + \beta_2 Pirojki_i + \beta_3 Limonad_i + \beta_4 Musa_i + \varepsilon_i
+Stranitsi_i = \beta_1 + \beta_2 Pirojki_i + \beta_3 Limonad_i + \beta_4 Musa_i + \e_i
 \]
 
-Когда идёт дождь, Василий Аспушкин очень волнуется: он ошибочно считает, что музы плохо летают в дождь. Поэтому в дождливые дни дисперсия $\varepsilon_i$ может быть выше.
+Когда идёт дождь, Василий Аспушкин очень волнуется: он ошибочно считает, что музы плохо летают в дождь. Поэтому в дождливые дни дисперсия $\e_i$ может быть выше.
 
 
 \begin{enumerate}
@@ -902,18 +929,28 @@ f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}  \right)
 \item Загрузите данные в R.
 
 Данные RLMS выложены на сайте в формате SPSS. SPSS это потихоньку погибающий статистический пакет для домохозяек. Для чтения формата .sav в таблицу данных R можно сделать так
-<<"read sav", eval=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 library(foreign)
 file.name <- "/home/boris/downloads/r20hall23c.sav"
 h <- read.spss(file.name, to.data.frame = TRUE)
-@
-Первая команда, library(foreign), подгружает библиотеку R, в которой содержатся команды для чтения вражеских форматов, spss, stata, etc
+\end{minted}
 
-Описания переменных при этом также загружаются в таблицу данных. Можно их выделить в отдельный вектор и прочитать, например, про переменную pc9.631a.
-<<"description of vars", eval=FALSE>>=
+Первая команда, \verb|library(foreign)|, подгружает библиотеку R, в которой содержатся команды для чтения вражеских форматов, spss, stata, etc
+
+Описания переменных при этом также загружаются в таблицу данных. 
+Можно их выделить в отдельный вектор и прочитать, например, про переменную pc9.631a.
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 var.labels <- attr(h, "variable.labels")
 var.labels["pc9.631a"]
-@
+\end{minted}
 
 \item Выберите любую количественную переменную в качестве зависимой и несколько переменных в качестве объясняющей.
 
@@ -1169,9 +1206,13 @@ H_0:
 \]
 \item  По 47 наблюдениям оценивается зависимость доли мужчин занятых в сельском хозяйстве от уровня образованности и доли католического населения по Швейцарским кантонам в 1888 году.
 
-\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\varepsilon_i\]
+\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\e_i\]
 
-<<echo=FALSE,message=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 h <- swiss
 model1 <- glm(Agriculture ~ Examination + Catholic, data = h)
 coef.t <- coeftest(model1)
@@ -1181,13 +1222,25 @@ coef.t <- coef.t[, -4]
 coef.t[1, 1] <- NA
 coef.t[2, 2] <- NA
 coef.t[3, 3] <- NA
-@
-
-
-
-<<results='asis',echo=FALSE>>=
 xtable(coef.t)
-@
+\end{minted}
+
+
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Mar 28 19:41:30 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Оценка & Ст. ошибка & t-статистика \\ 
+  \hline
+(Intercept) &  & 8.72 & 9.44 \\ 
+  Examination & -1.94 &  & -5.08 \\ 
+  Catholic & 0.01 & 0.07 &  \\ 
+   \hline
+\end{tabular}
+\end{table}
+
 
 \begin{enumerate}
 \item Заполните пропуски в таблице
@@ -1299,9 +1352,9 @@ Wikipedia
 \subsection{Праздник 6. Гетероскедастичность}
 
 \begin{enumerate}
-\item Желая протестировать наличие гетероскедастичности в модели $y_i=\beta_1+\beta_2 x_i +\beta_3 z_i +\beta_4 w_i +\varepsilon_i$, эконометресса Глафира решила провести тест Уайта и получила  во вспомогательной регрессии $R^2=0.50$. Глафира строит модель удоя по 200 коровам. Помогите ей провести тест на уровне значимости 5\%.
-\item На всякий случай эконометресса Глафира решила подстраховаться и провести тест Голдфельда-Квандта. Но она совсем забыла, как его делать. Напомните Глафире, как провести тест Голдфельда-Квандта, если она подозревает, что дисперсия $Var(\varepsilon_i)$ возрастает с ростом $z_i$. Чётко напишите гипотезы $H_0$, $H_a$, методику проведения теста, правило согласно которому отвергается или не отвергается $H_0$.
-\item Имеются три наблюдения, $x=(1,2,2)'$, $y=(2,1,0)'$. Предполагая, что в модели $y_i=\beta x_i + \varepsilon_i$ имеется гетероскедастичность вида $Var(\varepsilon_i)=\sigma^2 x_i^4$ найдите:
+\item Желая протестировать наличие гетероскедастичности в модели $y_i=\beta_1+\beta_2 x_i +\beta_3 z_i +\beta_4 w_i +\e_i$, эконометресса Глафира решила провести тест Уайта и получила  во вспомогательной регрессии $R^2=0.50$. Глафира строит модель удоя по 200 коровам. Помогите ей провести тест на уровне значимости 5\%.
+\item На всякий случай эконометресса Глафира решила подстраховаться и провести тест Голдфельда-Квандта. Но она совсем забыла, как его делать. Напомните Глафире, как провести тест Голдфельда-Квандта, если она подозревает, что дисперсия $Var(\e_i)$ возрастает с ростом $z_i$. Чётко напишите гипотезы $H_0$, $H_a$, методику проведения теста, правило согласно которому отвергается или не отвергается $H_0$.
+\item Имеются три наблюдения, $x=(1,2,2)'$, $y=(2,1,0)'$. Предполагая, что в модели $y_i=\beta x_i + \e_i$ имеется гетероскедастичность вида $Var(\e_i)=\sigma^2 x_i^4$ найдите:
 \begin{enumerate}
 \item Обычную МНК-оценку параметра $\beta$
 \item Самую эффективную среди несмещенных оценку параметра $\beta$
@@ -1326,7 +1379,7 @@ Wikipedia
 \item Формулировка с детерминистическими регрессорами
 \item Доказательство с детерминистическими регрессорами
 \item Формулировки со стохастическими регрессорами
-\item Что даёт дополнительное предположение о нормальности $\varepsilon$?
+\item Что даёт дополнительное предположение о нормальности $\e$?
 \end{enumerate}
 
 \item Проверка гипотез о линейных ограничениях
@@ -1431,8 +1484,8 @@ Wikipedia
 \subsection{Экзамен.}
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -1479,10 +1532,44 @@ $X'X=\left(
 
 \item По данным о пассажирах Титаника оценивается логит-модель. Зависимая переменная \verb|survived| равна 1, если пассажир выжил. Объясняющая переменная \verb|sexmale| равна 1 для  мужчин.
 
-<<"titanic", results='asis'>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+library(texreg)
+# here I need data source
 mod.tit <- glm(data = titanic, survived ~ age + sex, family = "binomial")
 texreg(mod.tit, float.pos = "h!", label = "table:titanic")
-@
+\end{minted}
+
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{l c }
+\hline
+ & Model 1 \\
+\hline
+(Intercept)    & $1.92^{***}$  \\
+               & $(0.28)$      \\
+age            & $-0.01$       \\
+               & $(0.01)$      \\
+sexmale        & $-2.84^{***}$ \\
+               & $(0.21)$      \\
+\hline
+AIC            & 633.45        \\
+BIC            & 646.80        \\
+Log Likelihood & -313.72       \\
+Deviance       & 627.45        \\
+Num. obs.      & 633           \\
+\hline
+\multicolumn{2}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+\end{tabular}
+\caption{Statistical models}
+\label{table:titanic}
+\end{center}
+\end{table}
+
 
 \begin{enumerate}
 \item Оцените вероятность выжить для женщины 20 лет
@@ -1533,8 +1620,8 @@ Q(\hb)=\sum_i (y_i-\hb x_i)^2+\lambda \hb^2
 \subsection{Пересдача экзамена}
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -1581,10 +1668,44 @@ $X'X=\left(
 
 \item По данным о пассажирах Титаника оценивается логит-модель. Зависимая переменная \verb|survived| равна 1, если пассажир выжил. Объясняющая переменная \verb|sexmale| равна 1 для  мужчин.
 
-<<"titanic_dup", results='asis'>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+library(texreg)
+# data source
 mod.tit <- glm(data = titanic, survived ~ age + sex, family = "binomial")
 texreg(mod.tit, float.pos = "h!", label = "table:titanic-2")
-@
+\end{minted}
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{l c }
+\hline
+ & Model 1 \\
+\hline
+(Intercept)    & $1.92^{***}$  \\
+               & $(0.28)$      \\
+age            & $-0.01$       \\
+               & $(0.01)$      \\
+sexmale        & $-2.84^{***}$ \\
+               & $(0.21)$      \\
+\hline
+AIC            & 633.45        \\
+BIC            & 646.80        \\
+Log Likelihood & -313.72       \\
+Deviance       & 627.45        \\
+Num. obs.      & 633           \\
+\hline
+\multicolumn{2}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+\end{tabular}
+\caption{Statistical models}
+\label{table:titanic-2}
+\end{center}
+\end{table}
+
+
 
 \begin{enumerate}
 \item Оцените вероятность выжить для женщины 20 лет
@@ -1638,18 +1759,28 @@ $i=30,\ldots, 50$ & $0.87$ & $1.84$ & $3.66$ & $117.46$ \\
 \item Загрузите данные в R.
 
 Данные RLMS выложены на сайте в формате SPSS. SPSS это потихоньку погибающий статистический пакет для домохозяек. Для чтения формата .sav в таблицу данных R можно сделать так
-<<echo=TRUE, eval=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 library(foreign)
 file.name <- "/home/boris/downloads/r20hall23c.sav"
 h <- read.spss(file.name, to.data.frame = TRUE)
-@
+\end{minted}
+
 Первая команда, \verb|library(foreign)|, подгружает библиотеку R, в которой содержатся команды для чтения вражеских форматов, spss, stata, etc
 
 Описания переменных при этом также загружаются в таблицу данных. Можно их выделить в отдельный вектор и прочитать, например, про переменную \verb|pc9.631a|.
-<<echo=TRUE, eval=FALSE>>=
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 var.labels <- attr(h, "variable.labels")
 var.labels["pc9.631a"]
-@
+\end{minted}
 
 \item Выберите любую количественную переменную в качестве зависимой и несколько переменных в качестве объясняющей.
 
@@ -1789,9 +1920,13 @@ $A=\left(%
 
 \item  По 47 наблюдениям оценивается зависимость доли мужчин занятых в сельском хозяйстве от уровня образованности и доли католического населения по Швейцарским кантонам в 1888 году.
 
-\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\varepsilon_i\]
+\[Agriculture_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\e_i\]
 
-<<echo=FALSE,message=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 h <- swiss
 model1 <- glm(Agriculture ~ Examination + Catholic, data = h)
 coef.t <- coeftest(model1)
@@ -1801,13 +1936,25 @@ coef.t <- coef.t[, -4]
 coef.t[1, 1] <- NA
 coef.t[2, 2] <- NA
 coef.t[3, 3] <- NA
-@
-
-
-
-<<results='asis',echo=FALSE>>=
 xtable(coef.t)
-@
+\end{minted}
+
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Mar 28 19:46:27 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Оценка & Ст. ошибка & t-статистика \\ 
+  \hline
+(Intercept) &  & 8.72 & 9.44 \\ 
+  Examination & -1.94 &  & -5.08 \\ 
+  Catholic & 0.01 & 0.07 &  \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
 
 \begin{enumerate}
 \item Заполните пропуски в таблице
@@ -1815,9 +1962,13 @@ xtable(coef.t)
 \item Постройте 99\%-ый доверительный интервал для коэффициента при переменной Catholic
 \end{enumerate}
 
-\item В рамках классической линейной модели с неслучайными регрессорами найдите $\Var(\hat{\varepsilon})$, $\Cov(\hb,\hat{\varepsilon})$. Верно ли, что $\Cov(\hat{\varepsilon}_1,\hat{\varepsilon}_2)=0$?
+\item В рамках классической линейной модели с неслучайными регрессорами найдите $\Var(\hat{\e})$, $\Cov(\hb,\hat{\e})$. Верно ли, что $\Cov(\hat{\e}_1,\hat{\e}_2)=0$?
 
-<<echo=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 X <- model.matrix(model1)
 B <- t(X) %*% X
 colnames(B) <- NULL
@@ -1825,13 +1976,13 @@ rownames(B) <- NULL
 XXm <- solve(B)
 x <- xtable(B, align = rep("", ncol(B) + 1), digits = 0)
 xm <- xtable(XXm, align = rep("", ncol(B) + 1), digits = 5)
-# print(xm, floating=FALSE, tabular.environment = "bmatrix",
-#      hline.after = NULL, include.rownames = FALSE, include.colnames = FALSE)
-@
+print(xm, floating = FALSE, tabular.environment = "bmatrix",
+      hline.after = NULL, include.rownames = FALSE, include.colnames = FALSE)
+\end{minted}
 
 
 
-\item Эконометресса Ефросинья оценивала модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \varepsilon_i$. Найдя матрицы $X'X$ и $(X'X)^{-1}$, она призадумалась\ldots
+\item Эконометресса Ефросинья оценивала модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$. Найдя матрицы $X'X$ и $(X'X)^{-1}$, она призадумалась\ldots
 
 $X'X = \begin{bmatrix}{}
   47 & 775 & 1934 \\
@@ -1850,8 +2001,8 @@ $(X'X)^{-1}=\begin{bmatrix}{}
 \item (*) Ефросинья решила зачем-то также оценить модель $x_i = \gamma_1 + \gamma_2 z_i + u_i$. Как она может найти RSS в новой модели в одно арифметическое действие?
 \end{enumerate}
 
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -1906,7 +2057,7 @@ $X'X=\left(
 \item $\hb_1$, $\hb_2$
 \item $[0.01 - 0.07 \cdot 2.704; 0.01 + 0.07 \cdot 2.704]$
 \end{enumerate}
-\item $\Var(\hat{\varepsilon}) = \sigma^2 (I - H)$, $\Cov(\hb,\hat{\varepsilon}) = 0$
+\item $\Var(\hat{\e}) = \sigma^2 (I - H)$, $\Cov(\hb,\hat{\e}) = 0$
 \item
 \begin{enumerate}
 \item $n = 47$, $\bar{z} = 1934 / 47$, $\sum x_i z_i = 23121$, $\sum(x_i-\bar{x})(z_i-\bar{z}) = 23121 - 1934 \cdot 775 / 47$
@@ -1943,7 +2094,7 @@ R^2 = 0.341, n = 27
 
 
 
-\item По ежегодным данным с 2002 по 2009 год оценивался тренд в динамике общей стоимости экспорта из РФ: $Exp_t=\beta_1+\beta_2t+\varepsilon_t$, где t — год ($t=0$ для 2002 г., $t=1$ для 2003 г., \ldots, $t=7$
+\item По ежегодным данным с 2002 по 2009 год оценивался тренд в динамике общей стоимости экспорта из РФ: $Exp_t=\beta_1+\beta_2t+\e_t$, где t — год ($t=0$ для 2002 г., $t=1$ для 2003 г., \ldots, $t=7$
 для 2009 г.), $Exp_t$ — стоимость экспорта из РФ во все страны в млрд. долл. Оценённое уравнение  выглядит так: $\widehat{Exp}_t=111.9+43.2t$. Получены также оценки дисперсии случайной ошибки $\hat{\sigma}^2=4009$ и ковариационной матрицы оценок коэффициентов:
 \[
 \widehat{Var}(\hb)=\begin{pmatrix}
@@ -1956,7 +2107,7 @@ R^2 = 0.341, n = 27
 \item Постройте 95\%-ый доверительный интервал для коэффициента $\beta_2$
 \item Спрогнозируйте стоимость экспорта на 2010 год и постройте 90\%-ый предиктивный интервал для прогноза.
 \end{enumerate}
-\item Имеется $100$ наблюдений. Исследователь Вениамин предполагает, что дисперсия случайной ошибки в последних $50$-ти наблюдениях в 4 раза выше, чем в первых $50$-ти, в частности $\Var(\varepsilon_1)=\sigma^2$, а $\Var(\varepsilon_{100})=4\sigma^2$. Вениамин оценивает модель $y_i=\beta x_i +\varepsilon_i$ с помощью МНК.
+\item Имеется $100$ наблюдений. Исследователь Вениамин предполагает, что дисперсия случайной ошибки в последних $50$-ти наблюдениях в 4 раза выше, чем в первых $50$-ти, в частности $\Var(\e_1)=\sigma^2$, а $\Var(\e_{100})=4\sigma^2$. Вениамин оценивает модель $y_i=\beta x_i +\e_i$ с помощью МНК.
 \begin{enumerate}
 \item Найдите истинную дисперсию МНК оценки коэффициента $\beta$
 \item Предложите более эффективную оценку $\hb^{alt}$
@@ -1964,15 +2115,15 @@ R^2 = 0.341, n = 27
 \item Подробно опишите любой способ, который позволяет протестировать гипотезу о гомоскедастичности против предположения Вениамина о дисперсии.
 \end{enumerate}
 
-\item Закон больших чисел гласит, что если $z_i$ независимы и одинаково распределены, то $\plim \bar{z}_n = \E(z_1)$. Предположим, что регрессоры — стохастические, а именно, наблюдения являются случайной выборкой (то есть отдельные наблюдения независимы и одинаково распределены), и  $\E(\varepsilon | X)=0$. Модель имеет вид:
+\item Закон больших чисел гласит, что если $z_i$ независимы и одинаково распределены, то $\plim \bar{z}_n = \E(z_1)$. Предположим, что регрессоры — стохастические, а именно, наблюдения являются случайной выборкой (то есть отдельные наблюдения независимы и одинаково распределены), и  $\E(\e | X)=0$. Модель имеет вид:
 
 \[
-y_i=\beta_1 + \beta_2 x_i +\beta_3 w_i +\varepsilon_i
+y_i=\beta_1 + \beta_2 x_i +\beta_3 w_i +\e_i
 \]
 
 \begin{enumerate}
-\item Найдите $\E(\varepsilon)$, $\E(x_1 \cdot \varepsilon_1)$
-\item Найдите $\plim \frac{1}{n}X'\varepsilon$
+\item Найдите $\E(\e)$, $\E(x_1 \cdot \e_1)$
+\item Найдите $\plim \frac{1}{n}X'\e$
 \item Найдите $\plim \frac{1}{n}X'X$
 \item Докажите, что вектор МНК оценок $\hb$ является состоятельным
 \end{enumerate}
@@ -2056,7 +2207,12 @@ y_i=\beta_1 + \beta_2 x_i +\beta_3 w_i +\varepsilon_i
 
 \item Для модели данных $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$ по 100 наблюдениям получены результаты:
 
-<<results="asis">>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+set.seed(777)
 x <- rnorm(100)
 z <- rnorm(100)
 x <- x - mean(x)
@@ -2065,10 +2221,24 @@ z <- resid(pre_model) # X'X is diagonal :)
 
 y <- 2 + 3*x - 0.05*z + rnorm(100)
 model <- lm(y ~ x + z)
-#summary(model)
-#vcov(model)
+
 xtable(model)
-@
+\end{minted}
+
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Mar 28 19:50:25 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 2.1304 & 0.1174 & 18.14 & 0.0000 \\ 
+  x & 2.9263 & 0.1228 & 23.83 & 0.0000 \\ 
+  z & -0.0562 & 0.1148 & -0.49 & 0.6252 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
 \begin{enumerate}
 \item Выпишите полученное уравнение регрессии
@@ -2091,8 +2261,8 @@ xtable(model)
 В этот день, 26 декабря 1919 года, совнарком РСФСР принял декрет «О ликвидации безграмотности в РСФСР». Всем желаю отметить этот день написанием грамотного зачета по эконометрике! Удачи!
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -2130,7 +2300,7 @@ $X'X=\left(
 \begin{enumerate}
 \item Найдите вектор МНК-оценок коэффициентов $\hb$.
 \item Найдите коэффициент детерминации $R^2$
-\item Предполагая нормальное распределение вектора $\varepsilon$, проверьте гипотезу $H_0$: $\b_2=0$ против альтернативной $H_a$: $\b_2\neq 0$
+\item Предполагая нормальное распределение вектора $\e$, проверьте гипотезу $H_0$: $\b_2=0$ против альтернативной $H_a$: $\b_2\neq 0$
 \end{enumerate}
 
 \item Для линейной регрессии $y_i = \beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$ была выполнена сортировка наблюдений по возрастанию переменной $x$. Исходная модель оценивалась по разным частям выборки:
@@ -2155,18 +2325,51 @@ $i=30,\ldots, 50$ & $0.87$ & $1.84$ & $3.66$ & $117.46$ \\
 
 
 \item По \Sexpr{nrow(flats)} наблюдениям оценена модель зависимости стоимости квартиры в Москве (в 1000\$) от общего метража и метража жилой площади.
-<<"flats - 2", results='asis'>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 model1 <- lm(price ~ totsp + livesp, data = flats)
 report <- summary(model1)
 coef.table <- report$coefficients
 rownames(coef.table) <- c("Константа", "Общая площадь", "Жилая площадь")
 xtable(coef.table)
-@
-
-Оценка ковариационной матрицы $\widehat{Var}(\hb)$ имеет вид
-<<"var hat - 2", results='asis'>>=
 xtable(vcov(model1))
-@
+\end{minted}
+
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Mar 28 19:51:07 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+Константа & -88.81 & 4.37 & -20.34 & 0.00 \\ 
+  Общая площадь & 1.70 & 0.10 & 17.78 & 0.00 \\ 
+  Жилая площадь & 1.99 & 0.18 & 10.89 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Оценка ковариационной матрицы $\hVar(\hb)$ имеет вид
+
+
+% latex table generated in R 3.4.2 by xtable 1.8-2 package
+% Wed Mar 28 19:51:50 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & (Intercept) & totsp & livesp \\ 
+  \hline
+(Intercept) & 19.07 & 0.03 & -0.45 \\ 
+  totsp & 0.03 & 0.01 & -0.02 \\ 
+  livesp & -0.45 & -0.02 & 0.03 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
 Оценка стандартной ошибки случайной составляющей, $\hat{\sigma}=\Sexpr{report$sigma}$.
 
@@ -2252,8 +2455,8 @@ var_meta
 \subsection{Экзамен. Демо-1}
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -2355,8 +2558,8 @@ Q(\hb)=\sum_i (y_i-\hb x_i)^2+\lambda \hb^2
 \subsection{Экзамен. Демо-2}
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -2394,7 +2597,7 @@ $X'X=\left(
 \begin{enumerate}
 \item Найдите вектор МНК-оценок коэффициентов $\hb$.
 \item Найдите коэффициент детерминации $R^2$
-\item Предполагая нормальное распределение вектора $\varepsilon$, проверьте гипотезу $H_0$: $\b_2=0$ против альтернативной $H_a$: $\b_2\neq 0$
+\item Предполагая нормальное распределение вектора $\e$, проверьте гипотезу $H_0$: $\b_2=0$ против альтернативной $H_a$: $\b_2\neq 0$
 \end{enumerate}
 
 \item Для линейной регрессии $y_i = \beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$ была выполнена сортировка наблюдений по возрастанию переменной $x$. Исходная модель оценивалась по разным частям выборки:
@@ -2493,8 +2696,8 @@ texreg(mod_tit, float.pos = "h!")
 
 
 \begin{enumerate}
-\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель  задана в матричном виде при помощи уравнения $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -2800,7 +3003,7 @@ A=\begin{pmatrix}
 
 \begin{enumerate}
 
-\item В рамках классической линейной регрессионной модели $y=X\beta+ \varepsilon$, $\E(\varepsilon)=0$, $\Var(\varepsilon)=\sigma^2 \cdot I$, найдите: $\E(\hat\varepsilon)$, $\Var(\hat\varepsilon)$, $\Cov(\hat\varepsilon, y)$.
+\item В рамках классической линейной регрессионной модели $y=X\beta+ \e$, $\E(\e)=0$, $\Var(\e)=\sigma^2 \cdot I$, найдите: $\E(\hat\e)$, $\Var(\hat\e)$, $\Cov(\hat\e, y)$.
 
 \item Имеются данные:
 
@@ -2818,7 +3021,7 @@ $y_i$ & $x_i$ & $z_i$ \\
 Предположим, что ошибки нормальны $\cN(0;\sigma^2)$ и независимы.
 
 \begin{enumerate}
-\item Оцените с помощью МНК модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \varepsilon_i$
+\item Оцените с помощью МНК модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$
 \item Найдите $RSS$, $TSS$, $ESS$ и $R^2$
 \item Проверьте гипотезу о незначимости коэффициента $\hat\beta_2$ на уровне значимости 5\%.
 \item Найдите оценку ковариационной матрицы коэффициентов $\widehat{\Var}(\hat\beta)$
@@ -2828,12 +3031,12 @@ $y_i$ & $x_i$ & $z_i$ \\
 
 \item Как могут измениться (могут ли увеличиться? уменьшиться?) $RSS$, $TSS$ и $ESS$ при добавлении дополнительного наблюдения? При добавлении дополнительного регрессора?
 
-\item Эконометресса Агнесса оценила множественную регрессию $y_i = \beta_1 + \beta_2 x_i + \beta_3 z_i + \varepsilon_i$. Потом она добавила два наблюдения к своей выборке: $y_{n+1}=1$, $x_{n+1}=2$, $z_{n+1}=3$ и $y_{n+2}=-1$, $x_{n+2}=1$, $z_{n+2}=2$. Как при этом изменились матрицы $X'X$ и $X'y$?
+\item Эконометресса Агнесса оценила множественную регрессию $y_i = \beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$. Потом она добавила два наблюдения к своей выборке: $y_{n+1}=1$, $x_{n+1}=2$, $z_{n+1}=3$ и $y_{n+2}=-1$, $x_{n+2}=1$, $z_{n+2}=2$. Как при этом изменились матрицы $X'X$ и $X'y$?
 
 
 \item По 47 наблюдениям оценивается зависимость фертильности женщин от доли мужчин занятых в сельском хозяйстве и доли католического населения по Швейцарским кантонам в 1888 году.
 
-\[Fertility_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\varepsilon_i\]
+\[Fertility_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\e_i\]
 
 <<echo=FALSE, message=FALSE>>=
 # library(Hmisc)
@@ -2864,7 +3067,7 @@ xtable(coef.t)
 
 \item Нарисуйте Самую Главную Картинку, иллюстрирующую метод наименьших квадратов для множественной регрессии. Отметьте на картинке $RSS$, $ESS$, $TSS$ и $R^2$
 
-\item Эконометресса Ефросинья оценивала модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \varepsilon_i$. Найдя матрицы $X'X$ и $(X'X)^{-1}$, она призадумалась\ldots
+\item Эконометресса Ефросинья оценивала модель $y_i=\beta_1 + \beta_2 x_i + \beta_3 z_i + \e_i$. Найдя матрицы $X'X$ и $(X'X)^{-1}$, она призадумалась\ldots
 
 $X'X = \begin{bmatrix}{}
   47 & 775 & 1934 \\
@@ -2908,7 +3111,7 @@ $(X'X)^{-1}=\begin{bmatrix}{}
 \subsection{Праздник номер 2, 10 ноября 2015, некоторые ответы}
 
 \begin{enumerate}
-\item $\E(\hat\varepsilon) = 0$, $\Var(\hat\varepsilon) = \sigma^2 (I - H)$, $\Cov(\hat\varepsilon, y) =  \sigma^2 (I - H)$.
+\item $\E(\hat\e) = 0$, $\Var(\hat\e) = \sigma^2 (I - H)$, $\Cov(\hat\e, y) =  \sigma^2 (I - H)$.
 \item
 %\begin{enumerate}
 %\item $\hb_1 = \frac{899}{342}$, $\hb_2 = \frac{22}{171}$, $\hb_3 = -\frac{7}{19}$
@@ -2942,8 +3145,8 @@ $(X'X)^{-1}=\begin{bmatrix}{}
 В этот день, 28 декабря 1895 года, в индийском салоне «Гран-кафе» на бульваре Капуцинок в Париже состоялся публичный показ «Синематографа братьев Люмьер» :)
 
 \begin{enumerate}
-\item Регрессионная модель $y_i=\b_1 + \b_2 x_i + \b_3 z_i + \e_i$  задана в матричном виде  $y=X\beta+\varepsilon$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
-Известно, что $\E(\varepsilon)=0$  и  $\Var(\varepsilon)=\sigma^2\cdot I$.
+\item Регрессионная модель $y_i=\b_1 + \b_2 x_i + \b_3 z_i + \e_i$  задана в матричном виде  $y=X\beta+\e$, где $\beta=(\beta_1,\beta_2,\beta_3)'$.
+Известно, что $\E(\e)=0$  и  $\Var(\e)=\sigma^2\cdot I$.
 Известно также, что
 
 $y=\left(
@@ -2981,7 +3184,7 @@ $X'X=\left(
 \begin{enumerate}
 \item Найдите вектор МНК-оценок коэффициентов $\hb$.
 \item Найдите коэффициент детерминации $R^2$
-\item Предполагая нормальное распределение вектора $\varepsilon$, проверьте гипотезу $H_0$: $\b_3=0$ против альтернативной $H_a$: $\b_3\neq 0$ на уровне значимости 5\%.
+\item Предполагая нормальное распределение вектора $\e$, проверьте гипотезу $H_0$: $\b_3=0$ против альтернативной $H_a$: $\b_3\neq 0$ на уровне значимости 5\%.
 \item Постройте точечный прогноз и 95\%-ый предиктивный интервал для $x_6=2$ и $z_6=0$.
 \end{enumerate}
 
@@ -3324,7 +3527,7 @@ l(\sigma^2) = -50ln(2\pi) - 50ln(\sigma^2) - \frac{1}{2\sigma^2}\sum \limits_{i=
 \item Формулировка с детерминистическими регрессорами
 \item Доказательство с детерминистическими регрессорами
 \item Формулировки со стохастическими регрессорами
-\item Что даёт дополнительное предположение о нормальности $\varepsilon$?
+\item Что даёт дополнительное предположение о нормальности $\e$?
 \item Теорема Фриша-Вау
 \end{enumerate}
 
@@ -4030,9 +4233,9 @@ B9 = P-value (22) \approx 0.000
 
 Последовательность оценок $\hat \theta_1$, $\hat \theta_2$, \ldots, называется состоятельной, если
 \[
-\lim_{n\to\infty} P(|\hat \theta_n - \theta| < \varepsilon) = 1
+\lim_{n\to\infty} P(|\hat \theta_n - \theta| < \e) = 1
 \]
-для любого числа $\varepsilon >0$.
+для любого числа $\e >0$.
 
 
 \end{enumerate}
@@ -4682,11 +4885,11 @@ F_crit <- qf(0.95, df1 = 1, df2 = 27 - 3)
 \]
 \item Доверительный (предиктивный) интервал для конкретного значения иммет вид:
 \[
-[\widehat{time}_f - z_{cr} \cdot se(\widehat{time}_f - \varepsilon_f); \widehat{time}_f+ z_{cr} \cdot se(\widehat{time}_f - \varepsilon_f)]
+[\widehat{time}_f - z_{cr} \cdot se(\widehat{time}_f - \e_f); \widehat{time}_f+ z_{cr} \cdot se(\widehat{time}_f - \e_f)]
 \]
 \begin{multline*}
-\Var(\widehat{time}_f - time_f | X) = \Var(\widehat{time}_f - \E(time_f | X) - \varepsilon_f |X) = \\
-= \Var(\widehat{time}_f - \varepsilon_f |X) = \Var(\widehat{time}_f|X) + \Var(\varepsilon_f |X) = 6.35 + 1.45 = 7.8
+\Var(\widehat{time}_f - time_f | X) = \Var(\widehat{time}_f - \E(time_f | X) - \e_f |X) = \\
+= \Var(\widehat{time}_f - \e_f |X) = \Var(\widehat{time}_f|X) + \Var(\e_f |X) = 6.35 + 1.45 = 7.8
 \end{multline*}
 \[
 [15 - 2 \sqrt{7.8}; 15 + 2 \sqrt{7.8}]
@@ -5057,7 +5260,7 @@ d_i = \begin{cases}
 \]
 Пусть коэффициенты для городской местности отличаются на некоторое $\Delta_i$, тогда неограниченная модель имеет вид:
 \[
-milk_i = \beta_1 + \Delta_1 d_i + (\beta_2 + \Delta_2 d_i) price_i + (\beta_3 + \Delta_3 d_i) income_i + \varepsilon_i
+milk_i = \beta_1 + \Delta_1 d_i + (\beta_2 + \Delta_2 d_i) price_i + (\beta_3 + \Delta_3 d_i) income_i + \e_i
 \]
 \[
 RSS_{UR} = RSS_{Urban} + RSS_{Rural} = 1115.693 + 865.08 = 1980.773
@@ -5088,7 +5291,7 @@ F_{obs} = \frac{(2123 - 1980.773)/3}{1980.773/94} \approx 2.25
 \begin{enumerate}
 \item В модель необходимо добавить фиктивные переменные $Q_1$, $Q_2$ и $Q_3$, соответствующие первым трём кварталам года:
 \[
-Y_i = \beta_1 + \beta_2 X_i + \beta_3 Z_i + \beta_4 W_i + \beta_5 Q_{1i} + \beta_6 Q_{2i} + \beta_7 Q_{3i} + \varepsilon_i
+Y_i = \beta_1 + \beta_2 X_i + \beta_3 Z_i + \beta_4 W_i + \beta_5 Q_{1i} + \beta_6 Q_{2i} + \beta_7 Q_{3i} + \e_i
 \]
 \item Гипотеза о наличии (а на самом деле отсутствии) сезонности записывается следущим образом:
 \[
@@ -5628,7 +5831,7 @@ mean_asv <- sample(c(40, 50, 60, 70), size = 1)
 \item Формулировка с детерминистическими регрессорами
 \item Доказательство с детерминистическими регрессорами
 \item Формулировки со стохастическими регрессорами
-\item Что даёт дополнительное предположение о нормальности $\varepsilon$?
+\item Что даёт дополнительное предположение о нормальности $\e$?
 \item Теорема Фриша-Вау
 \item Матрица-Мать всех регрессий
 \end{enumerate}
