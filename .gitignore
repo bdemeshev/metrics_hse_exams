@@ -5,3 +5,7 @@ metrics_hse_exams.run.xml
 junk.txt
 .DS_Store
 *.xdv
+materials/2017/kr_03_ip/kr_03i.aux
+*.fdb_latexmk
+*.fls
+materials/2017/kr_03_ip/kr_03i.log

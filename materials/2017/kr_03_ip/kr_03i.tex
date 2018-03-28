@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Эконометрика}
+\chead{}
+\rhead{2018-03-28, праздник номер три :)}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+\begin{document}
+
+
+Ровно 42 года назад польская путешественница Кристина Хойновская-Лискевич начала первое женское одиночное кругосветное плавание на парусной яхте. 
+Плавание продлилось примерно два года. 
+
+% На этой контрольной мы постараемся исследовать свойства ML оценок :)
+
+
+\begin{enumerate}
+
+  \item Рассмотрим задачу линейной регрессии для случая идеально точно известной дисперсии: $y=X\beta + u$, $u\sim \cN(0; I_{n\times n})$, 
+    где $I_{n\times n}$ — единичная матрица. 
+    Обозначим $s(\beta)$ — вектор-столбец, градиент логарифмической функции правдоподобия, 
+    а $\hb$ — оценку параметров $\beta$ с помощью максимального правдоподобия.
+
+    \begin{enumerate}
+      \item Найдите $\Var(s(\beta)|X)$ и вспомните $\Var(\hat\beta|X)$;
+      \item Упростите выражение $\Var(s(\beta)|X) \cdot \Var(\hat\beta|X)$;
+    \end{enumerate}
+
+  \item В созвездии Малой Медведицы водится $k$ видов медведепришельцев. 
+    Исследователь Миша отлавливает $n$ медведепришельцев и классифицирует их по видам: 
+    $y_1$ — количество медведепришельцев первого вида, $y_2$ — второго, \ldots, $y_k$ — $k$-го. 
+    Миша хочет оценить вектор вероятностей $p=(p_1, \ldots, p_{k-1})$. 
+    Вероятностей на одну меньше, чем видов, чтобы избежать жёсткой линейной зависимости между ними.
+    \begin{enumerate}
+      \item Как распределена в теории величина $y_1$? Чему равна её дисперсия?
+      \item Как распределена в теории величина $y_{12}=(y_1 + y_2)$? Чему равна её дисперсия?
+      \item Чему равна ковариация $y_1$ и $y_2$?
+      \item Выпишите функцию правдоподобия с точностью до домножения на константу;
+      \item Найдите $\hat p_{ML}$;
+      \item Найдите $\Var(s(\theta))$ и $\Var(\hat p)$;
+      \item Найдите предел $\lim \Var(s(\theta)) \cdot \Var(\hat p)$?
+    \end{enumerate}
+
+\end{enumerate}
+
+
+
+\begin{enumerate}[resume]
+
+
+  \item Исследовательница Несмеяна вывела хитрую формулу для $\hat a$ — несмещённой оценки неизвестного векторного параметра $a$.  
+    Обозначим $s(a)$ — вектор-столбец градиент логарифмической функции правдоподобия. Докажите, что для оценки Несмеяны выполнено неравенство Крамера-Рао,
+    а именно, матрица $M = \Var(s(a))\cdot \Var(\hat a) - I_{k\times k}$ положительна определена. 
+
+     
+
+Подсказки:
+
+    \begin{enumerate}
+      \item Вспомните, чему равно $\E(s(a))$. Достаточно просто вспомнить, доказывать не требуется!
+      \item Найдите скаляры $\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_1}\right)$, 
+	$\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_2}\right)$ 
+	и матрицу $\Cov\left(\hat a, s(a) \right)$.
+      \item Рассмотрим два произвольных случайных вектора $R$ и $S$ и два вектора констант подходящей длины $\alpha$ и $\beta$. 
+	Найдите минимум функции $f(\alpha, \beta) = \Var(\alpha^T R + \beta^T S)$ по $\beta$. 
+	Выпишите явно $\beta^*(\alpha)$ и $f^*(\alpha)$.
+      \item Докажите, что для произвольных случайных векторов положительно определена матрица 
+	\[
+          \Var(R) - \Cov(R, S) \Var^{-1}(S)\Cov(S, R)
+	\]
+      \item Завершите доказательство векторного неравенства Крамера-Рао. 
+
+
+    \end{enumerate}
+
+  Без угрызений совести можно храбро переставлять интегралы и производные :)
+
+  \newpage
+  \item[3-лайт!] Утешительная версия задачи про Несмеяну. Если не получилось доказать векторную версию неравенства Крамера-Рао, то докажите скалярную :)
+
+    Докажите, что для несмещённой скалярной оценки  $\Var(s(a))\cdot \Var(\hat a) \geq 1$.
+
+    Подсказки:
+	
+    \begin{enumerate}
+     
+      \item Вспомните, чему равно $\E(\ell'(a))$. Достаточно просто вспомнить, доказывать не требуется!
+      \item Найдите $\Cov(\hat a, \ell'(a))$;
+      \item Сколько корней может быть у параболы $f(t)=\Var(R + tL)$? Каким может быть дискриминант параболы $f(t)$?
+      \item  Докажите для произвольных случайных величин $R$ и $L$ неравенство Коши-Шварца, 
+	\[
+	  \Var(R) \cdot \Var(L) \geq \Cov^2(R, L) .
+	\]
+    \item Завершите доказательство скалярного неравенства Крамера-Рао :)
+    \end{enumerate}
+
+
+  \item[4.] Идея доказательства состоятельности ML оценки :)
+    
+    Пусть наблюдения $y_1$, \ldots, $y_n$ независимы и одинаково распределены с функцией плотности, зависящей от параметра $a$.
+    Истинное значение параметра обозначим буквой $a_0$. Оценку максимального правдоподобия обозначим $\hat a$.
+
+    Рассмотрим отмасштабированную логарифмическую функцию правдоподобия $\ell_n(a)=\ell(a) / n$, и
+    ожидаемую логарифмическую функцию правдоподобия\footnote{Внимание: 
+    ожидание считается с помощью истинного $a_0$ от функции, в которую входит константа $a$.}, 
+    $\tilde \ell(a)=\E(\ell(a))$.
+    \begin{enumerate}
+      \item Что больше, $\ln x$ или $x-1$? Докажите!
+      \item В какой точке находится максимум функции $\ell_n(a)$?        
+      \item В какой точке находится максимум функции $\tilde \ell(a)$?
+ 
+	Подсказка: рассмотрите выражение $\tilde \ell(a) - \tilde \ell(a_0)$ и примените доказанное неравество :)
+      \item К чему сходится $\ell_n(a)$ по вероятности?
+      %\item К чему сходится $\ell^{\prime\prime}_n(a)$? 
+
+    \end{enumerate}
+
+
+  \item[5.] Известна структура обратимой матрицы $M$,
+    \[
+         M = \begin{pmatrix}
+	   A & B \\
+	   0 & I_{k\times k} \\
+	 \end{pmatrix}.
+    \]
+
+    \begin{enumerate}
+      \item Найдите $M^{-1}$.
+      \item Какие условия должны выполняться на блоки $A$ и $B$, чтобы $M$ была обратимой?
+    \end{enumerate}
+
+
+\end{enumerate}
+
+
+
+\end{document}
