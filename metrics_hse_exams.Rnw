@@ -2324,7 +2324,7 @@ $i=30,\ldots, 50$ & $0.87$ & $1.84$ & $3.66$ & $117.46$ \\
 \end{enumerate}
 
 
-\item По \Sexpr{nrow(flats)} наблюдениям оценена модель зависимости стоимости квартиры в Москве (в 1000\$) от общего метража и метража жилой площади.
+\item По 2040 наблюдениям оценена модель зависимости стоимости квартиры в Москве (в 1000\$) от общего метража и метража жилой площади.
 \begin{minted}[mathescape,
                linenos,
                numbersep=5pt,
@@ -2371,7 +2371,7 @@ xtable(vcov(model1))
 \end{tabular}
 \end{table}
 
-Оценка стандартной ошибки случайной составляющей, $\hat{\sigma}=\Sexpr{report$sigma}$.
+Оценка стандартной ошибки случайной составляющей, $\hat{\sigma}=33.03$.
 
 \begin{enumerate}
 \item Можно ли интерпретировать коэффициент при переменной $totsp$ как стоимость одного метра нежилой площади?
@@ -2407,17 +2407,25 @@ xtable(vcov(model1))
 \item Загрузите данные в R.
 
 Данные RLMS выложены на сайте в формате SPSS. SPSS это потихоньку погибающий статистический пакет для домохозяек. Для удобства можно воспользоваться готовой функцией для чтения данных RLMS в пакете \verb|rlms|.
-<<echo=TRUE, eval=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 library("rlms")
 h <- read.rlms("/home/boris/downloads/r20hall23c.sav")
-@
+\end{minted}
 Про установку пакета \verb|rlms| можно прочитать на страничке \url{https://github.com/bdemeshev/rlms}
 
 Описания переменных при этом также загружаются в таблицу данных. Можно их посмотреть:
-<<echo=TRUE, eval=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 var_meta <- attr(h,"var_meta")
 var_meta
-@
+\end{minted}
 
 \item Выберите любую количественную переменную в качестве зависимой и несколько переменных в качестве объясняющих.
 
@@ -2503,10 +2511,38 @@ $X'X=\left(
 
 \item По данным о пассажирах Титаника оценивается логит-модель. Зависимая переменная \verb|survived| равна 1, если пассажир выжил. Объясняющая переменная \verb|sexmale| равна 1 для  мужчин.
 
-<<results='asis'>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+library(texreg)
 mod_tit <- glm(data = titanic, survived ~ age + sex, family = "binomial")
 texreg(mod_tit, float.pos = "h!")
-@
+\end{minted}
+
+
+\begin{tabular}{l c }
+\hline
+ & Model 1 \\
+\hline
+(Intercept)    & $1.92^{***}$  \\
+               & $(0.28)$      \\
+age            & $-0.01$       \\
+               & $(0.01)$      \\
+sexmale        & $-2.84^{***}$ \\
+               & $(0.21)$      \\
+\hline
+AIC            & 633.45        \\
+BIC            & 646.80        \\
+Log Likelihood & -313.72       \\
+Deviance       & 627.45        \\
+Num. obs.      & 633           \\
+\hline
+\multicolumn{2}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+\end{tabular}
+
+
 
 \begin{enumerate}
 \item Оцените вероятность выжить для женщины 20 лет
@@ -2546,9 +2582,10 @@ Q(\hb)=\sum_i (y_i-\hb x_i)^2+\lambda \hb^2
 \]
 \begin{enumerate}
 \item Как выглядит МНК оценка $\hb_{OLS}$?
-\item Как выглядит оценка методом <<ridge regression>>, $\hb_{RR}$?
+\item Как выглядит оценка методом «ridge regression», $\hb_{RR}$?
 \item Верно ли, что оценка $\hb_{RR}$ является несмещенной только при $\lambda=0$?
-\item (*) Верно ли, что всегда найдется такое $\lambda$, что среднеквадратичная ошибка оценки $\hb_{RR}$ будет меньше, т.е. $\E((\hb_{RR}-\beta)^2)<\E((\hb_{OLS}-\beta)^2)$?
+\item (*) Верно ли, что всегда найдется такое $\lambda$, что среднеквадратичная ошибка оценки $\hb_{RR}$ будет меньше, 
+то есть $\E((\hb_{RR}-\beta)^2)<\E((\hb_{OLS}-\beta)^2)$?
 \end{enumerate}
 
 
@@ -2622,19 +2659,44 @@ $i=30,\ldots, 50$ & $0.87$ & $1.84$ & $3.66$ & $117.46$ \\
 
 \newpage
 
-\item По \Sexpr{nrow(flats)} наблюдениям оценена модель зависимости стоимости квартиры в Москве (в 1000\$) от общего метража и метража жилой площади.
-<<results='asis'>>=
+\item По 2040 наблюдениям оценена модель зависимости стоимости квартиры в Москве (в 1000\$) от общего метража и метража жилой площади.
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 model1 <- lm(price ~ totsp + livesp, data = flats)
 report <- summary(model1)
 coef.table <- report$coefficients
 rownames(coef.table) <- c("Константа", "Общая площадь", "Жилая площадь")
 xtable(coef.table)
-@
+xtable(vcov(model1))
+\end{minted}
+
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+Константа & -88.81 & 4.37 & -20.34 & 0.00 \\ 
+  Общая площадь & 1.70 & 0.10 & 17.78 & 0.00 \\ 
+  Жилая площадь & 1.99 & 0.18 & 10.89 & 0.00 \\ 
+   \hline
+\end{tabular}
+
 
 Оценка ковариационной матрицы $\widehat{Var}(\hat{\beta})$ имеет вид
-<<results='asis'>>=
-xtable(vcov(model1))
-@
+
+
+\begin{tabular}{rrrr}
+  \hline
+ & (Intercept) & totsp & livesp \\ 
+  \hline
+(Intercept) & 19.07 & 0.03 & -0.45 \\ 
+  totsp & 0.03 & 0.01 & -0.02 \\ 
+  livesp & -0.45 & -0.02 & 0.03 \\ 
+   \hline
+\end{tabular}
+
 
 \begin{enumerate}
 \item Можно ли интерпретировать коэффициент при переменной $totsp$ как стоимость одного метра нежилой площади?
@@ -2672,11 +2734,38 @@ X'X=\left(\begin{array}{ccc}
 \newpage
 \item По данным о пассажирах Титаника оценивается логит-модель. Зависимая переменная $survived$ равна 1, если пассажир выжил.
 
-<<results='asis'>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+library(texreg)
 mod_tit <- glm(data = titanic, survived ~ age + sex,
                family = "binomial")
 texreg(mod_tit, float.pos = "h!")
-@
+\end{minted}
+
+
+\begin{tabular}{l c }
+\hline
+ & Model 1 \\
+\hline
+(Intercept)    & $1.92^{***}$  \\
+               & $(0.28)$      \\
+age            & $-0.01$       \\
+               & $(0.01)$      \\
+sexmale        & $-2.84^{***}$ \\
+               & $(0.21)$      \\
+\hline
+AIC            & 633.45        \\
+BIC            & 646.80        \\
+Log Likelihood & -313.72       \\
+Deviance       & 627.45        \\
+Num. obs.      & 633           \\
+\hline
+\multicolumn{2}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+\end{tabular}
+
 
 \begin{enumerate}
 \item Оцените вероятность выжить для мужчины 30 лет
@@ -2914,7 +3003,7 @@ A=\begin{pmatrix}
   \[
   H^2v = \lambda\cdot Hv \; \Leftrightarrow \; Hv = \lambda^2v
   \]
-  Можем делать так сколько угодно раз, то есть если $\lambda$ -- собственное число матрицы $H$, то и $\lambda^k$ тоже. Значит это могут быть только 0 или 1. Тот факт, что 0 является собственным значением сразу вытекает из неполного ранга.
+  Можем делать так сколько угодно раз, то есть если $\lambda$ — собственное число матрицы $H$, то и $\lambda^k$ тоже. Значит это могут быть только 0 или 1. Тот факт, что 0 является собственным значением сразу вытекает из неполного ранга.
 
 
 
@@ -3038,11 +3127,14 @@ $y_i$ & $x_i$ & $z_i$ \\
 
 \[Fertility_i=\beta_1+\beta_2 Examination_i+\beta_3 Catholic_i+\e_i\]
 
-<<echo=FALSE, message=FALSE>>=
-# library(Hmisc)
-library("lmtest")
-library("apsrtable")
-library("xtable")
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+library(lmtest)
+library(apsrtable)
+library(xtable)
 h <- swiss
 model1 <- lm(Fertility ~ Examination + Catholic, data = h)
 coef.t <- coeftest(model1)
@@ -3051,11 +3143,20 @@ coef.t <- coef.t[, -4]
 coef.t[1, 1] <- NA
 coef.t[2, 2] <- NA
 coef.t[3, 3] <- NA
-@
-
-<<echo=FALSE,results='asis'>>=
 xtable(coef.t)
-@
+\end{minted}
+
+\begin{tabular}{rrrr}
+  \hline
+ & Оценка & Ст. ошибка & t-статистика \\ 
+  \hline
+(Intercept) &  & 4.98 & 16.68 \\ 
+  Examination & -0.89 &  & -4.08 \\ 
+  Catholic & 0.04 & 0.04 &  \\ 
+   \hline
+\end{tabular}
+
+
 
 \begin{enumerate}
 \item Заполните пропуски в таблице.
@@ -3511,7 +3612,7 @@ l(\sigma^2) = -50ln(2\pi) - 50ln(\sigma^2) - \frac{1}{2\sigma^2}\sum \limits_{i=
 
 
 
-\subsection{Большой Устный ЗАчёт - 2016}
+\subsection{Большой Устный ЗАчёт 2016}
 
 \begin{enumerate}
 
@@ -4261,88 +4362,33 @@ B9 = P-value (22) \approx 0.000
 
 \begin{enumerate}
 
+\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\sum X_i^2 = 44$, $\sum Y_i^2 = 197$, $\sum X_i = 15 $, $\sum Y_i = 15$ и $\sum X_i Y_i = 44$. Василий предполагает корректность линейной модели $Y_i = \beta_1 + \beta_2 X_i + u_i$.
 
-<<"problem_1", echo=FALSE, results='asis'>>=
+\begin{enumerate}
+\item Найдите МНК-оценки коэффициентов регресси
+\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
+\end{enumerate}
 
-problem_1 <- c("\\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\\sum X_i^2 = 120$, $\\sum Y_i^2 = 75$, $\\sum X_i = 20 $, $\\sum Y_i = 5$ и $\\sum X_i Y_i = 50$. Василий предполагает корректность линейной модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$.
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регресси
-\\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
-\\end{enumerate}
-",
-"\\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\\sum X_i^2 = 44$, $\\sum Y_i^2 = 197$, $\\sum X_i = 15 $, $\\sum Y_i = 15$ и $\\sum X_i Y_i = 44$. Василий предполагает корректность линейной модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$.
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регресси
-\\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
-\\end{enumerate}
-",
-"\\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\\sum X_i^2 = 30$, $\\sum Y_i^2 = 80$, $\\sum X_i = 10 $, $\\sum Y_i = 10$ и $\\sum X_i Y_i = 0$. Василий предполагает корректность линейной модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$.
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регресси
-\\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
-\\end{enumerate}
-",
-"\\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\\sum X_i^2 = 11$, $\\sum Y_i^2 = 188$, $\\sum X_i = 10 $, $\\sum Y_i = 20$ и $\\sum X_i Y_i = 18$. Василий предполагает корректность линейной модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$.
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регресси
-\\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
-\\end{enumerate}
-",
-"\\item В течение 10 дней Василий записывал количество пойманных им покемонов, $Y_i$, и количество решённых задач по эконометрике, $X_i$. Оказалось, что $\\sum X_i^2 = 44$, $\\sum Y_i^2 = 116$, $\\sum X_i = 20 $, $\\sum Y_i = 10$ и $\\sum X_i Y_i = 2$. Василий предполагает корректность линейной модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$.
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регресси
-\\item Найдите $RSS$, $ESS$, $TSS$ и $R^2$
-\\end{enumerate}
-")
+ \item Для модели $Y_i = \beta_1 + \beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова, а случайные ошибки нормально распределены. Известны все значенения $Y_i$, все значения $\hat Y_i$ и часть значений $X_i$:
+ 
+\begin{tabular}{llll}
+\toprule
+$X_i$      & 4 & 5 & . \\
+$Y_i$      & 7 & 5 & 6 \\
+$\hat Y_i$ & 6.0 & 5.5 & 6.5 \\
+\bottomrule
+\end{tabular}
 
-set.seed(var_no)
-problem_1_selected <- sample(problem_1, 1)
-@
+\begin{enumerate}
+\item Найдите МНК-оценки коэффициентов регрессии
+\item Найдите стандартную ошибку коэффициента $\hat \beta_2$
+\item Постройте 95\%-ый доверительный интервал для коэффициента $\hat \beta_2$
+\item Проверьте гипотезу о незначимости коэффициента $\beta_2$ на уровне значимости 5\%
+\end{enumerate}
 
-
-
-
-
-<<"problem_2", echo=FALSE, results='asis'>>=
-problem_2 <- "\\item Для модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова, а случайные ошибки нормально распределены. Известны все значенения $Y_i$, все значения $\\hat Y_i$ и часть значений $X_i$
-
-\\begin{tabular}{llll}
-\\toprule
-$X_i$      & 4 & 5 & . \\\\
-$Y_i$      & 7 & 5 & 6 \\\\
-$\\hat Y_i$ & 6.0 & 5.5 & 6.5 \\\\
-\\bottomrule
-\\end{tabular}
-
-\\begin{enumerate}
-\\item Найдите МНК-оценки коэффициентов регрессии
-\\item Найдите стандартную ошибку коэффициента $\\hat \\beta_2$
-\\item Постройте 95\\%-ый доверительный интервал для коэффициента $\\hat \\beta_2$
-\\item Проверьте гипотезу о незначимости коэффициента $\\beta_2$ на уровне значимости 5\\%
-\\end{enumerate}
-"
-
-
-set.seed(var_no)
-problem_2_selected <- sample(problem_2, 1)
-@
-
-
-
-<<"print_all", echo=FALSE, results='asis'>>=
-problem_3 <- "\\item Для модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова. Докажите несмещённость МНК-оценки коэффициента $\\beta_1$."
-
-problem_4 <- "\\item Для модели $Y_i = \\beta_1 + \\beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова. Выведите формулу для дисперсии МНК-оценки, $\\Var(\\hb_1)$."
-
-problem_5 <- "\\item Рассмотрим модель $Y_i = \\beta_1 + \\beta_2 X_i + u_i$ с неслучайным регрессором. Аккуратно сформулируйте теорему Гаусса-Маркова, пояснив смысл используемых понятий"
-
-all_problems <- c(problem_1_selected, problem_2_selected, problem_3, problem_4, problem_5)
-
-set.seed(var_no)
-# all_problems_permuted <- sample(all_problems)
-all_problems_permuted <- all_problems
-cat(all_problems_permuted)
-@
+ \item Для модели $Y_i = \beta_1 + \beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова. Докажите несмещённость МНК-оценки коэффициента $\beta_1$. \item Для модели $Y_i = \beta_1 + \beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова. Выведите формулу для дисперсии МНК-оценки, $\Var(\hb_1)$. 
+ 
+ \item Рассмотрим модель $Y_i = \beta_1 + \beta_2 X_i + u_i$ с неслучайным регрессором. Аккуратно сформулируйте теорему Гаусса-Маркова, пояснив смысл используемых понятий.
 
 \end{enumerate}
 
@@ -4510,7 +4556,7 @@ D = \frac{1}{14} \begin{pmatrix}
 \[
 \Cov(r_i + s_i, r_j + s_j) = \Cov(r_i, r_j) + \Cov(r_i, s_j) +  \Cov(s_i, r_j) +  \Cov(s_i, s_j)
 \]
-Первое слагаемое принадлежит матрице $\Var (r)$, третье -- $\Var(s)$, второе -- $\Cov(r,s)$, четвертое -- $\Cov(s,r)$. Получаем
+Первое слагаемое принадлежит матрице $\Var (r)$, третье — $\Var(s)$, второе — $\Cov(r,s)$, четвертое — $\Cov(s,r)$. Получаем
 \[
 \Var(r + s) = \Var(r) + \Var (s) + \Cov(r,s) + \Cov(s,r)
 \]
@@ -4552,7 +4598,7 @@ a'Ca = a'(AA' - (X'X)^{-1})a = a'(AA' - AX(X'X)^{-1}X'A')a = a'A(I - H)A'a =
 \[
 \frac{1}{14} (1, 2, 3)' (1,2,3) \Rightarrow u'Du = \frac{1}{14} u'(1, 2, 3)' (1,2,3)u
 \]
-$u'(1, 2,3)' $ -- это сумма нормально распределенных случайных величин с некоторыми коэффициентами, такая сумма тоже имеет нормальное распределение c матожиданием 0 и дисперсией равной 14. Нормируя на корень из 14, мы получаем стандартную нормальную случайную величину. Значит
+$u'(1, 2,3)' $ — это сумма нормально распределенных случайных величин с некоторыми коэффициентами, такая сумма тоже имеет нормальное распределение c матожиданием 0 и дисперсией равной 14. Нормируя на корень из 14, мы получаем стандартную нормальную случайную величину. Значит
 \[
 \frac{1}{14} u'(1, 2, 3)' (1,2,3)u \sim \chi_1^2
 \]
@@ -4577,7 +4623,7 @@ R^2 = 0
 \item (16)
 \begin{enumerate}
 \item (2)
-Пусть $G$ -- матрица из одних единиц. Её смысл в том, что она будет суммировать элементы вектора, который был умножен на неё. Тогда
+Пусть $G$ — матрица из одних единиц. Её смысл в том, что она будет суммировать элементы вектора, который был умножен на неё. Тогда
 \[
 A = I - \frac{1}{n}G
 \]
@@ -4588,7 +4634,7 @@ A' = A
 \[
 (I - \frac{1}{n}G)(I - \frac{1}{n}G) = I -  \frac{1}{n}G - \frac{1}{n}G + \frac{1}{n^2}GG
 \]
-Легко видеть, что $GG$ -- это матрица, где каждый элемент равен $n$. Получаем
+Легко видеть, что $GG$ — это матрица, где каждый элемент равен $n$. Получаем
 \[
 A^2 = A
 \]
@@ -4623,7 +4669,7 @@ D = A'A = AA = A
 \[
 \frac{1}{n}G = S\Lambda S'
 \]
-Где у матрицы лямбда все элементы 0 кроме элемента $S_{1,1}$. Пусть $s$ -- это собственный вектор, который соответствует собственному значению $1$, тогда
+Где у матрицы лямбда все элементы 0 кроме элемента $S_{1,1}$. Пусть $s$ — это собственный вектор, который соответствует собственному значению $1$, тогда
 \[
 u'\frac{1}{n}Gu = u'ss'u
 \]
@@ -4819,12 +4865,16 @@ N&14&&13\\
 \begin{enumerate}
 
 \item
-<<echo=TRUE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 y_hat <- 12 + 0.2 * 15
 se_y_hat <- 5 + 225 * 0.01 + 2 * 15 * 0.03
 se_forecast_error <- se_y_hat + 1.45
 t_crit <- qt(0.975, df = 30 - 2)
-@
+\end{minted}
 
 \begin{enumerate}
 \item
@@ -4862,12 +4912,18 @@ se(\hb_{age}) = 0.71
 \item $\hb_{4, new} = -\hb_{4, old}$, $\hb_{1, new} = \hb_{1, old} - \hb_{4, new}$, остальные не изменятся.
 \end{enumerate}
 \item
-<<echo=TRUE>>=
-t_obs <- (0.385-0.5) / 0.085
+
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+t_obs <- (0.385 - 0.5) / 0.085
 t_crit <- qt(0.975, df = 27 - 3)
 F_obs <- (0.943 - 0.74) / (1 - 0.943) * (27 - 3)
 F_crit <- qf(0.95, df1 = 1, df2 = 27 - 3)
-@
+\end{minted}
 
 Или руками:
 \begin{enumerate}
@@ -4985,7 +5041,11 @@ F_{obs} = \frac{(RSS_R - RSS_{UR})/q}{RSS_{UR} / (n-k_{UR})} = \frac{(0.851-0.48
 
 \begin{enumerate}
 
-<<include = FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 set.seed(var_no)
 n_obs <- 200
 opros <- data_frame(exper = rnorm(n_obs, mean = 7, sd = 2),
@@ -4996,7 +5056,7 @@ opros <- data_frame(exper = rnorm(n_obs, mean = 7, sd = 2),
 model <- lm(data = opros, wage ~ exper + exper2 + sex)
 report <- summary(model)
 coefs <- coef(model)
-@
+\end{minted}
 
 \item На основании опроса 200 человек была оценена следующая модель:
 \[
@@ -5067,7 +5127,12 @@ $R^2$                        & 0.911 \\
 
 В данных указано, проживает ли семья в сельской или городской местности. Поэтому Глафира оценила три регрессии: (All) — по всем данным, (Urban) — по городским семьям, (Rural) — по сельским семьям.
 
-<<results="asis", echo=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
+var_no <- 1
 set.seed(var_no)
 n_obs <- 100
 
@@ -5091,7 +5156,35 @@ model_table <- mtable("(All)" = model_all, "(Urban)" = model_urban, "(Rural)" = 
 model_table <- relabel(model_table, Deviance = "RSS", p = "P-value", N = "n observations")
 
 toLatex(model_table)
-@
+\end{minted}
+
+
+
+\begin{tabular}{lD{.}{.}{3}D{.}{.}{3}D{.}{.}{3}}
+\toprule
+ & 
+\multicolumn{1}{c}{(All)} & 
+\multicolumn{1}{c}{(Urban)} & 
+\multicolumn{1}{c}{(Rural)}\\
+\midrule
+(Intercept)    &  1.479       & -0.797     &  4.598      \\
+               & (4.480)      & (7.808)    & (5.121)     \\
+income         &  0.252^{***} &  0.204^{*} &  0.262^{***}\\
+               & (0.049)      & (0.092)    & (0.053)     \\
+price          & -0.335^{*}   &  0.001     & -0.567^{**} \\
+               & (0.165)      & (0.272)    & (0.194)     \\
+\midrule
+R-squared      &    0.230 &    0.104 &   0.380\\
+adj. R-squared &    0.214 &    0.063 &   0.355\\
+sigma          &    4.678 &    5.036 &   4.160\\
+F              &   14.464 &    2.541 &  15.326\\
+P-value        &    0.000 &    0.090 &   0.000\\
+RSS            & 2123.000 & 1115.693 & 865.080\\
+n observations &  100     &   47     &  53    \\
+\bottomrule
+\end{tabular}
+
+
 
 \begin{enumerate}
 \item Проверьте значимость в целом регрессии (All) на 5\%-ом уровне значимости.
@@ -5105,19 +5198,52 @@ toLatex(model_table)
 \item $milk$ — расходы семьи на молоко за последние семь дней в рублях
 \end{itemize}
 
-Имеются результаты оценивания модели $milk_i = \beta_1 + \beta_2 income_i + \beta_3 price_i + u_i$ по $\Sexpr{n_obs}$ наблюдениям:
-<<echo=FALSE, results="asis">>=
+Имеются результаты оценивания модели $milk_i = \beta_1 + \beta_2 income_i + \beta_3 price_i + u_i$ по $100$ наблюдениям:
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 xtable(model_all)
-@
+\end{minted}
 
 
-Коэффициент детерминации $R^2$ оказался равен $\Sexpr{round(summary(model_all)$r.squared, 3)}$.
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 1.4791 & 4.4796 & 0.33 & 0.7420 \\ 
+  income & 0.2524 & 0.0486 & 5.19 & 0.0000 \\ 
+  price & -0.3354 & 0.1649 & -2.03 & 0.0447 \\ 
+   \hline
+\end{tabular}
+
+
+
+Коэффициент детерминации $R^2$ оказался равен $0.23$.
 
 
 Глафира рассчитала оценку ковариационной матрицы исходных переменных:
-<<echo=FALSE, results="asis">>=
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 xtable(var(dplyr::select(milk_demand, price, income, milk)))
-@
+\end{minted}
+
+
+\begin{tabular}{rrrr}
+  \hline
+ & price & income & milk \\ 
+  \hline
+price & 8.26 & 3.48 & -1.89 \\ 
+  income & 3.48 & 95.09 & 22.83 \\ 
+  milk & -1.89 & 22.83 & 27.84 \\ 
+   \hline
+\end{tabular}
+
 
 
 \begin{enumerate}
@@ -5127,24 +5253,22 @@ xtable(var(dplyr::select(milk_demand, price, income, milk)))
 \end{enumerate}
 
 
-<<include=FALSE>>=
-set.seed(var_no)
-ESS_old <- sample(c(100, 110, 120), 1)
-ESS_new <- sample(c(150, 160, 170), 1)
-@
-
 \item По квартальным данным 1958-1976 годов была оценена модель с тремя объясняющими факторами:
 \[
-\hat Y_i = 2.2 + 0.104 X_i - 3.48 Z_i + 0.34 W_i, \; ESS = \Sexpr{ESS_old}, \; RSS = 120
+\hat Y_i = 2.2 + 0.104 X_i - 3.48 Z_i + 0.34 W_i, \; ESS = 100, \; RSS = 120
 \]
 
 \begin{enumerate}
 \item Какую модель необходимо оценить исследователю, если он считает, что в различные сезоны среднее значение зависимой переменной помимо зависимости от трёх регрессоров может отличаться на константу?
-\item При оценивании модели, допускающей сезонные эффекты, оказалось, что значение $ESS$ увеличилось до $\Sexpr{ESS_new}$.
+\item При оценивании модели, допускающей сезонные эффекты, оказалось, что значение $ESS$ увеличилось до $160$.
 На уровне значимости 5\% проверьте гипотезу о наличии сезонности.
 \end{enumerate}
 
-<<include=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 set.seed(var_no)
 hb_w <- sample(c(3, 4, 5), 1)
 hb_r <- sample(c(6, 7, 8), 1)
@@ -5172,21 +5296,24 @@ xmatrix <- function(a, environment = "pmatrix", output = TRUE, digits = 3) {
   }
   return(invisible(res))
 }
-@
+xmatrix(XXm)
+\end{minted}
 
 \item По 24 наблюдениям была оценена модель:
 
 \[
-\widehat{Y}_i=15-4Z_i+\Sexpr{hb_w}W_i
+\widehat{Y}_i=15-4Z_i+3W_i
 \]
 
 Известно, что случайные ошибки нормально распределены, $RSS=180$, и
 
 \[
 (X'X)^{-1} =
-<<echo=FALSE, results="asis">>=
-xmatrix(XXm)
-@
+\begin{pmatrix}
+  0.365 & -0.218 & -0.084 \\ 
+  -0.218 & 0.184 & 0.027 \\ 
+  -0.084 & 0.027 & 0.046 \\ 
+  \end{pmatrix}
 \]
 
 
@@ -5373,20 +5500,20 @@ t_{obs} = \frac{\hb_Z + \hb_W - 0}{se(\hb_Z + \hb_W)} = \frac{-4 + 3}{\sqrt{8.57
 \item Дайте интерпретацию полученным результатам.
 \end{enumerate}
 
-\item Были обследованы 36 предприятий по трём показателям:  $K_i$ — основным фондам (млн. руб.), $W_i$ — фонду оплаты труда (млн. руб.), $R_i$ — расходам на НИОКР (млн. руб.). Получены оценки вектора средних $\hat \mu = (3, 4, \Sexpr{var_no})'$ и ковариационной матрицы  $\hat\Sigma = \begin{pmatrix}
+\item Были обследованы 36 предприятий по трём показателям:  $K_i$ — основным фондам (млн. руб.), $W_i$ — фонду оплаты труда (млн. руб.), $R_i$ — расходам на НИОКР (млн. руб.). Получены оценки вектора средних $\hat \mu = (3, 4, 1)'$ и ковариационной матрицы  $\hat\Sigma = \begin{pmatrix}
 2 & 3 & 0 \\
 3 & 10 & 0 \\
-0 & 0 & \Sexpr{var_no + 2} \\
+0 & 0 & 3 \\
 \end{pmatrix}
 $.
 
 Найдите первую главную компоненту и определите долю суммарной дисперсии, которую она объясняет.
 
-\item Мартовский Заяц и Безумный Шляпник почти все время пьют чай. Известно, что количество выпитого за день чая (в чашках) зависит от количества пирожных (в штуках) и печенья (в штуках). Алиса, гостившая у героев в течение \Sexpr{20 + 5 * var_no} дней, заметила, что если оценить зависимость выпитого чая от закуски для Мартовского Зайца и Шляпника
+\item Мартовский Заяц и Безумный Шляпник почти все время пьют чай. Известно, что количество выпитого за день чая (в чашках) зависит от количества пирожных (в штуках) и печенья (в штуках). Алиса, гостившая у героев в течение 25 дней, заметила, что если оценить зависимость выпитого чая от закуски для Мартовского Зайца и Шляпника
 \[
 Tea_i = \beta_1 + \beta_2 Biscuit_i + \beta_3 Cake_i + u_i,
 \]
-то получится регрессия с $RSS = \Sexpr{14 + 3 * var_no}$.
+то получится регрессия с $RSS = 17$.
 
 Чтобы понять, удачную ли модель она построила, Алиса оценила еще одну регрессию
 \[
@@ -5407,16 +5534,21 @@ Tea_i = \beta_1 + \beta_2 Biscuit_i + \beta_3 Cake_i +
 
   После применения взвешенного МНК оба коэффициента значимы.
   \item
-<<>>=
+  
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 eigen(matrix(c(2, 3, 3, 10), nrow = 2))
-@
+\end{minted}
 
-Доля дисперсии: $\Sexpr{11/(11 + 1 + var_no + 2)}$
+Доля дисперсии: $0.733$
 
   \item
   \[
   F = \frac{(RSS_R - RSS_{UR})/3}{RSS_{UR}/(n-k_{UR})}=
-  \Sexpr{(14 + 3 * var_no - 10)*(20 + 5 * var_no - 3)/3/10}
+  5.133
   \]
 
 \end{enumerate}
@@ -5643,11 +5775,26 @@ Y_i^* = \beta_1 + \beta_2 X_i + u_i \\
 \end{cases}.
 \]
 
-<<include=FALSE>>=
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{r}
 df_logit <- tibble(x = c(0, 2, 3, 4), y = c(0, 1, 0, 1))
 logit <- glm(data = df_logit, family = binomial(link = "logit"), y ~ x)
-logit
-@
+xtable(logit)
+\end{minted}
+
+
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -1.9559 & 2.5571 & -0.76 & 0.4443 \\ 
+  x & 0.8424 & 0.9329 & 0.90 & 0.3665 \\ 
+   \hline
+\end{tabular}
+
 
 \begin{enumerate}
 \item Выпишите функцию правдоподобия для набора из четырёх наблюдений: $(X_1, Y_1) = (4, 1)$, $(X_2, Y_2) = (0, 0)$,  $(X_3, Y_3) = (2, 1)$,  $(X_4, Y_4) = (3, 0)$.
@@ -5668,22 +5815,12 @@ logit
 
 
 
-<<include=FALSE>>=
-set.seed(var_no)
-c <- sample(2:5, size = 1)
-lambda_1 <- sample(c(0.1, 0.2, 0.3), size = 1)
-lambda_2 <- sample(c(0.4, 0.5, 0.6), size = 1)
-a_1 <- lambda_1 + lambda_2
-a_2_minus <- lambda_1 * lambda_2
-sigma2 <- sample(2:5, size = 1)
-@
-
 
 \item Рассмотрим стационарный случайный процесс $y_t$, удовлетворяющий уравнению
 \[
-y_t = \Sexpr{c} + \Sexpr{a_1} y_{t-1} - \Sexpr{a_2_minus} y_{t-2} + u_t,
+y_t = 3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t,
 \]
-где $u_t$ — белый шум с дисперсией $\Sexpr{sigma2}$.
+где $u_t$ — белый шум с дисперсией $5$.
 
 Найдите $\E(y_t)$, $\Var(y_t)$, $\Cov(y_t, y_{t-1})$, $\Cov(y_t, y_{t-2})$.
 
@@ -5713,28 +5850,16 @@ y_t = \Sexpr{c} + \Sexpr{a_1} y_{t-1} - \Sexpr{a_2_minus} y_{t-2} + u_t,
 
 \begin{enumerate}
 
-
-<<include=FALSE>>=
-set.seed(var_no)
-coef <- sample(c(0.3, 0.4, 0.5, 0.6), size = 1)
-mu <- sample(2:9, size = 1)
-@
-\item Рассмотрим AR(2) процесс $Y_t = \Sexpr{mu} + Y_{t-1} - \Sexpr{coef} Y_{t-2} + u_t$, где $u_t$ — белый шум с единичной дисперсией.
+\item Рассмотрим AR(2) процесс $Y_t = 4 + Y_{t-1} - 0.4 Y_{t-2} + u_t$, где $u_t$ — белый шум с единичной дисперсией.
 \begin{enumerate}
 \item Является ли данный процесс стационарным?
 \item Найдите $\Cov(Y_t, Y_{t-1})$, $\Cov(Y_t, Y_{t-2})$.
 \end{enumerate}
 
 
-<<include=FALSE>>=
-set.seed(var_no)
-beta1 <- sample(c(20, 30, 40, 50), size = 1)
-beta2 <- sample(c(5, 6, 7, 8), size = 1)
-covta <- sample(c(2, 3, 4, 5), size = 1)
-@
 \item Начинающий исследователь Елисей исследует зависимость успехов в учёбе своих однокурсников, $G_i$, от времени, которое они тратят на учёбу, $T_i$. По выборке из 100 человек он смог оценить следующую регрессию:
 \[
-\hat G_i = \Sexpr{beta1} + \Sexpr{beta2}T_i
+\hat G_i = 30 + 6T_i
 \]
 
 Елисей был бы рад полученному результату, но тут на лекции по эконометрике ему рассказали про эндогенность и пропущенные переменные, и он решил, что в его модели эти проблемы точно есть. Изучив литературу, он узнал, что на успехи в учёбе кроме времени влияют ещё и способности студента, $A_i$, при этом способности коррелированы со временем, которое студент тратит на учёбу.
@@ -5742,7 +5867,8 @@ covta <- sample(c(2, 3, 4, 5), size = 1)
 \begin{enumerate}
 \item Проверьте, является ли найденная Елисеем оценка коэффициента при времени состоятельной;
 \item Если оценка не состоятельна, то предложите способ получения состоятельной оценки;
-\item Найдите асимптотическую величину смещения оценки, если $\Cov(G_i, A_i) = 6$, $\Cov(T_i, A_i) = \Sexpr{covta}$, $\Var(G_i) = 16$, $\Var(A_i) = 100$, $\Var(T_i) = 49$.
+\item Найдите асимптотическую величину смещения оценки, если $\Cov(G_i, A_i) = 6$, 
+$\Cov(T_i, A_i) = 4$, $\Var(G_i) = 16$, $\Var(A_i) = 100$, $\Var(T_i) = 49$.
 \end{enumerate}
 
 
@@ -5761,16 +5887,6 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 \end{enumerate}
 
 
-<<include=FALSE>>=
-set.seed(var_no)
-c <- sample(2:5, size = 1)
-lambda_1 <- sample(c(0.1, 0.2, 0.3), size = 1)
-lambda_2 <- sample(c(0.4, 0.5, 0.6), size = 1)
-a_1 <- lambda_1 + lambda_2
-a_2_minus <- lambda_1 * lambda_2
-sigma2 <- sample(2:5, size = 1)
-@
-
 
 \item Рассмотрим систему одновременных уравнений
 \[
@@ -5788,12 +5904,8 @@ sigma2 <- sample(2:5, size = 1)
 \end{enumerate}
 
 
-<<include=FALSE>>=
-set.seed(var_no)
-n <- sample(c(860, 870, 880, 890), size = 1)
-mean_asv <- sample(c(40, 50, 60, 70), size = 1)
-@
-\item Исследователь, используя данные по \Sexpr{n} индивидуумам, оценил вероятность получения степени бакалавра после четырехлетнего обучения в колледже в зависимости от обобщённых результатов тестов ASVABC. Переменная BACH равна 1, если индивидуум получил степень бакалавра, и равна 0 иначе. Исследователь оценил линейную модель с помощью МНК:
+
+\item Исследователь, используя данные по 870 индивидуумам, оценил вероятность получения степени бакалавра после четырехлетнего обучения в колледже в зависимости от обобщённых результатов тестов ASVABC. Переменная BACH равна 1, если индивидуум получил степень бакалавра, и равна 0 иначе. Исследователь оценил линейную модель с помощью МНК:
 \[
 \widehat{BACH}_i = -\underset{(0.04)}{0.8} + \underset{(0.001)}{0.02}ASVABC.
 \]
@@ -5806,7 +5918,7 @@ mean_asv <- sample(c(40, 50, 60, 70), size = 1)
 \begin{enumerate}
 \item Как оценивается логит-модель?
 \item Каковы недостатки линейной модели в данном случае?
-\item Оцените предельный эффект объясняющего фактора для среднего значения ASVABC, равного \Sexpr{mean_asv}.
+\item Оцените предельный эффект объясняющего фактора для среднего значения ASVABC, равного $50$.
 \end{enumerate}
 
 
