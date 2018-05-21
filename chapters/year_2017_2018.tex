@@ -419,12 +419,12 @@ F_{obs} = \frac{(RSS_R - RSS_{UR}) / q}{RSS_{UR}/(n - k_{UR})} = \frac{(710.21 -
 X^T = \begin{pmatrix}
 1 & 2 & 3 & 0 & 0 & 0 \\
 0 & 0 & 0 & 4 & 5 & 6 \\
-\end{pmatrix}. 
+\end{pmatrix}.
 \]
 
 Ошибки имеют нормальное распределение.
 
-Постройте 95\% предиктивный интервал (доверительный интервал для индивидуального прогноза) в точке $Z=-1$, $W=3$.
+Постройте 95\% предиктивный интервал (доверительный интервал для индивидуального прогноза) в точке $Z=-2$, $W=5$.
 
 
 \item В модели множественной регрессии $Y = X\beta + \e$
@@ -444,24 +444,127 @@ X^T = \begin{pmatrix}
 
 Найдите наиболее эффективную оценку для параметра $\beta$ в классе всех линейных по $Y$ несмещённых оценок.
 
-\item По 1000 наблюдений  Винни-Пух оценил логистическую модель $\P(Y_i = 1)=F(\beta_0 + \beta_1 X_i)$, где  $X_i$ — количество времени в часах, проведённое в гостях, а $Y_i$ — факт застревания при выходе. 
+\item По 1000 наблюдений  Винни-Пух оценил логистическую модель $\P(Y_i = 1)=F(\beta_0 + \beta_1 X_i)$, где  $X_i$ — количество времени в часах, проведённое в гостях, а $Y_i$ — факт застревания при выходе.
 
-Оценки параметров равны $\hb_0 =1$, $\hb_1 = 2$, с оценкой ковариационной матрицы
+Оценки параметров равны $\hb_0 =2$, $\hb_1 = 3$, с оценкой ковариационной матрицы
 \[
 \begin{pmatrix}
 0.25 & 0.1 \\
-0.1 & 0.36 \\
+0.1 & 0.16 \\
 \end{pmatrix}.
 \]
 
 \begin{enumerate}
 \item Проверьте значимость отдельных коэффициентов при уровне значимости 5\%;
-\item Найдите предельный эффект времени, проведённого в гостях, на вероятность застрять при выходе для получасового визита;  
+\item Найдите предельный эффект времени, проведённого в гостях, на вероятность застрять при выходе для получасового визита;
 \item Найдите максимально возможный предельный эффект.
 \end{enumerate}
-
-
 \end{enumerate}
+
+
+
+\subsection{Кр 3, 2018-03-28, бп часть, решения}
+
+\begin{enumerate}
+\item Найдём оценку ковариационную матрицу оценок коэффицентов:
+\[
+\widehat \Var(\hat \beta) = \hat \sigma^2 (X'X)^{-1} = 0.04
+\begin{pmatrix}
+1/14 & 0 \\
+0 & 1/77
+\end{pmatrix},
+\]
+дисперсию ошибки прогноза:
+\begin{align*}
+\widehat \Var(y_i - \hat y_f | X) &=  \widehat\Var(\beta_z z_i + \beta_w w_i + \varepsilon_i - \hat y_f | X) \\
+&= \widehat\Var\left(\varepsilon_i | X\right) + \widehat \Var\left(-2 \hat \beta_z + 5 \hat \beta_w  | X \right) - 2 \widehat \Cov\left(\varepsilon_i, \hat y_f\right) \\
+&= 0.04 + 4 \widehat \Var\left(\hat \beta_z | X\right) + 25 \widehat \Var\left(\hat \beta_w | X\right) - 2 \cdot (-2) \cdot 5 \widehat \Cov\left(\hat \beta_z, \hat \beta_w\right) + 0 \\
+&= 0.04 + 4 \cdot 0.04 \cdot \frac{1}{14} + 25 \cdot 0.04 \cdot \frac{1}{77} + 0 \\
+&\approx 0.0644,
+\end{align*}
+и сам прогноз:
+\[
+\hat y_f = 0.2 \cdot (-2) + 0.3 \cdot 5 = 1.1.
+\]
+Теперь можно выписать доверительный интервал, $t_{0.975, 5} = 2.57$:
+\[
+\left[1.1 - 2.57 \sqrt{0.0644}; 1.1 + 2.57 \sqrt{0.0644}\right]
+\]
+\item Функция правдоподобия в неограниченной модели ($\sigma^2_1 \neq \sigma^2_2$)
+имеет вид:
+\[
+L\left(\sigma^2_1, \sigma^2_2\right) = \prod_{i=1}^m \frac{1}{\sqrt{2\pi\sigma^2_1}} e^{-\frac{1}{2}\frac{\left(y_i - x_i'\beta\right)^2}{\sigma^2_1}}
+\cdot \prod_{i=m+1}^n \frac{1}{\sqrt{2\pi\sigma^2_2}} e^{-\frac{1}{2}\frac{\left(y_i - x_i'\beta\right)^2}{\sigma^2_2}}
+\]
+Выпишем также логарифмическую функцию правдоподобия для неограниченной модели
+и найдём оценки $\hat \sigma^2_1$, $\hat \sigma^2_2$:
+\begin{align*}
+\ell\left(\sigma^2_1, \sigma^2_2\right) &= -\frac{m}{2} \ln 2\pi - \frac{m}{2} \ln \sigma^2_1 -
+\frac{1}{2\sigma^2_1} \sum_{i=1}^m \left(y_i - x_i'\beta\right)^2 \\
+&- \frac{n-m}{2} \ln 2\pi - \frac{n-m}{2} \ln \sigma^2_2 -
+\frac{1}{2\sigma^2_2} \sum_{i=m+1}^n \left(y_i - x_i' \beta\right)^2 \to \max_{\sigma^2_1, \sigma^2_2} \\
+\frac{\partial \ell}{\partial \sigma^2_1} &= \left. -\frac{m}{2\sigma^2_1} + \frac{1}{2\left(\sigma^2_1\right)^2} \sum_{i=1}^m \left(y_i - x_i'\beta\right)^2 \right|_{\sigma^2_1 = \hat\sigma^2_1} = 0 \\
+\frac{\partial \ell}{\partial \sigma^2_2} &= \left. -\frac{n-m}{2\sigma^2_2} + \frac{1}{2\left(\sigma^2_2\right)^2} \sum_{i=m+1}^n \left(y_i - x_i'\beta\right)^2 \right|_{\sigma^2_2 = \hat\sigma^2_2} = 0 \\
+\hat\sigma^2_1 &= \frac{\sum_{i=1}^m \left(y_i - x_i'\beta\right)^2 }{m} \\
+\hat\sigma^2_2 &= \frac{\sum_{i=m+1}^n \left(y_i - x_i'\beta\right)^2}{n-m}
+\end{align*}
+Тогда логарифмическая функция правдоподобия примет вид:
+\[
+\ell_{UR}\left(\hat \sigma^2_1, \hat \sigma^2_2\right) = - \frac{n}{2} \ln 2 \pi - \frac{n}{2} -
+\frac{m}{2} \ln \frac{\sum_{i=1}^m \left(y_i - x_i'\beta\right)^2 }{m} - \frac{n-m}{2} \ln \frac{\sum_{i=m+1}^n \left(y_i - x_i'\beta\right)^2}{n-m}
+\]
+Проделаем то же самое для ограниченной модели ($\sigma^2_1 = \sigma^2_2 = \sigma^2_0$):
+\begin{align*}
+L\left(\sigma^2_0\right) &= \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2_0}} e^{-\frac{1}{2} \frac{\left(y_i - x_i'\beta\right)^2}{\sigma^2_0}} \\
+\ell\left(\sigma^2_0\right) &= -\frac{n}{2} \ln 2\pi - \frac{n}{2} \ln \sigma^2_0 - \frac{1}{2\sigma^2_0} \sum_{i=1}^n \left(y_i - x_i'\beta\right)^2 \to \max_{\sigma^2_0} \\
+\frac{\partial \ell}{\partial \sigma^2_0} &= \left. -\frac{n}{2\sigma^2_0} + \frac{1}{2\left(\sigma^2_0\right)^2} \sum_{i=1}^n \left(y_i - x_i'\beta\right)^2 \right|_{\sigma^2_0 = \hat\sigma^2_0} = 0 \\
+\hat\sigma^2_0 &= \frac{\sum_{i=1}^n \left(y_i - x_i'\beta\right)^2 }{n} \\
+\ell_R\left(\hat \sigma^2_0\right) &= -\frac{n}{2} \ln 2\pi - \frac{n}{2} \ln \frac{\sum_{i=1}^n \left(y_i - x_i'\beta\right)^2 }{n} - \frac{n}{2}
+\end{align*}
+Осталось выписать формулу статистики LR-теста:
+\begin{align*}
+LR &= 2(\ell_{UR} - \ell_{R}) \\
+&= 2 \left(-\frac{m}{2} \ln \frac{\sum_{i=1}^m \left(y_i - x_i'\beta\right)^2 }{m} - \frac{n-m}{2} \ln \frac{\sum_{i=m+1}^n \left(y_i - x_i'\beta\right)^2}{n-m}
++ \frac{n}{2} \ln \frac{\sum_{i=1}^n \left(y_i - x_i'\beta\right)^2 }{n} \right)
+\end{align*}
+\item Наиболее эффективная оценка коэффициента $\beta$ может быть получена
+с помощью взвешенного МНК. Для этого необхдимо оценить регрессиию
+\[
+\frac{y_i}{\sqrt{i}} = \beta \frac{x_i}{\sqrt{i}} + \frac{\varepsilon_i}{\sqrt{i}}.
+\]
+Переобозначив $\frac{y_i}{\sqrt{i}}$ за $y_i^*$, $\frac{x_i}{\sqrt{i}}$ за
+$x_i^*$ и $\frac{\varepsilon_i}{\sqrt{i}}$ за $\varepsilon_i^*$, получим регрессию
+\[
+y_i^* = \beta x_i^* + \varepsilon_i^*,
+\]
+применив к которой обычный МНК, получим эффективную оценку $\hat \beta_{WLS}$ вида
+\[
+\hat \beta_{WLS} = \frac{\sum_{i=1}^n x_i^* y_i^*}{\sum_{i=1}^n (x_i^*)^2} = \frac{\sum_{i=1}^n \frac{x_i}{\sqrt{i}} \cdot \frac{y_i}{\sqrt{i}}}{\sum_{i=1}^n \frac{x_i^2}{i}}.
+\]
+\item
+\begin{enumerate}
+\item $\beta_0: \frac{2 - 0}{\sqrt{0.25}} = 4 > 2 \Rightarrow$ гипотеза о незначимости
+коэффициента отвергается
+
+$\beta_1: \frac{3 - 0}{\sqrt{0.16}} = 7.5 > 2 \Rightarrow$ гипотеза о незначимости
+коэффициента отвергается
+\item
+\begin{align*}
+\frac{\partial \hat\P(Y_i = 1)}{\partial X_i} &= F'\left(\hat \beta_0 + \hat \beta_1 \cdot X_i\right) \cdot \hat \beta_1 \\
+&= \left. F\left(\hat \beta_0 + \hat \beta_1 \cdot X_i\right)\left(1 - F\left(\hat \beta_0 + \hat \beta_1 \cdot X_i\right)\right) \cdot \hat\beta_1 \right|_{X_i=0.5} \\
+&= \frac{e^{3.5}}{1+e^{3.5}} \left(1 - \frac{e^{3.5}}{1+e^{3.5}} \right) \cdot 3 \\
+&\approx 0.085
+\end{align*}
+\item Предельный эффект максимален в точке, где наклон касательной к логистической функции
+самый крутой, то есть в нуле:
+\[
+2 + 3x = 0 \Rightarrow x = -\frac{2}{3}
+\]
+\end{enumerate}
+\end{enumerate}
+
+
+
 
 \subsection{КР 3, 2018-03-28, ип часть}
 
