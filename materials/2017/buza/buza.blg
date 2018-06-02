@@ -1,0 +1,15 @@
+[0] Config.pm:302> INFO - This is Biber 2.11
+[0] Config.pm:305> INFO - Logfile is 'buza.blg'
+[21] biber:313> INFO - === Сб июн  2, 2018, 13:55:09
+[37] Biber.pm:371> INFO - Reading 'buza.bcf'
+[83] Biber.pm:857> INFO - Found 8 citekeys in bib section 0
+[93] Biber.pm:3976> INFO - Processing section 0
+[100] Biber.pm:4136> INFO - Looking for bibtex format file 'em1_pset_v2.bib' for section 0
+[101] bibtex.pm:1500> INFO - LaTeX decoding ...
+[120] bibtex.pm:1316> INFO - Found BibTeX data source 'em1_pset_v2.bib'
+[151] UCollate.pm:68> INFO - Overriding locale 'ru-RU' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[151] UCollate.pm:68> INFO - Overriding locale 'ru-RU' defaults 'variable = shifted' with 'variable = non-ignorable'
+[151] Biber.pm:3804> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'ru-RU'
+[151] Biber.pm:3810> INFO - No sort tailoring available for locale 'ru-RU'
+[158] bbl.pm:617> INFO - Writing 'buza.bbl' with encoding 'UTF-8'
+[161] bbl.pm:720> INFO - Output to buza.bbl
