@@ -5828,6 +5828,106 @@ y_t = 3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t,
 
 \end{enumerate}
 
+\subsection{Кр 4, финальный экзамен, демо, решения}
+
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item $\E(X_i) = a$, $\E(|X_i|) = 5a/4$
+\item Чтобы найти оценку метода моментов, приравняем истинный момент $\E(|X_i|)$
+к выборочному $|\bar X| = 1.3/3$:
+\[
+\E(|X_i|) = \left. \frac{5}{4} a \right|_{a = \hat{a}_{MM}} = \frac{1.3}{3} \Rightarrow \hat{a}_{MM} = \frac{26}{75}
+\]
+\item Выпишем моментные условия:
+\begin{align*}
+g_1(X_i, a) &= X_i - a \quad \Rightarrow  \quad \bar{g}_1 = \frac{11}{30} - a \\
+g_2(X_i, a) &= |X_i| -\frac{5}{4} a \quad \Rightarrow \quad \bar{g}_2 = \frac{26}{75} - \frac{5}{4}a
+\end{align*}
+Будем минимизировать величину невязки:
+\begin{align*}
+Q &= \begin{pmatrix}
+\frac{11}{30} - a & \frac{26}{75} - \frac{5}{4}a
+\end{pmatrix}
+\begin{pmatrix}
+2 & 0 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\frac{11}{30} - a \\
+\frac{26}{75} - \frac{5}{4}a
+\end{pmatrix}
+\to \min_a \\
+Q &= 2\left(\frac{11}{30} - a\right)^2 + \left(\frac{26}{75} - \frac{5}{4}a \right)^2 \to \min_a \\
+\frac{\partial Q}{\partial a} &= \left. -4 \left(\frac{11}{30} - a \right) - 2 \cdot \frac{5}{4} \left(\frac{26}{75} - \frac{5}{4}a \right) \right|_{a = \hat{a}_{GMM}} = 0 \\
+\hat{a}_{GMM} &= \frac{56}{171}
+\end{align*}
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Функция правдоподобия имеет вид:
+\[
+L = F(\beta_1 + 4\beta_2)(1 - F(\beta_1))F(\beta_1 + 2\beta_2)(1 - F(\beta_1 + 3\beta_2)),
+\]
+где $F(z)$ — сигмоидная функция, $F(z) = \frac{1}{1 + e^{-z}}$
+\item $\P(Y_5 = 1 | X_5 = 1) = F(-1.95 + 0.85) \approx 0.25$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Если вместо $X^e_i$ иcпользовать $X_i$, то оцениваемая модель будет иметь вид
+\[
+Y_i = \beta_1 + \beta_2 X_i + v_i,
+\]
+где $v_i = \e_i - \beta_2 u_i$.
+Тогда регерессор $X_i$ будет коррелирован со случайной ошибкой $v_i$:
+\[
+\Cov(X_i, v_i) = \Cov(X^e_i + u_i, \e_i - \beta_2 u_i) = -\beta_2 \sigma^2_u \neq 0,
+\]
+то есть возникает проблема эндогенности, следовательно, МНК-оценки коэффициентов
+не будут состоятельными и асимптотически несмещёнными.
+\item Решение проблемы эндогенности — использование инструменатльных переменных.
+\end{enumerate}
+\item Возьмём математическое ожидание от обеих частей уравнения:
+\[
+\E(y_t) = 3 + 0.7 \E(y_{t-1}) - 0.1 \E(y_{t-2}) + \E(u_t)
+\]
+В силу стационарности процесса, $\E(y_t) = \E(y_{t-1}) = \E(y_{t-2})$,
+тогда уравнение упрощается:
+\[
+0.4 \E(y_t) = 3 \Rightarrow \E(y_t) = 7.5
+\]
+Прежде чем находить дисперсию и ковариации, заметим, что
+\begin{align*}
+& \Cov(y_t, u_t) = 5 \\
+& \Cov(y_{t-1}, u_t) = 0 \\
+& \Cov(y_{t-2}, u_t) = 0
+\end{align*}
+Теперь составим систему уравнений:
+\begin{align*}
+\gamma_0 = \Cov(y_t, y_t) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_t) \\
+&= 0.7 \gamma_1 - 0.1 \gamma_2 + 5 \\
+\gamma_1 = \Cov(y_t, y_{t-1}) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_{t-1}) \\
+&= 0.7 \gamma_0 - 0.1 \gamma_1 \\
+\gamma_2 = \Cov(y_t, y_{t-2}) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_{t-2}) \\
+&= 0.7 \gamma_1 - 0.1 \gamma_0
+\end{align*}
+Осталось решить полученную систему:
+\[
+\begin{cases}
+\gamma_0 = 0.7 \gamma_1 - 0.1 \gamma_2 + 5 \\
+\gamma_1 = 0.7 \gamma_0 - 0.1 \gamma_1 \\
+\gamma_2 = 0.7 \gamma_1 - 0.1 \gamma_0
+\end{cases}
+\quad \Rightarrow
+\begin{cases}
+\gamma_0 = \frac{1375}{162} \approx 8.5 \\
+\gamma_1 = \frac{875}{162} \approx 5.4 \\
+\gamma_2 = \frac{475}{162} \approx 2.8
+\end{cases}
+\]
+\end{enumerate}
+
 
 
 \subsection{Кр 4, финальный экзамен}
