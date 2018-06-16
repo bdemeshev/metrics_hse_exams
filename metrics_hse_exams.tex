@@ -5995,7 +5995,7 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
     y_t = c_t + g_t + i_t \\
     \end{cases},
 \]
-где  $c_t$ — потребление, $i_t$ — инвестиции, $y_t$ — ВНР, $i_t$ — процентная ставка, $g_t$ — правительственные расходы. Первые три переменные являются эндогенными.
+где  $c_t$ — потребление, $i_t$ — инвестиции, $y_t$ — ВНР, $r_t$ — процентная ставка, $g_t$ — правительственные расходы. Первые три переменные являются эндогенными.
 
 \begin{enumerate}
 \item Возможно ли оценить коэффициенты данной системы уравнений и почему?
@@ -6006,11 +6006,11 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 
 \item Исследователь, используя данные по 870 индивидуумам, оценил вероятность получения степени бакалавра после четырехлетнего обучения в колледже в зависимости от обобщённых результатов тестов ASVABC. Переменная BACH равна 1, если индивидуум получил степень бакалавра, и равна 0 иначе. Исследователь оценил линейную модель с помощью МНК:
 \[
-\widehat{BACH}_i = -\underset{(0.04)}{0.8} + \underset{(0.001)}{0.02}ASVABC.
+\widehat{BACH}_i = -\underset{(0.04)}{0.8} + \underset{(0.001)}{0.02}ASVABC_i.
 \]
 А также логит-модель:
 \[
-\widehat{BACH^*}_i =  -\underset{(0.5)}{11.1} + \underset{(0.01)}{0.2}ASVABC,
+\widehat{BACH^*}_i =  -\underset{(0.5)}{11.1} + \underset{(0.01)}{0.2}ASVABC_i,
 \]
 где $BACH_i=1$ если $BACH^*_i > 0$.
 
@@ -6024,6 +6024,126 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 \item Модели панельных данных со случайными эффектами: определение, способы оценивания.
 
 \end{enumerate}
+
+\subsection{Кр 4, финальный экзамен, решения}
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item Выпишем характеристическое уравнение и найдём его корни:
+\begin{align*}
+& \lambda^2 - \lambda + 0.4 = 0 \\
+& \lambda_{1,2} = \frac{1 \pm \sqrt{0.6} i}{2} \\
+& |\lambda_1| = \left| \frac{1}{2} + \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} - \frac{0.6}{4}} = \sqrt{\frac{1}{10}} < 1 \\
+& |\lambda_2| = \left| \frac{1}{2} - \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} + \frac{0.6}{4}} = 0.2 < 1
+\end{align*}
+Поскольку оба корня по модулю не превосходят единицы, то существует не смотрящее в будущее
+стационарное решение.
+\item Прежде чем находить ковариации, заметим, что
+\begin{align*}
+& \Cov(y_t, u_t) = 1 \\
+& \Cov(y_{t-1}, u_t) = 0 \\
+& \Cov(y_{t-2}, u_t) = 0
+\end{align*}
+Теперь составим систему уравнений:
+\begin{align*}
+\gamma_0 &= \Cov(Y_t, Y_t) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_t) = \gamma_1 - 0.4 \gamma_2 + 1 \\
+\gamma_1 &= \Cov(Y_t, Y_{t-1}) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_{t-1}) = \gamma_0 - 0.4 \gamma_1 \\
+\gamma_2 &= \Cov(Y_t, Y_{t-2}) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_{t-2}) = \gamma_1 - 0.4 \gamma_0
+\end{align*}
+Решив её, получим следующие значения:
+\[
+\begin{cases}
+\gamma_0 = \gamma_1 - 0.4 \gamma_2 + 1 \\
+\gamma_1 = \gamma_0 - 0.4 \gamma_1 \\
+\gamma_2 = \gamma_1 - 0.4 \gamma_0 \\
+\end{cases}
+\quad \Rightarrow \quad
+\begin{cases}
+\gamma_0 = \frac{175}{72} \approx 2.4 \\
+\gamma_1 = \frac{125}{72} \approx 1.7 \\
+\gamma_2 = \frac{55}{72} \approx 0.8
+\end{cases}
+\]
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Посчитаем предел по вероятности оценки коэффициента $\hb_2$:
+\begin{align*}
+\plim \hb_2 &= \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)}{\sum \left(T_i - \bar T\right)^2} = \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)/(n-1)}{\sum \left(T_i - \bar T\right)^2/(n-1)} \\
+&= \frac{\Cov(T_i, G_i)}{\Var(T_i)} = \frac{\Cov(T_i, \beta_1 + \beta_2 T_i + \beta_3 A_i + u_i)}{\Var(T_i)}  = \beta_2 + \frac{\Cov(T_i, A_i)}{\Var(T_i)} \neq \beta_2
+\end{align*}
+\item Нужно найти инструментальную переменную $Z$, которая удовлетворяет
+двум требованиям: $\Cov(Z, A) \neq 0$ и $\Cov(Z, \e) = 0$,
+и оценить регрессию $G$ на $T$ и $Z$.
+\item $\frac{\Cov(T_i, A_i)}{\Var(T_i)} = \frac{4}{100}$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Перепишем второе уравнение системы в следующем виде:
+\begin{equation}\label{eq:prices}
+P^e_{t+1} - (1 - \lambda) P^e_t = \lambda P_t
+\end{equation}
+Первое уравнение системы запишем для периода $t-1$ и домножим обе его части на $(1 - \lambda)$:
+\[
+(1 - \lambda) A_{t-1} = (1 - \lambda) \beta_1 + (1 - \lambda) \beta_2 P^e_t + (1 - \lambda) u_{t-1}
+\]
+Вычтем его из первого уравнения системы:
+\begin{equation}\label{eq:diff}
+A_t - (1 - \lambda) A_{t-1} = \beta_1 - (1 - \lambda) \beta_1 + \beta_2 P^e_{t+1} - (1 - \lambda) \beta_2 P^e_t + u_t - (1 - \lambda) u_{t-1}
+\end{equation}
+В уравнение \eqref{eq:diff} подставим выражение \eqref{eq:prices}:
+\[
+A_t = -\lambda \beta_1 + \lambda \beta_2 P_t + (1 - \lambda) A_{t-1} + u_t - (1 - \lambda) u_{t-1}
+\]
+Переобозначив коэффициенты и ошибку, получим
+\[
+A_t = \alpha_1 + \alpha_2 P_t + \alpha_3 A_{t-1} + \nu_t,
+\]
+где $\alpha_1 = -\lambda \beta_1$, $\alpha_2 = \lambda \beta_2$, $\alpha_3 =  (1 - \lambda)$,
+$\nu_t = u_t - (1 - \lambda) u_{t-1}$.
+\item Оценки МНК не будут BLUE, для оценивания ARMA(1, 1) нужно использовать
+метод максимального правдоподобия.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Подставим выражение для $y_t$ в оба уравнения и преобразуем их:
+\begin{align*}
+&\begin{cases}
+c_t = \alpha_1 + \alpha_2(c_t + g_t + i_t) + \alpha_3 c_{t-1} + u_{1t} \\
+i_t = \beta_1 + \beta_2 r_t + \beta_3 (c_t + g_t + i_t) + u_{2t}
+\end{cases} \\
+&\begin{cases}
+c_t = \frac{\alpha_1}{1 - \alpha_2} + \frac{\alpha_2}{1 - \alpha_2}(g_t + i_t) + \frac{\alpha_3}{1 - \alpha_2} c_{t-1} + \frac{1}{1 - \alpha_2} u_{1t} \\
+i_t = \frac{\beta_1}{1 - \beta_3} + \frac{\beta_2}{1 - \beta_3} r_t + \frac{\beta_3}{1 - \beta_3} (c_t + g_t) + \frac{1}{1 - \beta_3} u_{2t}
+\end{cases}
+\end{align*}
+В полученной системе экзогенные переменные — $g_t$, $r_t$, $c_{t-1}$, эндогенные —
+$c_t$, $i_t$.
+
+В правую часть первого уравнения не включена только одна экзогенная переменная — $r_t$,
+и включена одна эндогенная — $i_t$.
+Значит, параметры идентифицируемы.
+
+В правую часть второго уравнения не включена только одна экзогенная переменная — $c_{t-1}$,
+и включена одна эндогенная — $c_t$.
+Значит, параметры идентифицируемы.
+
+\item Нужно оценить коэффициенты новой системы методом наименьших квадратов,
+а затем из полученных выражений найти оценки исходных коэффициентов.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Методом максимального правдоподобия
+\item Прогнозы линейной модели не обязаны лежать в отрезке $[0, 1]$.
+\item Предельный эффект для среднего наблюдения:
+\[
+\frac{\partial P}{\partial ASVABC_i} = 0.2 f(-11.1 + 0.2 \cdot 50) \approx 0.037,
+\]
+где $f(z) = \frac{e^{-z}}{(1+e^{-z})^2}$.
+\end{enumerate}
+\end{enumerate}
+
 
 \subsection{ИП. БУЗА}
 
