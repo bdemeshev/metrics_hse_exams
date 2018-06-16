@@ -5032,15 +5032,17 @@ F_{obs} = \frac{(RSS_R - RSS_{UR})/q}{RSS_{UR} / (n-k_{UR})} = \frac{(0.851-0.48
 
 \subsection{Кр 2, экзамен за I семестр, 24.12.2016}
 
-%<<child="tests/2016_kr_02_midterm.Rnw">>=
-%@
+\subsubsection*{Часть 1. Тест.}
+
+\input{tests/2016_kr_02_midterm}
 
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-%\copygroup[10]{midterm_16}{test}
-%\insertgroup{test}
+\copygroup[10]{2016_kr_02_midterm}{test}
+\insertgroup{test}
 
+\subsubsection*{Часть 2. Задачи.}
 
 \begin{enumerate}
 
@@ -5476,15 +5478,13 @@ t_{obs} = \frac{\hb_Z + \hb_W - 0}{se(\hb_Z + \hb_W)} = \frac{-4 + 3}{\sqrt{8.57
 
 \subsubsection*{Часть 1. Тест.}
 
-%<<child="tests/2016_kr_03.Rnw">>=
-%@
 
-
+\input{tests/2016_kr_03}
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-%\copygroup[10]{kr_03}{test}
-%\insertgroup{test}
+\copygroup[10]{2016_kr_03}{test}
+\insertgroup{test}
 
 
 \subsubsection*{Часть 2. Задачи.}
@@ -5730,16 +5730,18 @@ f(\lambda) \propto \lambda^{\alpha - 1}\exp(-\lambda\beta)
 
 \subsubsection*{Часть 1. Тест.}
 
+%\input{tests/2016_kr_04_final_demo}
+
 %<<child="tests/2016_kr_04_final_demo.Rnw">>=
 %@
 
+\input{tests/2016_final_spring_demo}
 
+\AMCnumero{1} % начинаем нумерацию вопросов с 1го
 
-\AMCnumero{1} % сбрасываем номер вопроса на 1
-
-\cleargroup{test}
-%\copygroup[10]{final_spring_2017_demo}{test}
-%\insertgroup{test}
+\cleargroup{all}
+\copygroup[10]{2016_final_spring_demo}{all}
+\insertgroup{all}
 
 \subsubsection*{Часть 2. Задачи.}
 
@@ -5828,20 +5830,119 @@ y_t = 3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t,
 
 \end{enumerate}
 
+\subsection{Кр 4, финальный экзамен, демо, решения}
+
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item $\E(X_i) = a$, $\E(|X_i|) = 5a/4$
+\item Чтобы найти оценку метода моментов, приравняем истинный момент $\E(|X_i|)$
+к выборочному $|\bar X| = 1.3/3$:
+\[
+\E(|X_i|) = \left. \frac{5}{4} a \right|_{a = \hat{a}_{MM}} = \frac{1.3}{3} \Rightarrow \hat{a}_{MM} = \frac{26}{75}
+\]
+\item Выпишем моментные условия:
+\begin{align*}
+g_1(X_i, a) &= X_i - a \quad \Rightarrow  \quad \bar{g}_1 = \frac{11}{30} - a \\
+g_2(X_i, a) &= |X_i| -\frac{5}{4} a \quad \Rightarrow \quad \bar{g}_2 = \frac{26}{75} - \frac{5}{4}a
+\end{align*}
+Будем минимизировать величину невязки:
+\begin{align*}
+Q &= \begin{pmatrix}
+\frac{11}{30} - a & \frac{26}{75} - \frac{5}{4}a
+\end{pmatrix}
+\begin{pmatrix}
+2 & 0 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+\frac{11}{30} - a \\
+\frac{26}{75} - \frac{5}{4}a
+\end{pmatrix}
+\to \min_a \\
+Q &= 2\left(\frac{11}{30} - a\right)^2 + \left(\frac{26}{75} - \frac{5}{4}a \right)^2 \to \min_a \\
+\frac{\partial Q}{\partial a} &= \left. -4 \left(\frac{11}{30} - a \right) - 2 \cdot \frac{5}{4} \left(\frac{26}{75} - \frac{5}{4}a \right) \right|_{a = \hat{a}_{GMM}} = 0 \\
+\hat{a}_{GMM} &= \frac{56}{171}
+\end{align*}
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Функция правдоподобия имеет вид:
+\[
+L = F(\beta_1 + 4\beta_2)(1 - F(\beta_1))F(\beta_1 + 2\beta_2)(1 - F(\beta_1 + 3\beta_2)),
+\]
+где $F(z)$ — сигмоидная функция, $F(z) = \frac{1}{1 + e^{-z}}$
+\item $\P(Y_5 = 1 | X_5 = 1) = F(-1.95 + 0.85) \approx 0.25$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Если вместо $X^e_i$ иcпользовать $X_i$, то оцениваемая модель будет иметь вид
+\[
+Y_i = \beta_1 + \beta_2 X_i + v_i,
+\]
+где $v_i = \e_i - \beta_2 u_i$.
+Тогда регерессор $X_i$ будет коррелирован со случайной ошибкой $v_i$:
+\[
+\Cov(X_i, v_i) = \Cov(X^e_i + u_i, \e_i - \beta_2 u_i) = -\beta_2 \sigma^2_u \neq 0,
+\]
+то есть возникает проблема эндогенности, следовательно, МНК-оценки коэффициентов
+не будут состоятельными и асимптотически несмещёнными.
+\item Решение проблемы эндогенности — использование инструменатльных переменных.
+\end{enumerate}
+\item Возьмём математическое ожидание от обеих частей уравнения:
+\[
+\E(y_t) = 3 + 0.7 \E(y_{t-1}) - 0.1 \E(y_{t-2}) + \E(u_t)
+\]
+В силу стационарности процесса, $\E(y_t) = \E(y_{t-1}) = \E(y_{t-2})$,
+тогда уравнение упрощается:
+\[
+0.4 \E(y_t) = 3 \Rightarrow \E(y_t) = 7.5
+\]
+Прежде чем находить дисперсию и ковариации, заметим, что
+\begin{align*}
+& \Cov(y_t, u_t) = 5 \\
+& \Cov(y_{t-1}, u_t) = 0 \\
+& \Cov(y_{t-2}, u_t) = 0
+\end{align*}
+Теперь составим систему уравнений:
+\begin{align*}
+\gamma_0 = \Cov(y_t, y_t) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_t) \\
+&= 0.7 \gamma_1 - 0.1 \gamma_2 + 5 \\
+\gamma_1 = \Cov(y_t, y_{t-1}) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_{t-1}) \\
+&= 0.7 \gamma_0 - 0.1 \gamma_1 \\
+\gamma_2 = \Cov(y_t, y_{t-2}) &= \Cov(3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t, y_{t-2}) \\
+&= 0.7 \gamma_1 - 0.1 \gamma_0
+\end{align*}
+Осталось решить полученную систему:
+\[
+\begin{cases}
+\gamma_0 = 0.7 \gamma_1 - 0.1 \gamma_2 + 5 \\
+\gamma_1 = 0.7 \gamma_0 - 0.1 \gamma_1 \\
+\gamma_2 = 0.7 \gamma_1 - 0.1 \gamma_0
+\end{cases}
+\quad \Rightarrow
+\begin{cases}
+\gamma_0 = \frac{1375}{162} \approx 8.5 \\
+\gamma_1 = \frac{875}{162} \approx 5.4 \\
+\gamma_2 = \frac{475}{162} \approx 2.9
+\end{cases}
+\]
+\end{enumerate}
+
 
 
 \subsection{Кр 4, финальный экзамен}
 
 \subsubsection*{Часть 1. Тест.}
 
-%<<child="tests/2016_kr_04_final.Rnw">>=
-%@
+\input{tests/2016_kr_04_final}
+\AMCnumero{1} % начинаем нумерацию вопросов с 1го
 
-\AMCnumero{1} % сбрасываем номер вопроса на 1
+\cleargroup{all}
+\copygroup[10]{2016_kr_04_final}{all}
+\insertgroup{all}
 
-\cleargroup{test}
-%\copygroup[10]{final_spring_2017}{test}
-%\insertgroup{test}
 
 
 \subsubsection*{Часть 2. Задачи.}
@@ -5894,7 +5995,7 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
     y_t = c_t + g_t + i_t \\
     \end{cases},
 \]
-где  $c_t$ — потребление, $i_t$ — инвестиции, $y_t$ — ВНР, $i_t$ — процентная ставка, $g_t$ — правительственные расходы. Первые три переменные являются эндогенными.
+где  $c_t$ — потребление, $i_t$ — инвестиции, $y_t$ — ВНР, $r_t$ — процентная ставка, $g_t$ — правительственные расходы. Первые три переменные являются эндогенными.
 
 \begin{enumerate}
 \item Возможно ли оценить коэффициенты данной системы уравнений и почему?
@@ -5905,11 +6006,11 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 
 \item Исследователь, используя данные по 870 индивидуумам, оценил вероятность получения степени бакалавра после четырехлетнего обучения в колледже в зависимости от обобщённых результатов тестов ASVABC. Переменная BACH равна 1, если индивидуум получил степень бакалавра, и равна 0 иначе. Исследователь оценил линейную модель с помощью МНК:
 \[
-\widehat{BACH}_i = -\underset{(0.04)}{0.8} + \underset{(0.001)}{0.02}ASVABC.
+\widehat{BACH}_i = -\underset{(0.04)}{0.8} + \underset{(0.001)}{0.02}ASVABC_i.
 \]
 А также логит-модель:
 \[
-\widehat{BACH^*}_i =  -\underset{(0.5)}{11.1} + \underset{(0.01)}{0.2}ASVABC,
+\widehat{BACH^*}_i =  -\underset{(0.5)}{11.1} + \underset{(0.01)}{0.2}ASVABC_i,
 \]
 где $BACH_i=1$ если $BACH^*_i > 0$.
 
@@ -5923,6 +6024,118 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 \item Модели панельных данных со случайными эффектами: определение, способы оценивания.
 
 \end{enumerate}
+
+\subsection{Кр 4, финальный экзамен, решения}
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item Выпишем характеристическое уравнение и найдём его корни:
+\begin{align*}
+& \lambda^2 - \lambda + 0.4 = 0 \\
+& \lambda_{1,2} = \frac{1 \pm \sqrt{0.6} i}{2} \\
+& |\lambda_1| = \left| \frac{1}{2} + \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} - \frac{0.6}{4}} = \sqrt{\frac{1}{10}} < 1 \\
+& |\lambda_2| = \left| \frac{1}{2} - \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} + \frac{0.6}{4}} = 0.2 < 1
+\end{align*}
+Поскольку оба корня по модулю не превосходят единицы, то существует не смотрящее в будущее
+стационарное решение.
+\item Прежде чем находить ковариации, заметим, что
+\begin{align*}
+& \Cov(y_t, u_t) = 1 \\
+& \Cov(y_{t-1}, u_t) = 0 \\
+& \Cov(y_{t-2}, u_t) = 0
+\end{align*}
+Теперь составим систему уравнений:
+\begin{align*}
+\gamma_0 &= \Cov(Y_t, Y_t) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_t) = \gamma_1 - 0.4 \gamma_2 + 1 \\
+\gamma_1 &= \Cov(Y_t, Y_{t-1}) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_{t-1}) = \gamma_0 - 0.4 \gamma_1 \\
+\gamma_2 &= \Cov(Y_t, Y_{t-2}) = \Cov(4 + Y_{t-1} - 0.4 Y_{t-2} + u_t, Y_{t-2}) = \gamma_1 - 0.4 \gamma_0
+\end{align*}
+Решив её, получим следующие значения:
+\[
+\begin{cases}
+\gamma_0 = \gamma_1 - 0.4 \gamma_2 + 1 \\
+\gamma_1 = \gamma_0 - 0.4 \gamma_1 \\
+\gamma_2 = \gamma_1 - 0.4 \gamma_0 \\
+\end{cases}
+\quad \Rightarrow \quad
+\begin{cases}
+\gamma_0 = \frac{175}{72} \approx 2.4 \\
+\gamma_1 = \frac{125}{72} \approx 1.7 \\
+\gamma_2 = \frac{55}{72} \approx 0.8
+\end{cases}
+\]
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Посчитаем предел по вероятности оценки коэффициента $\hb_2$:
+\begin{align*}
+\plim \hb_2 &= \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)}{\sum \left(T_i - \bar T\right)^2} = \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)/(n-1)}{\sum \left(T_i - \bar T\right)^2/(n-1)} \\
+&= \frac{\Cov(T_i, G_i)}{\Var(T_i)} = \frac{\Cov(T_i, \beta_1 + \beta_2 T_i + \beta_3 A_i + u_i)}{\Var(T_i)}  = \beta_2 + \frac{\Cov(T_i, A_i)}{\Var(T_i)} \neq \beta_2
+\end{align*}
+\item Нужно найти инструментальную переменную $Z$, которая удовлетворяет
+двум требованиям: $\Cov(Z, A) \neq 0$ и $\Cov(Z, \e) = 0$,
+и оценить регрессию $G$ на $T$ и $Z$.
+\item $\frac{\Cov(T_i, A_i)}{\Var(T_i)} = \frac{4}{100}$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Перепишем второе уравнение системы в следующем виде:
+\begin{equation}\label{eq:prices}
+P^e_{t+1} - (1 - \lambda) P^e_t = \lambda P_t
+\end{equation}
+Первое уравнение системы запишем для периода $t-1$ и домножим обе его части на $(1 - \lambda)$:
+\[
+(1 - \lambda) A_{t-1} = (1 - \lambda) \beta_1 + (1 - \lambda) \beta_2 P^e_t + (1 - \lambda) u_{t-1}
+\]
+Вычтем его из первого уравнения системы:
+\begin{equation}\label{eq:diff}
+A_t - (1 - \lambda) A_{t-1} = \beta_1 - (1 - \lambda) \beta_1 + \beta_2 P^e_{t+1} - (1 - \lambda) \beta_2 P^e_t + u_t - (1 - \lambda) u_{t-1}
+\end{equation}
+В уравнение \eqref{eq:diff} подставим выражение \eqref{eq:prices}:
+\[
+A_t = -\lambda \beta_1 + \lambda \beta_2 P_t + (1 - \lambda) A_{t-1} + u_t - (1 - \lambda) u_{t-1}
+\]
+Переобозначив коэффициенты и ошибку, получим
+\[
+A_t = \alpha_1 + \alpha_2 P_t + \alpha_3 A_{t-1} + \nu_t,
+\]
+где $\alpha_1 = -\lambda \beta_1$, $\alpha_2 = \lambda \beta_2$, $\alpha_3 =  (1 - \lambda)$,
+$\nu_t = u_t - (1 - \lambda) u_{t-1}$.
+\item Оценки МНК не будут BLUE, для оценивания ARMA(1, 1) нужно использовать
+метод максимального правдоподобия.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item В системе экзогенные переменные — $g_t$, $r_t$, $c_{t-1}$, эндогенные —
+$c_t$, $i_t$.
+
+В правую часть первого уравнения не включены две экзогенных переменных — $r_t$ и $g_t$,
+и включена одна эндогенная — $y_t$.
+Значит, параметры идентифицируемы.
+
+В правую часть второго уравнения не включены две экзогенных переменных — $c_{t-1}$ и $g_t$,
+и включена одна эндогенная — $y_t$.
+Значит, параметры идентифицируемы.
+
+\item
+%Можно оценить коэффициенты новой системы методом наименьших квадратов,
+%а затем из полученных выражений найти оценки исходных коэффициентов.
+
+Можно в качестве инструмента для $y_t$ использовать переменную $g_t$.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Методом максимального правдоподобия
+\item Прогнозы линейной модели не обязаны лежать в отрезке $[0, 1]$.
+\item Предельный эффект для среднего наблюдения:
+\[
+\frac{\partial P}{\partial ASVABC_i} = 0.2 f(-11.1 + 0.2 \cdot 50) \approx 0.037,
+\]
+где $f(z) = \frac{e^{-z}}{(1+e^{-z})^2}$.
+\end{enumerate}
+\end{enumerate}
+
 
 \subsection{ИП. БУЗА}
 
