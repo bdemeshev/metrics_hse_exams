@@ -5032,15 +5032,17 @@ F_{obs} = \frac{(RSS_R - RSS_{UR})/q}{RSS_{UR} / (n-k_{UR})} = \frac{(0.851-0.48
 
 \subsection{Кр 2, экзамен за I семестр, 24.12.2016}
 
-%<<child="tests/2016_kr_02_midterm.Rnw">>=
-%@
+\subsubsection*{Часть 1. Тест.}
+
+\input{tests/2016_kr_02_midterm}
 
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-%\copygroup[10]{midterm_16}{test}
-%\insertgroup{test}
+\copygroup[10]{2016_kr_02_midterm}{test}
+\insertgroup{test}
 
+\subsubsection*{Часть 2. Задачи.}
 
 \begin{enumerate}
 
@@ -5476,15 +5478,13 @@ t_{obs} = \frac{\hb_Z + \hb_W - 0}{se(\hb_Z + \hb_W)} = \frac{-4 + 3}{\sqrt{8.57
 
 \subsubsection*{Часть 1. Тест.}
 
-%<<child="tests/2016_kr_03.Rnw">>=
-%@
 
-
+\input{tests/2016_kr_03}
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-%\copygroup[10]{kr_03}{test}
-%\insertgroup{test}
+\copygroup[10]{2016_kr_03}{test}
+\insertgroup{test}
 
 
 \subsubsection*{Часть 2. Задачи.}
@@ -6107,30 +6107,22 @@ $\nu_t = u_t - (1 - \lambda) u_{t-1}$.
 \end{enumerate}
 \item
 \begin{enumerate}
-\item Подставим выражение для $y_t$ в оба уравнения и преобразуем их:
-\begin{align*}
-&\begin{cases}
-c_t = \alpha_1 + \alpha_2(c_t + g_t + i_t) + \alpha_3 c_{t-1} + u_{1t} \\
-i_t = \beta_1 + \beta_2 r_t + \beta_3 (c_t + g_t + i_t) + u_{2t}
-\end{cases} \\
-&\begin{cases}
-c_t = \frac{\alpha_1}{1 - \alpha_2} + \frac{\alpha_2}{1 - \alpha_2}(g_t + i_t) + \frac{\alpha_3}{1 - \alpha_2} c_{t-1} + \frac{1}{1 - \alpha_2} u_{1t} \\
-i_t = \frac{\beta_1}{1 - \beta_3} + \frac{\beta_2}{1 - \beta_3} r_t + \frac{\beta_3}{1 - \beta_3} (c_t + g_t) + \frac{1}{1 - \beta_3} u_{2t}
-\end{cases}
-\end{align*}
-В полученной системе экзогенные переменные — $g_t$, $r_t$, $c_{t-1}$, эндогенные —
+\item В системе экзогенные переменные — $g_t$, $r_t$, $c_{t-1}$, эндогенные —
 $c_t$, $i_t$.
 
-В правую часть первого уравнения не включена только одна экзогенная переменная — $r_t$,
-и включена одна эндогенная — $i_t$.
+В правую часть первого уравнения не включены две экзогенных переменных — $r_t$ и $g_t$,
+и включена одна эндогенная — $y_t$.
 Значит, параметры идентифицируемы.
 
-В правую часть второго уравнения не включена только одна экзогенная переменная — $c_{t-1}$,
-и включена одна эндогенная — $c_t$.
+В правую часть второго уравнения не включены две экзогенных переменных — $c_{t-1}$ и $g_t$,
+и включена одна эндогенная — $y_t$.
 Значит, параметры идентифицируемы.
 
-\item Нужно оценить коэффициенты новой системы методом наименьших квадратов,
-а затем из полученных выражений найти оценки исходных коэффициентов.
+\item
+%Можно оценить коэффициенты новой системы методом наименьших квадратов,
+%а затем из полученных выражений найти оценки исходных коэффициентов.
+
+Можно в качестве инструмента для $y_t$ использовать переменную $g_t$.
 \end{enumerate}
 \item
 \begin{enumerate}
