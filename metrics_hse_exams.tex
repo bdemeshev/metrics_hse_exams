@@ -5845,12 +5845,12 @@ y_t = 3 + 0.7 y_{t-1} - 0.1 y_{t-2} + u_t,
 \item Выпишем моментные условия:
 \begin{align*}
 g_1(X_i, a) &= X_i - a \quad \Rightarrow  \quad \bar{g}_1 = \frac{11}{30} - a \\
-g_2(X_i, a) &= |X_i| -\frac{5}{4} a \quad \Rightarrow \quad \bar{g}_2 = \frac{26}{75} - \frac{5}{4}a
+g_2(X_i, a) &= |X_i| -\frac{5}{4} a \quad \Rightarrow \quad \bar{g}_2 = \frac{13}{30} - \frac{5}{4}a
 \end{align*}
 Будем минимизировать величину невязки:
 \begin{align*}
 Q &= \begin{pmatrix}
-\frac{11}{30} - a & \frac{26}{75} - \frac{5}{4}a
+\frac{11}{30} - a & \frac{13}{30} - \frac{5}{4}a
 \end{pmatrix}
 \begin{pmatrix}
 2 & 0 \\
@@ -5858,12 +5858,12 @@ Q &= \begin{pmatrix}
 \end{pmatrix}
 \begin{pmatrix}
 \frac{11}{30} - a \\
-\frac{26}{75} - \frac{5}{4}a
+\frac{13}{30} - \frac{5}{4}a
 \end{pmatrix}
 \to \min_a \\
-Q &= 2\left(\frac{11}{30} - a\right)^2 + \left(\frac{26}{75} - \frac{5}{4}a \right)^2 \to \min_a \\
-\frac{\partial Q}{\partial a} &= \left. -4 \left(\frac{11}{30} - a \right) - 2 \cdot \frac{5}{4} \left(\frac{26}{75} - \frac{5}{4}a \right) \right|_{a = \hat{a}_{GMM}} = 0 \\
-\hat{a}_{GMM} &= \frac{56}{171}
+Q &= 2\left(\frac{11}{30} - a\right)^2 + \left(\frac{13}{30} - \frac{5}{4}a \right)^2 \to \min_a \\
+\frac{\partial Q}{\partial a} &= \left. -4 \left(\frac{11}{30} - a \right) - 2 \cdot \frac{5}{4} \left(\frac{13}{30} - \frac{5}{4}a \right) \right|_{a = \hat{a}_{GMM}} = 0 \\
+\hat{a}_{GMM} &= \frac{34}{95}
 \end{align*}
 \end{enumerate}
 \item
