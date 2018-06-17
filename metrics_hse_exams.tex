@@ -6071,12 +6071,12 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 \item Посчитаем предел по вероятности оценки коэффициента $\hb_2$:
 \begin{align*}
 \plim \hb_2 &= \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)}{\sum \left(T_i - \bar T\right)^2} = \plim \frac{\sum \left(T_i - \bar T\right)\left(G_i - \bar G\right)/(n-1)}{\sum \left(T_i - \bar T\right)^2/(n-1)} \\
-&= \frac{\Cov(T_i, G_i)}{\Var(T_i)} = \frac{\Cov(T_i, \beta_1 + \beta_2 T_i + \beta_3 A_i + u_i)}{\Var(T_i)}  = \beta_2 + \frac{\Cov(T_i, A_i)}{\Var(T_i)} \neq \beta_2
+&= \frac{\Cov(T_i, G_i)}{\Var(T_i)} = \frac{\Cov(T_i, \beta_1 + \beta_2 T_i + \beta_3 A_i + u_i)}{\Var(T_i)}  = \beta_2 + \beta_3 \frac{\Cov(T_i, A_i)}{\Var(T_i)} \neq \beta_2
 \end{align*}
 \item Нужно найти инструментальную переменную $Z$, которая удовлетворяет
 двум требованиям: $\Cov(Z, A) \neq 0$ и $\Cov(Z, \e) = 0$,
 и оценить регрессию $G$ на $T$ и $Z$.
-\item $\frac{\Cov(T_i, A_i)}{\Var(T_i)} = \frac{4}{100}$
+\item $\beta_3 \frac{\Cov(T_i, A_i)}{\Var(T_i)} = \frac{6}{100} \cdot \frac{4}{100}$
 \end{enumerate}
 \item
 \begin{enumerate}
