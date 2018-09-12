@@ -5,6 +5,12 @@ junk.txt
 *.amc
 *.bbl
 *.flb
+*.blg
+*.bcf
+*.log
+*.out
+*.run.xml
+*.aux
 materials/2017/kr_03_ip/kr_03i.aux
 *.fdb_latexmk
 *.fls
