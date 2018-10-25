@@ -4368,11 +4368,11 @@ B9 = P-value (22) \approx 0.000
 
  \item Для модели $Y_i = \beta_1 + \beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова, а случайные ошибки нормально распределены. Известны все значенения $Y_i$, все значения $\hat Y_i$ и часть значений $X_i$:
 
-\begin{tabular}{llll}
+\begin{tabular}{lllll}
 \toprule
-$X_i$      & 4 & 5 & . \\
-$Y_i$      & 7 & 5 & 6 \\
-$\hat Y_i$ & 6.0 & 5.5 & 6.5 \\
+$X_i$      & 5 & 3 & . & . \\
+$Y_i$      & 4 & 7 & 7 & 2 \\
+$\hat Y_i$ & 5 & 7 & 4 & 4 \\
 \bottomrule
 \end{tabular}
 
@@ -4436,7 +4436,7 @@ R^2 &= \frac{ESS}{TSS} \approx 0.123
 \]
 \item
 \[
-se\left(\hat{\beta}_2\right) = \sqrt{\frac{\hat{\sigma}^2}{\sum_{i=1}^{10} \left(X_i - \bar X \right)^2}} = \sqrt{\frac{RSS}{(n-2) \sum_{i=1}^{10} \left(X_i - \bar X \right)^2}}
+se\left(\hat{\beta}_2\right) = \sqrt{\frac{\hat{\sigma}^2}{\sum_{i=1}^{n} \left(X_i - \bar X \right)^2}} = \sqrt{\frac{RSS}{(n-2) \sum_{i=1}^{n} \left(X_i - \bar X \right)^2}}
 \]
 \item
 \[
