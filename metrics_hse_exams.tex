@@ -4157,8 +4157,6 @@ A=\begin{pmatrix}
 \subsection{Кр 1, демо}
 
 
-
-
 \input{tests/2016_kr_01}
 
 \AMCnumero{1} % сбрасываем номер вопроса на 1
@@ -4340,11 +4338,7 @@ B9 = P-value (22) \approx 0.000
 \]
 для любого числа $\e >0$.
 
-
 \end{enumerate}
-
-
-
 \end{enumerate}
 
 
@@ -4387,11 +4381,11 @@ B9 = P-value (22) \approx 0.000
 
  \item Для модели $Y_i = \beta_1 + \beta_2 X_i + u_i$ выполнены все предпосылки теоремы Гаусса-Маркова, а случайные ошибки нормально распределены. Известны все значенения $Y_i$, все значения $\hat Y_i$ и часть значений $X_i$:
 
-\begin{tabular}{llll}
+\begin{tabular}{lllll}
 \toprule
-$X_i$      & 4 & 5 & . \\
-$Y_i$      & 7 & 5 & 6 \\
-$\hat Y_i$ & 6.0 & 5.5 & 6.5 \\
+$X_i$      & 5 & 3 & . & . \\
+$Y_i$      & 4 & 7 & 7 & 2 \\
+$\hat Y_i$ & 5 & 7 & 4 & 4 \\
 \bottomrule
 \end{tabular}
 
@@ -4413,6 +4407,79 @@ $\hat Y_i$ & 6.0 & 5.5 & 6.5 \\
 {\caption*{Randall Munroe, xkcd}}
 {\includegraphics[width=12cm]{figures/linear_regression.png}}
 \end{figure}
+
+
+
+\subsection{Кр 1, 24.10.2016, решения}
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item  Из задачи
+\[
+RSS = \sum_{i=1}^{10} \left (Y_i - \hat{\beta}_1 -\hat{\beta}_2 X_i  \right) \to \min_{\hat{\beta}_1, \hat{\beta}_2}
+\]
+Получаем
+\begin{align*}
+\hat{\beta}_2 &= \frac{\sum_{i=1}^{10} (X_i - \bar X)(Y_i - \bar Y)}{\sum_{i=1}^{10} (X_i - \bar X)^2} = 1 \\
+\hat{\beta}_1 &= \bar Y - \hat{\beta}_2 \bar X = 0
+\end{align*}
+\item
+\begin{align*}
+TSS &= \sum_{i=1}^{10} \left(Y_i - \bar Y\right)^2  = 174.5 \\
+ESS &= \sum_{i=1}^{10} \left(\hat{Y}_i - \bar Y\right)^2 = 21.5 \\
+RSS &= \sum_{i=1}^{10} \left(Y_i - \hat{Y}_i\right)^2  = 153 \\
+R^2 &= \frac{ESS}{TSS} \approx 0.123
+\end{align*}
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\[
+\begin{cases}
+5 = \hat{\beta}_1 + 5 \hat{\beta}_2 \\
+7 =  \hat{\beta}_1 + 3 \hat{\beta}_2
+\end{cases}
+\quad \Rightarrow \quad
+\begin{cases}
+\hat{\beta}_1 = 10 \\
+\hat{\beta}_2 = -1
+\end{cases}
+\]
+\item
+\[
+se\left(\hat{\beta}_2\right) = \sqrt{\frac{\hat{\sigma}^2}{\sum_{i=1}^{n} \left(X_i - \bar X \right)^2}} = \sqrt{\frac{RSS}{(n-2) \sum_{i=1}^{n} \left(X_i - \bar X \right)^2}}
+\]
+\item
+\[
+\left[-1 - 2 \cdot se\left(\hat{\beta}_2\right) ; -1 + 2 \cdot se\left(\hat{\beta}_2\right)  \right]
+\]
+\item
+$t_{obs} = \frac{\hat{\beta}_2 - 0}{se\left(\hat{\beta}_2\right)} \sim t_2$, $t_{crit} = 4.3$
+\end{enumerate}
+
+\item
+\begin{align*}
+\E\left(\hat{\beta}_2\right) &= \E \left(\frac{\widehat{\Cov}(X, Y)}{\widehat{\Var}(X)} \right) \\
+&= \E \left(\frac{\widehat{\Cov}(X, \beta_1 + \beta_2 X + u)}{\widehat{\Var}(X)} \right)  \\
+&= \E \left(\frac{\widehat{\Cov}(X, \beta_1) +  \beta_2\widehat{\Cov}(X, X) + \widehat{\Cov}(X, u)}{\widehat{\Var}(X)}  \right) \\
+&= \E( \beta_2) \\
+&= \beta_2
+\end{align*}
+
+
+\item
+\begin{align*}
+\Var \left(\hat{\beta}_1 \right) &= \Var \left(\bar{Y} - \hat{\beta}_2 \bar X \right) \\
+&= \Var \left(\bar{Y} \right) + \Var \left( \hat{\beta}_2 \bar X \right) - 2 \Cov\left(\bar Y, \hat{\beta}_1 \bar X \right) \\
+&= \frac{\sigma^2}{n} + \left(\bar X \right)^2 \cdot  \Var \left( \hat{\beta}_2 \right) - 2 \bar X \Cov \left(\bar{Y},  \hat{\beta}_1\right) \\
+&= \frac{\sigma^2}{n}  + \left(\bar X \right)^2 \cdot \frac{\sigma^2}{\sum_{i=1}^n \left(X_i - \bar X \right)^2} - 2 \bar X \cdot 0 \\
+&= \frac{\sigma^2 \sum_{i=1}^n X_i^2}{n \cdot \sum_{i=1}^n \left(X_i - \bar X \right)^2}
+\end{align*}
+
+\end{enumerate}
+
 
 
 \subsection{ИП. Подготовка к битве}
