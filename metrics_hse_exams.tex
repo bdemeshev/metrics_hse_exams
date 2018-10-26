@@ -4162,7 +4162,7 @@ A=\begin{pmatrix}
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-\copygroup[10]{combat_kr_01_16}{test}
+\copygroup[10]{demo_kr_01_16}{test}
 \insertgroup{test}
 
 \AMCnumero{1} % сбрасываем номер вопроса на 1
@@ -4347,13 +4347,26 @@ B9 = P-value (22) \approx 0.000
 
 \subsection{Кр 1, 24.10.2016}
 
-% TODO: где тут ссылка на файл?
+
+% вопросы на самом берутся из файла
+%\input{tests/2016_kr_01}
+% но мы его не подгружаем, тк
+% из него же берутся демо вопросы,
+% и выше сделан \input этого файла
+% а повторный \input вопрос с одинаковыми id не возможен
 
 \AMCnumero{1} % сбрасываем номер вопроса на 1
 
 \cleargroup{test}
-%\copygroup[10]{combat_kr_01_16}{test}
-%\insertgroup{test}
+\copygroup[10]{combat_kr_01_16}{test}
+\insertgroup{test}
+
+\AMCnumero{1} % сбрасываем номер вопроса на 1
+
+\cleargroup{test}
+
+
+
 
 
 
