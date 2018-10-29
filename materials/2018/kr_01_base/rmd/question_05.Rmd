@@ -1,0 +1,25 @@
+Question
+========
+По 20 наблюдениям Чебурашка оценил модель $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$. 
+Известно, что $\sum X_i = -10$, $\sum X_i^2 = 40$, $\sum X_i Y_i = 10$, $\sum Y_i = 50$.
+
+Сумма оценок МНК коэффициентов $\hat \beta_0 + \hat \beta_1$ равна 
+
+Answerlist
+----------
+* $4$
+* $3$
+* $2$
+* $1$
+* $5$
+
+
+Solution
+========
+
+Meta-information
+================
+exname: sum_of_estimates
+extype: schoice
+exsolution: 10000
+exshuffle: 5

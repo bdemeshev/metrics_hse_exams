@@ -1,0 +1,24 @@
+Question
+========
+Чебурашка оценил модель $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$, а Крокодил Гена — модель $X_i = \gamma_0 + \gamma_1 Y_i + u_i$.
+Оказалось, что $\hat\gamma_1 = 0.25/\hat\beta_1$. Величина $R^2$ в регрессии Чебурашки равна
+
+Answerlist
+----------
+* $0.25$
+* $0$
+* $0.5$
+* $0.75$
+* $1$
+
+
+Solution
+========
+$R^2 = \hat\beta_1 \cdot \hat\gamma_1$
+
+Meta-information
+================
+exname: r2_formula
+extype: schoice
+exsolution: 10000
+exshuffle: 5
