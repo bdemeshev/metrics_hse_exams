@@ -1,0 +1,23 @@
+Question
+========
+Оценки МНК вектора коэффициентов регрессии $Y=X\beta + \varepsilon$
+находятся по формуле
+
+Answerlist
+----------
+* $(X'X)^{-1}X'Y$
+* $(XX')^{-1}X'Y$
+* $(XX')^{-1}Y'X$
+* $(X'X)^{-1}YX$
+* $X'Y(X'X)^{-1}$
+
+
+Solution
+========
+
+Meta-information
+================
+exname: vector_formula
+extype: schoice
+exsolution: 10000
+exshuffle: 5

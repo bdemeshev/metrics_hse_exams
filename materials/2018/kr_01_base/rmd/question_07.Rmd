@@ -1,0 +1,24 @@
+Question
+========
+В модели $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$ при выполненных предпосылках теоремы Гаусса-Маркова и нормальных ошибках тестовая статистика
+$(\hat\beta_1 - \beta_1)/se(\hat\beta_1)$ имеет распределение
+
+Answerlist
+----------
+* $t_{n-2}$
+* $\cN(0;1)$
+* $\cN(0;\sigma^2)$
+* $\chi^2_1$
+* $\chi^2_{n-2}$
+
+
+Solution
+========
+
+
+Meta-information
+================
+exname: distribution
+extype: schoice
+exsolution: 10000
+exshuffle: 5

@@ -1,0 +1,128 @@
+\documentclass[12pt, a4paper]{article}
+
+
+
+\input{title_bor_utf8} % use local copy
+\input{emetrix_preamble} % use local copy
+
+% \usepackage{minted}
+
+\unitlength=0.6mm
+
+
+%%%%%%%%%%%%%%%%%% вставки
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Списки без уродских отступов
+\newenvironment{enumerate*}{
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+\newenvironment{itemize*}{
+\begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\abovedisplayskip=0mm
+\abovedisplayshortskip=0mm
+\belowdisplayskip=0mm
+\belowdisplayshortskip=0mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{centered}{%
+  \begin{list}{}{%
+    \topsep0pt
+  }
+  \centering
+  \item[]
+}
+{\end{list}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[sorting=none, backend=biber]{biblatex}
+
+
+\addbibresource{metrics_hse_exams.bib}
+
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*} % списки уровня 2 будут буквами а) б) ...
+
+
+
+\begin{document}
+
+\begin{enumerate}
+\item На основании  наблюдений получена	МНК оценка уравнения регрессии  $\hY_i = 0.2 Z_i + 0.3 W_i$ и оценка дисперсии ошибок $\hat\sigma^2 = 0.04$. Матрица наблюдений регрессоров имеет вид
+\[
+X^T = \begin{pmatrix}
+1 & 2 & 0 & 0 & 0 \\
+0 & 0 & 4 & 5 & 6 \\
+\end{pmatrix}.
+\]
+
+Ошибки имеют нормальное распределение. Постройте 95\% предиктивный интервал (доверительный интервал для индивидуального прогноза)
+в точке $Z=-2$, $W=5$.
+
+
+\item В модели множественной регрессии $Y = X\beta + \e$
+выполнены все предпосылки классической линейной модели кроме предпосылки о гомоскедастичности. Вектор ошибок имеет нормальное распределение, а возможная гетероскедастичность имеет вид
+\[
+\Var(\e_i) = \begin{cases}
+\sigma^2_1, \text{ при } i\leq m; \\
+\sigma^2_2, \text{ при } i > m.\\
+\end{cases}
+\]
+
+Матрица $X$ имеет размер $n$ на $k+1$. Выведите формулу статистики LM-теста для проверки гипотезы о гомоскедастичности.
+
+\item Рассмотрим модель $Y_i = \beta X_i + \e_i$, где $\e_i$ — независимые случайные величины с $\E(\e_i)=0$ и $\Var(\e_i)=\alpha X_i$.
+
+Найдите наиболее эффективную оценку для параметра $\beta$ в классе всех линейных по $Y$ несмещённых оценок.
+
+\item По 1000 наблюдений  Винни-Пух оценил логистическую модель $\P(Y_i = 1)=F(\beta_0 + \beta_1 X_i)$,
+где  $X_i$ — количество времени в часах, проведённое в гостях, а $Y_i$ — факт застревания при выходе.
+
+Оценки параметров равны $\hb_0 =2$, $\hb_1 = 2$, с оценкой ковариационной матрицы
+\[
+\begin{pmatrix}
+0.25 & 0.1 \\
+0.1 & 0.16 \\
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+\item Проверьте значимость отдельных коэффициентов при уровне значимости 5\%;
+\item Найдите предельный эффект времени, проведённого в гостях, на вероятность застрять при выходе для получасового визита;
+\end{enumerate}
+
+\item \textbf{Дополнительная задача для ИП}. Исследовательница Несмеяна вывела хитрую формулу для $\hat a$ — несмещённой оценки неизвестного векторного параметра $a$.
+    Обозначим $s(a)$ — вектор-столбец градиент логарифмической функции правдоподобия.
+
+    \begin{enumerate}
+      \item Вспомните, чему равно $\E(s(a))$. Достаточно просто вспомнить, доказывать не требуется!
+      \item Найдите скаляры $\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_1}\right)$,
+	$\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_2}\right)$
+	и матрицу $\Cov\left(\hat a, s(a) \right)$.
+      \item Рассмотрим два произвольных случайных вектора $R$ и $S$ и два вектора констант подходящей длины $\alpha$ и $\beta$.
+	Найдите минимум функции $f(\alpha, \beta) = \Var(\alpha^T R + \beta^T S)$ по $\beta$.
+	Выпишите явно $\beta^*(\alpha)$ и $f^*(\alpha)$.
+      \item Докажите, что для произвольных случайных векторов положительно определена матрица
+	\[
+          \Var(R) - \Cov(R, S) \Var^{-1}(S)\Cov(S, R)
+	\]
+      \item Завершите доказательство векторного неравенства Крамера-Рао.
+
+
+    \end{enumerate}
+
+
+\end{enumerate}
+
+
+
+
+\end{document}

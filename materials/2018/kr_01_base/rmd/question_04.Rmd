@@ -1,0 +1,25 @@
+Question
+========
+В модели парной линейной регрессии со свободным членом
+$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$
+несмещённой оценкой дисперсии оценки МНК $\hat\beta_1$ является
+
+Answerlist
+----------
+* $RSS/((n-2)\sum_i (X_i - \bar X)^2)$
+* $RSS/(n-2)$
+* $RSS/n$
+* $\sum (Y_i - \bar Y)^2 / (n-1)$
+* $\sum (Y_i - \bar Y)^2 / (n-2)$
+
+
+Solution
+========
+
+
+Meta-information
+================
+exname: hat_var_hat_beta
+extype: schoice
+exsolution: 10000
+exshuffle: 5
