@@ -149,6 +149,95 @@ $1/32$. Итого,
   \end{enumerate}
 \end{enumerate}
 
+\subsection{Контрольная работа-1. Базовая часть, решения}
+
+\begin{enumerate}
+\item Распишем вероятность $\P(Z >z^*)$:
+\begin{align*}
+\P(Z >z^*) &= \P \left(\frac{X+Y}{X} > z^* \right) = \P \left(1 + \frac{Y}{X} > z^* \right) \\
+&= 1 - \P\left(\frac{Y}{X} \leq z^* - 1 \right) = 1 - \P\left(\frac{Y/10}{X/5} \leq \left(z^* - 1\right) \cdot \frac{5}{10} \right)
+\end{align*}
+Заметим, что
+\[
+W = \frac{Y/10}{X/5} \sim F_{10,5}
+\]
+Подставив случайную величину $W$ в выражение для $\P(Z >z^*)$, получим:
+\[
+\P\left(W \leq 0.5(z^* - 1) \right) = 0.95 \Rightarrow 0.5(z^* - 1) = 4.74 \Rightarrow z^* = 10.48
+\]
+\item Запишем $Y_i$ через оценку $\hat Y_i$ и остатки $e_i = Y_i - \hat Y_i$ и
+просуммируем обе части выражения:
+\begin{align*}
+Y_i &= \hat Y_i + e_i \\
+\sum_{i=1}^n Y_i &= \sum_{i=1}^n \hat Y_i + \sum_{i=1}^n e_i
+\end{align*}
+Нужно показать, что последнее слагаемое в полученном равенстве равно нулю:
+\[
+\sum_{i=1}^n e_i = \sum_{i=1}^n Y_i - n\hb_0 - \hb_1 \sum_{i=1}^n X_i
+\]
+Разделим обе части на $n$:
+\[
+\frac{1}{n} \sum_{i=1}^n e_i = \bar Y - \hb_0 - \hb_1 \bar X
+\]
+Осталось вспомнить, что $\hb_0 = \bar Y - \hb_1 \bar X$.
+\item Если для модели $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, i=1, \ldots, n$
+выполнены условия о том, что
+\begin{enumerate}
+  \item модель правильно специфицирована,
+  \item $X_i$ являются детерминированными величинами и не равны между собой,
+  \item $\E(\varepsilon_i) = 0 \quad \forall i$,
+  \item $\Var(\varepsilon_i) = \sigma^2_{\varepsilon} \quad \forall i$,
+  \item $\Cov(\varepsilon_i, \varepsilon_j) = 0 \quad \forall i \neq j$,
+\end{enumerate}
+то МНК-оценки $\hb_0$, $\hb_1$ являются лучшими линейными несмещёнными оценками.
+\item
+\begin{enumerate}
+\item Для проверки гипотезы о значимости отдельного коэффициента используем $t$-тест:
+\[
+t_{obs} = \frac{\hb - \beta}{\hat{\sigma}_{\hb}} \sim t_{n-k}
+\]
+\begin{itemize}
+\item для $\beta_0$: $t_{obs} = 1 / 1.6 = 0.625 < 2 = t_{crit} \Rightarrow$
+нет оснований отвергать $H_0$.
+\item для $\beta_1$: $t_{obs} = -1.25 / 0.2 = 6.25 > 2 = t_{crit} \Rightarrow$
+$H_0$ отвергается.
+\end{itemize}
+\item Необходимо проверить следующую гипотезу:
+\[
+\begin{cases}
+H_0: \beta_1 = -1 \\
+H_a: \beta_1 < -1
+\end{cases}
+\]
+Проверяем:
+\[
+t_{obs} = \frac{-1.25 - (-1)}{0.2} = -1.25 > -1.67 = t_{crit}
+\]
+Нет оснований отвергать нулевую гипотезу.
+\item Из соотношения для оценки дисперсии $\hb_1$ получим:
+\begin{align*}
+\hat{\sigma}^2_{\hb_1} &= \frac{\hat{\sigma}^2_{\varepsilon}}{\sum_{i=1}^{62}(X_i - \bar X)^2} \Rightarrow \\
+\hat{\sigma}^2_{\varepsilon} &= \hat{\sigma}^2_{\hb_1} \cdot \sum_{i=1}^{62}(X_i - \bar X)^2 \\
+&= (0.2)^2 \cdot 2.25 = 0.09
+\end{align*}
+\item Найдём точечный прогноз в точке $X = 8$:
+\[
+\hat Y_f = 3 - 1.25 \cdot 8 = -7
+\]
+Найдём оценку дисперсии прогноза:
+\begin{align*}
+\widehat{\Var}(\hat Y_f) &= \widehat{\Var} \left(\hb_0 + \hb_1 \cdot 8 \right) \\
+&= \widehat{\Var} \left(\hb_0\right) + 64 \widehat{\Var} \left(\hb_1 \right) + 2 \cdot 8 \widehat{\Cov}(\hb_0, \hb_1) \\
+&= 1.6^2 + 64 \cdot 0.2^2 + 16 \cdot \frac{-\bar X \hat{\sigma}^2_{\varepsilon}}{\sum_{i=1}^{62}\left(X_i - \bar X\right)^2} \\
+&= 1.6^2 + 64 \cdot 0.04 - 16 \cdot \frac{\sqrt{3.96} \cdot 0.09}{2.25} \\
+&\approx 3.9
+\end{align*}
+Осталось выписать доверительный интервал:
+\[
+\left[-7 -2 \cdot \sqrt{3.9}; -7 + 2 \cdot \sqrt{3.9} \right]
+\]
+\end{enumerate}
+\end{enumerate}
 
 
 \subsection{Контрольная работа-1. ИП часть}
@@ -210,9 +299,6 @@ $1/32$. Итого,
 порядке значения зависимой переменной и предложил Машеньке заново оценить модель.
 
 Какой ожидаемый $R^2$ получит Машенька?
-
-
-<<<<<<< HEAD
 \end{enumerate}
 
 
