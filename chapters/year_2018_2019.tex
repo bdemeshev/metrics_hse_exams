@@ -149,6 +149,95 @@ $1/32$. Итого,
   \end{enumerate}
 \end{enumerate}
 
+\subsection{Контрольная работа-1. Базовая часть, решения}
+
+\begin{enumerate}
+\item Распишем вероятность $\P(Z >z^*)$:
+\begin{align*}
+\P(Z >z^*) &= \P \left(\frac{X+Y}{X} > z^* \right) = \P \left(1 + \frac{Y}{X} > z^* \right) \\
+&= 1 - \P\left(\frac{Y}{X} \leq z^* - 1 \right) = 1 - \P\left(\frac{Y/10}{X/5} \leq \left(z^* - 1\right) \cdot \frac{5}{10} \right)
+\end{align*}
+Заметим, что
+\[
+W = \frac{Y/10}{X/5} \sim F_{10,5}
+\]
+Подставив случайную величину $W$ в выражение для $\P(Z >z^*)$, получим:
+\[
+\P\left(W \leq 0.5(z^* - 1) \right) = 0.95 \Rightarrow 0.5(z^* - 1) = 4.74 \Rightarrow z^* = 10.48
+\]
+\item Запишем $Y_i$ через оценку $\hat Y_i$ и остатки $e_i = Y_i - \hat Y_i$ и
+просуммируем обе части выражения:
+\begin{align*}
+Y_i &= \hat Y_i + e_i \\
+\sum_{i=1}^n Y_i &= \sum_{i=1}^n \hat Y_i + \sum_{i=1}^n e_i
+\end{align*}
+Нужно показать, что последнее слагаемое в полученном равенстве равно нулю:
+\[
+\sum_{i=1}^n e_i = \sum_{i=1}^n Y_i - n\hb_0 - \hb_1 \sum_{i=1}^n X_i
+\]
+Разделим обе части на $n$:
+\[
+\frac{1}{n} \sum_{i=1}^n e_i = \bar Y - \hb_0 - \hb_1 \bar X
+\]
+Осталось вспомнить, что $\hb_0 = \bar Y - \hb_1 \bar X$.
+\item Если для модели $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, i=1, \ldots, n$
+выполнены условия о том, что
+\begin{enumerate}
+  \item модель правильно специфицирована,
+  \item $X_i$ являются детерминированными величинами и не равны между собой,
+  \item $\E(\varepsilon_i) = 0 \quad \forall i$,
+  \item $\Var(\varepsilon_i) = \sigma^2_{\varepsilon} \quad \forall i$,
+  \item $\Cov(\varepsilon_i, \varepsilon_j) = 0 \quad \forall i \neq j$,
+\end{enumerate}
+то МНК-оценки $\hb_0$, $\hb_1$ являются лучшими линейными несмещёнными оценками.
+\item
+\begin{enumerate}
+\item Для проверки гипотезы о значимости отдельного коэффициента используем $t$-тест:
+\[
+t_{obs} = \frac{\hb - \beta}{\hat{\sigma}_{\hb}} \sim t_{n-k}
+\]
+\begin{itemize}
+\item для $\beta_0$: $t_{obs} = 1 / 1.6 = 0.625 < 2 = t_{crit} \Rightarrow$
+нет оснований отвергать $H_0$.
+\item для $\beta_1$: $t_{obs} = -1.25 / 0.2 = 6.25 > 2 = t_{crit} \Rightarrow$
+$H_0$ отвергается.
+\end{itemize}
+\item Необходимо проверить следующую гипотезу:
+\[
+\begin{cases}
+H_0: \beta_1 = -1 \\
+H_a: \beta_1 < -1
+\end{cases}
+\]
+Проверяем:
+\[
+t_{obs} = \frac{-1.25 - (-1)}{0.2} = -1.25 > -1.67 = t_{crit}
+\]
+Нет оснований отвергать нулевую гипотезу.
+\item Из соотношения для оценки дисперсии $\hb_1$ получим:
+\begin{align*}
+\hat{\sigma}^2_{\hb_1} &= \frac{\hat{\sigma}^2_{\varepsilon}}{\sum_{i=1}^{62}(X_i - \bar X)^2} \Rightarrow \\
+\hat{\sigma}^2_{\varepsilon} &= \hat{\sigma}^2_{\hb_1} \cdot \sum_{i=1}^{62}(X_i - \bar X)^2 \\
+&= (0.2)^2 \cdot 2.25 = 0.09
+\end{align*}
+\item Найдём точечный прогноз в точке $X = 8$:
+\[
+\hat Y_f = 3 - 1.25 \cdot 8 = -7
+\]
+Найдём оценку дисперсии прогноза:
+\begin{align*}
+\widehat{\Var}(\hat Y_f) &= \widehat{\Var} \left(\hb_0 + \hb_1 \cdot 8 \right) \\
+&= \widehat{\Var} \left(\hb_0\right) + 64 \widehat{\Var} \left(\hb_1 \right) + 2 \cdot 8 \widehat{\Cov}(\hb_0, \hb_1) \\
+&= 1.6^2 + 64 \cdot 0.2^2 + 16 \cdot \frac{-\bar X \hat{\sigma}^2_{\varepsilon}}{\sum_{i=1}^{62}\left(X_i - \bar X\right)^2} \\
+&= 1.6^2 + 64 \cdot 0.04 - 16 \cdot \frac{\sqrt{3.96} \cdot 0.09}{2.25} \\
+&\approx 3.9
+\end{align*}
+Осталось выписать доверительный интервал:
+\[
+\left[-7 -2 \cdot \sqrt{3.9}; -7 + 2 \cdot \sqrt{3.9} \right]
+\]
+\end{enumerate}
+\end{enumerate}
 
 
 \subsection{Контрольная работа-1. ИП часть}
@@ -210,6 +299,208 @@ $1/32$. Итого,
 порядке значения зависимой переменной и предложил Машеньке заново оценить модель.
 
 Какой ожидаемый $R^2$ получит Машенька?
+\end{enumerate}
 
+
+\subsection{ИП-часть, решения}
+\begin{enumerate}
+\item Дисперсия:
+
+\begin{align*}
+\Var \left(\hat{y}_{test}\right) &= \Var \left(X_{test} \hat\beta \right) \\
+&= X_{test} \Var\left((X'X)^{-1} X' y \right) X'_{test} \\
+&= X_{test} (X'X)^{-1} X' \sigma^2 \cdot I X (X'X)^{-1}  X'_{test} \\
+&= \sigma^2 X_{test} (X'X)^{-1} X'_{test}
+\end{align*}
+
+Ковариация:
+\begin{align*}
+\Cov\left(\hat \beta, \hat{y}_{test}\right) &= \Cov\left(\hat \beta,  X_{test} \hat{\beta} \right) \\
+&= \Var\left(\hat \beta\right) X'_{test} \\
+&= \Var\left((X'X)^{-1} X' y \right)X'_{test} \\
+&= (X'X)^{-1} X' \sigma^2 \cdot I X (X'X)^{-1}  X'_{test} \\
+&= \sigma^2 (X'X)^{-1} X'_{test}
+\end{align*}
+
+\item
+Воспользуемся подсказкой и найдём:
+\begin{align*}
+\Var\left(\hat y\right) &= \Var \left(Hy \right) = H \Var(y) H' = \sigma^2 H \\
+\Var \left(\hat u \right) &= \Var \left(y - \hat y\right) = \Var \left((I-H)y\right) = \sigma^2 (I-H)
+\end{align*}
+
+
+Соответственно, для диагональных элементов выполнятются соотношения:
+\[
+\Var\left(\hat y_i \right) = \sigma^2 h_{ii} \text{ и } \Var \left(\hat u_i \right) = \sigma^2(1 - h_{ii}),
+\]
+откуда следует, что диагональные элементы матрицы-шляпницы лежат в пределах от $0$ до $1$.
+
+Вспомним, что сумму диагональных элементов, или след матрицы, можно вычислить
+как сумму её собственных значений.
+Поскольку матрица-шляпница является проектором, её собственные числа равны либо
+ $0$, либо $1$.
+Это легко показать. Пусть $\lambda$ — собственное значение матрицы $H$ с собственным
+вектором $v$. Для $H$ выполняется соотношение $H^2 = H$, а значит верно и
+\[
+\lambda^2 v = H^2 v = H v = \lambda v,
+\]
+где $v \neq 0$. Отсюда получаем уравнение $\lambda^2 = \lambda$, корни которого —
+$0$ и $1$.
+
+Осталось заметить, что для собственных чисел $\lambda = 1$ собственные вектора
+лежат в $Lin(X)$, а для нулевых собственных чисел — перпендикулярны ей.
+Значит, количество единиц совпадает с размерностью пространства, на которое проецируем.
+В нашем случае оно равно $k$. Значит, среднее диагональных элементов — $k/n$.
+
+\item Утверждение можно доказать геометрически.
+
+\begin{align*}
+\frac{t}{\sqrt{n-2}} &=
+\frac{\hat \beta_2}{\sqrt{n-2}se\left(\hat\beta_2\right)} =
+\frac{\hat \beta_2}{\sqrt{n-2}\frac{\hat \sigma}{\sqrt{\sum\limits_{i=1}^n (x_i - \bar x)^2}}}
+= \frac{\hat \beta_2 \sqrt{\sum\limits_{i=1}^n (x_i - \bar x)^2}}{\sqrt{n-2}\frac{\sqrt{\sum\limits_{i=1}^n (y_i - \hat y_i)^2}}{\sqrt{n-2}}} \\
+&= \frac{\hat \beta_2 \lVert x^c \rVert}{\sqrt{RSS}} = \ctg \varphi\\
+\end{align*}
+
+\begin{figure}[ht!]
+\begin{center}
+\subfigure[]{
+\includegraphics[width=0.35\linewidth]{figures/04_ttest.pdf}
+\label{fig:ttest_3d}}
+%\hspace{4ex}
+\subfigure[]{
+\includegraphics[width=0.35\linewidth]{figures/04_ttest_lin.pdf}
+\label{fig:ttest_lin}}
+\caption{\subref{fig:ttest_3d}: Регрессия $y$ на $\Lin(x, \mathbf{1})$ и соответствующие проекции;
+\subref{fig:ttest_lin}: $\Lin^{\perp}(\mathbf{1})$.}
+\end{center}
+\end{figure}
+
+\[
+F = \frac{(RSS_{R} - RSS_{UR})/q}{RSS_{UR}/(n-k_{UR})} =
+\ctg^2 \varphi \cdot \frac{n - k_{UR}}{q}
+\]
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.55]{figures/04_ftest.pdf}
+\caption{F-статистика пропорциональна квадрату котангенса $\varphi$,
+где $a$ означает $\sqrt{RSS_{UR}}$, $b$ — $\sqrt{RSS_{R} -RSS_{UR}}$,
+$c$ — $\sqrt{RSS_{R}}$.}
+\label{fig:ftest}
+\end{figure}
+
+В случае парной регрессии $k_{UR} = 2, q = 1$.
+
+\item Представим матрицу регрессоров в виде двух блоков: $X = [Z \quad W]$, где $Z$ —
+это регрессор (вектор), для которого мы будем искать стандартную ошибку, а
+$W$ — это матрица всех остальных регрессоров.
+Известно, что
+\[
+\Var\left(\hat{\beta}_{Z} \right) = \sigma^2 (X'X)^{-1}_{11},
+\]
+то есть нам нужно найти только первый элемент матрицы $X'X$.
+Эта матрица является блочной и в наших обозначениях имеет вид:
+\[
+X'X = \begin{pmatrix}
+Z'Z & Z'W \\
+W'Z & W'W
+\end{pmatrix}
+\]
+
+Чтобы найти обратную матрицу в общем случае, нужно решить систему:
+\[
+\begin{pmatrix}
+A & B \\
+C & D
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+E & F \\
+G & H
+\end{pmatrix}
+=
+\begin{pmatrix}
+I & 0 \\
+0 & I
+\end{pmatrix},
+\]
+где матрица слева изветсна, матрица из блоков $E, F, G, H$ является обратной к ней.
+Решая эту систему, например, методом Гаусса, получим:
+\[
+E = (A-BD^{-1}C)^{-1},
+\]
+а остальные элементы нас не интересуют.
+Возвращаясь к нашим обозначениям, запишем:
+\[
+(X'X)^{-1}_{11} = \left(Z'Z - Z'W \left(W'W \right)^{-1} W'Z \right)
+\]
+Обозначив $\left(W'W \right)^{-1} W'= H$ (проектор во вспомогательной регрессии на все
+переменные, кроме Z), упростим полученное выражение:
+\[
+(X'X)^{-1}_{11} = Z'(I-H)Z
+\]
+Как промежуточный итог мы получили:
+\[
+\Var\left(\hat{\beta}_{Z} \right) = \frac{\sigma^2}{Z'(I-H)Z}
+\]
+Теперь рассмотрим коэффициент детерминации во вспомогательной регрессии:
+\[
+1 - R^2_Z = \frac{RSS_Z}{TSS_Z} = \frac{(Z - \hat Z)'(Z - \hat Z)}{(Z - \bar Z)'(Z - \bar Z)} = \frac{((I-H)Z)'(I-H)Z}{(Z - \bar Z)'(Z - \bar Z)}
+= \frac{Z'(I-H)Z}{(Z - \bar Z)'(Z - \bar Z)}
+\]
+Выражая отсюда числетель, получаем:
+\[
+Z'(I-H)Z = \left( 1 - R^2_Z \right) \cdot \sum (Z_i - \bar Z)^2
+\]
+Осталось вспомнить оценку для $\sigma^2$ и записать финальный резульат:
+\[
+\widehat{\Var}\left(\hat{\beta}_{Z} \right) = \frac{RSS/(n-k)}{\sum (Z_i - \bar Z)^2} \cdot \frac{1}{1 - R^2_Z}
+\]
+
+\item В том виде, в котором задача дана, она не решается.
+Однако можно было выписать целевую функцию и взять её дифференциал:
+\[
+\Corr(\alpha^T w, z) = \frac{\Cov(\alpha^T w, z)}{\sqrt{\Var(\alpha^T w)\Var(z)}}
+= \frac{\alpha^T \Cov(w,z)}{\sqrt{\alpha^T\Var(w) \alpha \Var(z)}} \to \max_{\alpha}
+\]
+Также можно было заметить, что эта задача напоминает МНК.
+Пусть $\hat z$ — проекция $z$ на $\Lin(w_1, \ldots, w_k)$,
+а $\tilde{z}$ — произвольный вектор из $\Lin(w_1, \ldots, w_k)$.
+Обозначив угол между $z$ и $\hat z$ за $\alpha$, между $z$ и $\tilde z$ за $\beta$,
+можем записать:
+\[
+\Corr(z, \hat z) = \cos \alpha \geq \cos \beta = \Corr(z, \tilde z)
+\]
+при $\alpha \leq \beta \leq 90^{\circ}$.
+И задача максимизации $\Corr(z, \tilde z)$ будет эквивалентна задаче МНК.
+
+\item Без ограничения общности центрируем исходные переменные.
+Значения регрессора обозначим $x_i$, исходную зависимую переменную $\tilde{y}_i$,
+а переставленную в случайном порядке $y_i$.
+По условию, $\sum y_i^2 = \sum \tilde{y}_i^2$.
+
+Фиксируем исходные переменные и находим:
+\[
+\E(R^2 | \tilde{y}) = \E\left( \frac{(\sum x_i y_i )^2}{\sum x_i^2 \sum y_i^2}  \right) = \frac{\Var(\sum x_i y_i | \tilde{y})}{\sum x_i^2 \sum y_i^2}
+\]
+
+Для начала найдём дисперсию отдельного игрека:
+\[
+\Var(y_i | \tilde{y}) = \frac{\sum \tilde{y}_i^2}{n} = \frac{\sum y_i^2}{n}
+\]
+
+А теперь из $\Cov(y_1, \sum y_i | \tilde{y}) =0$ найдём и дисперсию нужной суммы:
+\[
+\Var(\sum x_i y_i | \tilde{y}) = \Var(y_i | \tilde{y}) \left(  \sum x_i^2 - \sum_{i\neq j} x_i x_j \frac{1}{n-1}  \right) = \Var(y_i | \tilde{y}) \frac{n}{n-1} \sum x_i^2 = \frac{\sum x_i^2 \sum y_i^2 }{n-1}
+\]
+
+Заканчиваем подсчёт,
+\[
+\E(R^2 | \tilde{y}) = \frac{1}{n-1}
+\]
+
+Следовательно, и $\E(R^2) = \frac{1}{n-1} = 0.1$.
 
 \end{enumerate}
