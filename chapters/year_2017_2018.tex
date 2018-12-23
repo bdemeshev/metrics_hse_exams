@@ -304,14 +304,14 @@ $\hat\sigma$ & 0.42113        & 0.41921     & 0.575        & 0.956    \\
 \begin{enumerate}
 \item Для проверки гипотезы используем $t$-статистику:
 \[
-t_{obs} = \frac{\hb_{orange} - \hb_{banana} - \beta_{orange} - \beta_{banana}}{se(\hb_{orange} - \hb_{banana})} \sim t_{n-k} = t_{29 -4} = t_{25}
+t_{obs} = \frac{\hb_{orange} - \hb_{banana} - (\beta_{orange} - \beta_{banana})}{se(\hb_{orange} - \hb_{banana})} \sim t_{n-k} = t_{29 -4} = t_{25}
 \]
 Сначала найдём стандартное отклонение:
 \begin{align*}
 se(\hb_{orange} - \hb_{banana}) &= \sqrt{\widehat{\Var}(\hb_{orange}) + \widehat{\Var}(\hb_{banana}) - 2 \widehat{\Cov}(\hb_{orange}, \hb_{banana})} \\
 &= \sqrt{3 + 4 - 2\cdot 0.6} \approx 2.41
 \end{align*}
-Тогда наблюдаемое значение статистики равно $t_{obs} = \frac{3-4}{2.41} \approx -0.42$,
+Тогда наблюдаемое значение статистики равно $t_{obs} = \frac{3-2}{2.41} \approx 0.42$,
 а $t_{crit} \approx 2.06$. Значит, оснований отвергать нулевую гипотезу нет.
 \item В модели (1) $\widehat{\Corr}(P,I)=-0.8$ свидетельствует о проблеме мультиколлинеарности в данных.
 В модели (3) значение $R^2$ самое низкое. Предпчтительной является модель $(2)$.
