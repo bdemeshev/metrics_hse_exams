@@ -5015,7 +5015,7 @@ t_crit <- qt(0.975, df = 30 - 2)
 
 \textbf{B6}: $\hat{\sigma}^2 = \frac{RSS}{n-k} = \frac{282.1}{21-4} = 16.59$
 
-\textbf{B7}: $R^2_{adj} = 1 - \frac{RSS/(n-k)}{TSS/(n-1)} = 1 - \frac{282.1/17}{2920.4/20} = 0.87$
+\textbf{B7}: $R^2_{adj} = 1 - \frac{RSS/(n-k)}{TSS/(n-1)} = 1 - \frac{282.1/17}{2920.4/20} = 0.89$
 
 \textbf{B8} и \textbf{B9} получаются из следующей системы, где $2.11$ берётся из таблицы распределения Стьюдента, $t_{21-4;0.025}$:
 \[
@@ -5025,7 +5025,7 @@ t_crit <- qt(0.975, df = 30 - 2)
 \end{cases}
 \Rightarrow
 \begin{cases}
-\hb_{age} = 5.63 \\
+\hb_{age} = 5.595 \\
 se(\hb_{age}) = 0.71
 \end{cases}
 \]
@@ -5561,7 +5561,7 @@ H_{a}: \beta_5^2 + \beta_6^2 + \beta_7^2 > 0
 
 Теперь можно проверять гипотезу, $F \sim F(3, 69)$:
 \[
-F_{obs} = \frac{(RSS_{R} - RSS_{UR}) / q}{RSS_{UR}/(n-k_{UR})} = \frac{(120 - 60) / 3}{40/69} = 34.5
+F_{obs} = \frac{(RSS_{R} - RSS_{UR}) / q}{RSS_{UR}/(n-k_{UR})} = \frac{(120 - 60) / 3}{60/69} = 23
 \]
 Так как $F_{obs} > F_{crit} = 2.73$, гипотеза отвергается.
 \end{enumerate}

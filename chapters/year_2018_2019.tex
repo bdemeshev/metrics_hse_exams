@@ -483,7 +483,8 @@ Z'(I-H)Z = \left( 1 - R^2_Z \right) \cdot \sum (Z_i - \bar Z)^2
 
 Фиксируем исходные переменные и находим:
 \[
-\E(R^2 | \tilde{y}) = \E\left( \frac{(\sum x_i y_i )^2}{\sum x_i^2 \sum y_i^2}  \right) = \frac{\Var(\sum x_i y_i | \tilde{y})}{\sum x_i^2 \sum y_i^2}
+\E(R^2 | \tilde{y}) = \E\left( \frac{(\sum x_i y_i )^2}{\sum x_i^2 \sum y_i^2}  \right) =
+\frac{\Var\left(\sum x_i y_i | \tilde{y}\right)}{\sum x_i^2 \sum y_i^2}
 \]
 
 Для начала найдём дисперсию отдельного игрека:
@@ -493,7 +494,9 @@ Z'(I-H)Z = \left( 1 - R^2_Z \right) \cdot \sum (Z_i - \bar Z)^2
 
 А теперь из $\Cov(y_1, \sum y_i | \tilde{y}) =0$ найдём и дисперсию нужной суммы:
 \[
-\Var(\sum x_i y_i | \tilde{y}) = \Var(y_i | \tilde{y}) \left(  \sum x_i^2 - \sum_{i\neq j} x_i x_j \frac{1}{n-1}  \right) = \Var(y_i | \tilde{y}) \frac{n}{n-1} \sum x_i^2 = \frac{\sum x_i^2 \sum y_i^2 }{n-1}
+\Var\left(\sum x_i y_i | \tilde{y}\right) =
+\Var(y_i | \tilde{y}) \left(  \sum x_i^2 - \sum_{i\neq j} x_i x_j \frac{1}{n-1}  \right) =
+\Var(y_i | \tilde{y}) \frac{n}{n-1} \sum x_i^2 = \frac{\sum x_i^2 \sum y_i^2 }{n-1}
 \]
 
 Заканчиваем подсчёт,
