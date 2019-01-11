@@ -1,0 +1,32 @@
+Question
+========
+
+Исследовательница Клеопатра оценила модель $\ln Y_i = \beta_0 + \beta_1 \ln X_i + \beta_2 \ln Z_i + \beta_3 \ln W_i + u_i$.
+Клеопатра хочет протестировать гипотезу $H_0$: $\beta_3 + 2\beta_1 = 1$. 
+Для этой цели можно оценить вспомогательную регрессию 
+
+Answerlist
+----------
+* $\ln(Y_i/W_i) = \gamma_0 + \gamma_1 \ln(X_i/W_i^2) + \gamma_2 \ln{Z_i} + u_i$
+* $\ln(Y_i \cdot W_i) = \gamma_0 + \gamma_1 \ln (X_i/W_i^2) + \gamma_2 \ln Z_i + u_i$
+* $\ln(Y_i \cdot W_i) = \gamma_0 + \gamma_1 \ln (X_i \cdot W_i^2) + \gamma_2 \ln Z_i + u_i$
+* $\ln(Y_i/W_i) = \gamma_0 + \gamma_1 \ln (X_i \cdot W_i^2) + \gamma_2 \ln Z_i + u_i$
+* $\ln(Y_i/W_i^2) = \gamma_0 + \gamma_1 \ln (X_i/W_i) + \gamma_2 \ln Z_i + u_i$
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_04_short_model
+extype: schoice
+exsolution: 10000
+exshuffle: 5

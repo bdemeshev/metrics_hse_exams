@@ -1,0 +1,40 @@
+Question
+========
+
+Чудо-швабры производятся на разных заводах по одной из двух технологий, $A$ или $B$. 
+Исследователь оценил две модели зависимости выпуска, $Y$, от количества сырья, $X$, и технологии:
+
+$\hat Y_i = \hat \alpha_0 + \hat\alpha_1 A_i + \hat\alpha_2 X_i + \hat\alpha_3 A_i X_i$;
+
+$\hat Y_i = \hat \beta_0 + \hat\beta_1 B_i + \hat\beta_2 X_i + \hat\beta_3 B_i X_i$.
+
+Переменная $A_i$ равна единице для заводов с технологией $A$ и нулю иначе, а переменная $B_i$ равна единице для
+заводов с технологией $B$ и нулю иначе.
+
+Оценки коэффициентов связаны соотношением
+
+Answerlist
+----------
+* $\hat\alpha_0 + \hat\alpha_1 = \hat\beta_0$
+* $\hat\alpha_0 = \hat\beta_0 + \hat\beta_1$
+* $\hat\alpha_0  = \hat\beta_0$
+* $\hat\alpha_2 = \hat\beta_2$
+* $\hat\alpha_1 = \hat\beta_0$
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_10_dummy
+extype: schoice
+exsolution: 10000
+exshuffle: 5

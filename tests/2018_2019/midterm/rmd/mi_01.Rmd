@@ -1,0 +1,33 @@
+Question
+========
+
+Исследовательница Надежда оценила регрессию в отклонениях, $\hat y_i =  x_i + 2 z_i$ с помощью МНК.
+Известно, что $\bar Y=5$, $\bar X =6$, $\bar Z=-2$.
+В регрессии нецентрированных переменных, $\hat Y_i = \hb_0 + \hb_1 X_i + \hb_2 Z_i$, 
+оценка коэффициента $\hb_0$ равна
+
+Answerlist
+----------
+*  $3$ 
+*  $1$
+*  $2$ 
+*  $4$ 
+*  $5$ 
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_01_centered
+extype: schoice
+exsolution: 10000
+exshuffle: 5

@@ -1,0 +1,32 @@
+Question
+========
+
+Выборочная корреляция между регрессорами $X$ и $Z$ равна $0.5$. 
+В регрессии $\hat Y_i = \hat\beta_0 + \hat\beta_1 X_i + \hat\beta_2 Z_i$ показатель $VIF$ для регрессора $X$ равен
+
+
+Answerlist
+----------
+* $4/3$
+* $1/4$
+* $1/2$
+* $2$
+* $3/4$
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_07_vif
+extype: schoice
+exsolution: 10000
+exshuffle: 5

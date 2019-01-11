@@ -1,0 +1,32 @@
+Question
+========
+
+Для регрессии $\hat Y_i = \hat\beta_0 + \hat\beta_1 X_i + \hat\beta_2 Z_i + \hat\beta_3 W_i$, оценённой по 24 наблюдениям, $R^2=0.9$.
+
+При проверке гипотезы о неадекватности модели $F$-статистика равна 
+
+Answerlist
+----------
+* $60$
+* $200.27$
+* $189/2$
+* $45$
+* $5/9$
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_05_f_stat
+extype: schoice
+exsolution: 10000
+exshuffle: 5

@@ -1,0 +1,31 @@
+Question
+========
+
+Какое условие НЕ требуется в теореме Гаусса-Маркова?
+
+
+Answerlist
+----------
+* случайные ошибки $\varepsilon_i$ нормально распределены
+* случайные ошибки $\varepsilon_i$ имеют одинаковые дисперсии
+* случайные ошибки $\varepsilon_i$ не коррелированы
+* матрица регрессоров $X$ имеет полный ранг
+* модель $Y=X\beta + \varepsilon$ правильно специфицирована
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_06_non_gm
+extype: schoice
+exsolution: 10000
+exshuffle: 5

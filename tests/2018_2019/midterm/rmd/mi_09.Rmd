@@ -1,0 +1,32 @@
+Question
+========
+
+Портос построил регрессию по 66 наблюдениям, $\hat Y_i = \hat\beta_0 + \hat\beta_1 X_i + \hat\beta_2 W_i + \hat\beta_3 Z_i$, $RSS=140$. Затем Портос оценил вспомогательную регрессию, $\hat{\hat {Y}}_i = \hat\gamma_0 + \hat\gamma_1 X_i + \hat\gamma_2 W_i + \hat\gamma_3 Z_i + \hat\delta_2 \hat Y_i^2 + \hat\delta_3 \hat Y_i^3$, $RSS=120$. 
+
+При проверке гипотезы о правильной спецификации модели в тесте Рамсея $F$-статистика равна
+
+Answerlist
+----------
+* $5$
+* $30/7$
+* $10/3$
+* $6$
+* $11/3$
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_09_ramsey
+extype: schoice
+exsolution: 10000
+exshuffle: 5

@@ -1,0 +1,45 @@
+Question
+========
+
+Для регрессионной модели со свободным членом известно, что 
+$$
+X'X = \begin{pmatrix}
+20 & 0 & 0 \\
+0 & 4 & 3 \\
+0 & 3 & 5 
+\end{pmatrix}, \; \;
+X'Y = \begin{pmatrix}
+40 \\
+10 \\
+13
+\end{pmatrix}, \;\;
+\sum_{i=1}^n Y_i^2 = 140.
+$$
+Коэффициент $R^2$ в этой модели равен
+
+
+Answerlist
+----------
+*  $0.6$ 
+*  $13/14$
+*  $9/35$ 
+*  $0.5$ 
+*  недостаточно информации, чтобы вычислить $R^2$ 
+
+Solution
+========
+
+Answerlist
+----------
+*  Good answer :)
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+*  Bad answer :(
+
+Meta-information
+================
+exname: mi_03_r2
+extype: schoice
+exsolution: 10000
+exshuffle: 5
