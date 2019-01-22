@@ -1,0 +1,32 @@
+Question
+========
+Распределение случайной величины $X$ задано таблицей
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$x$ & 0 & 1 & 2 & 3 \\ 
+$\P(X=x)$ & $-b$ & $0.5-b$ & $0.5+b$ & $b$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Вероятность $\P(X=1)$ равна 
+
+Answerlist
+----------
+* $0.5$
+* $0$
+* $0.4$
+* $0.2$
+* $0.3$
+
+Solution
+========
+
+
+Meta-information
+================
+exname: distribution_discrete
+extype: schoice
+exsolution: 10000
+exshuffle: 5

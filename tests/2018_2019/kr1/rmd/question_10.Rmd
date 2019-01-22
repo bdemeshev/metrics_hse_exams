@@ -1,0 +1,24 @@
+Question
+========
+Рассмотрим модель множественной регрессии $Y=X\beta+\varepsilon$, где $\hat Y = X\hat\beta$, $e=Y-\hat Y$.
+Величина $RSS$ — это квадрат длины вектора
+
+Answerlist
+----------
+* $e$
+* $\varepsilon$
+* $Y-\bar Y$
+* $\hat Y - \bar Y$
+* $\hat Y$
+
+
+Solution
+========
+
+
+Meta-information
+================
+exname: rss
+extype: schoice
+exsolution: 10000
+exshuffle: 5
