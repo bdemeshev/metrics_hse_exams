@@ -10,6 +10,8 @@ junk.txt
 *.log
 *.out
 *.run.xml
+*-cache.yaml
+*.synctex.gz
 *.aux
 materials/2017/kr_03_ip/kr_03i.aux
 *.fdb_latexmk

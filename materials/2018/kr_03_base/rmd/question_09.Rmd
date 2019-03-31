@@ -1,0 +1,23 @@
+Question
+========
+Переменная $Y_i$ принимает значения $0$ или $1$. 
+Логарифмическая функция правдоподобия, используемая для оценивания логит и пробит моделей, имеет вид
+
+Answerlist
+----------
+* $\ln L = \sum_{i=1}^n Y_i \ln F(X_i \beta) + (1 - Y_i) \ln (1 - F(X_i \beta))$
+* $\ln L = \sum_{i=1}^n Y_i \ln (1 - F(X_i \beta)) + (1 - Y_i) \ln F(X_i \beta)$
+* $\ln L = \sum_{i=1}^n Y_i \ln F(X_i \beta) - (1 - Y_i) \ln (1 - F(X_i \beta))$
+* $\ln L = \sum_{i=1}^n Y_i \ln F(X_i \beta) - (1 - Y_i) \ln F(X_i \beta)$
+* $\ln L = \sum_{i=1}^n Y_i \ln F(X_i \beta) \cdot (1 - Y_i) \ln (1 - F(X_i \beta))$
+
+
+Solution
+========
+
+Meta-information
+================
+exname: log_likelihood
+extype: schoice
+exsolution: 10000
+exshuffle: 5

@@ -1,0 +1,212 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath} % куча стандартных математических плюшек
+
+\usepackage{comment}
+\usepackage{amsfonts}
+
+\usepackage[top=2cm, left=1cm, right=1cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Максимум}
+\chead{2019-03-30}
+\rhead{:)}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+\def \P{\mathbb{P}}
+
+
+\begin{document}
+
+
+\fbox{
+  \begin{minipage}{42em}
+    Имя, фамилия и номер группы:\vspace*{3ex}\par
+    \noindent\dotfill\vspace{2mm}
+  \end{minipage}
+}
+
+\vspace{10pt}
+
+Ровно 228 лет назад, 30 марта 1791 Национальное собрание Франции ввело определение метра: одна сорокамиллионная часть длины парижского меридиана.
+
+
+\begin{enumerate}
+\item Рассмотрим логит-модель $\P(y_i = 1) = \Lambda(X_{i.}\beta)$, где $X_{i.}$ — $i$-ая строчка матрицы
+регрессоров. Людовик XIV знает, что оценки логит-модели в явном виде аналитически не считаются. Поэтому он использует две технологии.
+
+Технология 1. Разложить лог-функцию правдоподобия в ряд Тейлора до членов второго порядка и максимизировать полученную функцию.
+
+Технология 2. Стартуя из точки $\beta = 0$ сделать один шаг равный градиенту лог-функции правдоподобия.
+
+
+\begin{enumerate}
+  \item Помогите Людовику получить обе аппроксимации оценок логит-модели.
+  \item С каким известным алгоритмом совпадает одна из этих оценок?
+\end{enumerate}
+
+
+\item Храбрый исследователь Шарль Ожье́ де Бац де Кастельмо́р, граф д'Артанья́н, оценивает модель $y_i = \beta x_i + u_i$ по трём наблюдениям.
+Ошибки $u_i$ имеют многомерное нормальное распределение с нулевым ожиданием и ковариационной матрицей
+$\sigma^2\begin{pmatrix}
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 1 & 2 \\
+\end{pmatrix}$.
+
+Наблюдения известны:
+
+\begin{tabular}{cccc}
+\toprule
+$y_i$ & 1 & 2 & 1  \\
+$x_i$ & 0 & 3 & -1 \\
+\bottomrule
+\end{tabular}
+
+
+\begin{enumerate}
+  \item Найдите наиболее эффективную оценку в классе линейных по игреку несмещённых оценок.
+  \item Какой уровень доверия обеспечивает интервал $[\hb -1;\hb +1]$?
+  \item Постройте 95\%-й предиктивный интервал для $y_4$, если известно, что $u_4$ не зависит
+  от предыдущих ошибок и имеет дисперсию $3\sigma^2$.
+\end{enumerate}
+
+
+\item Монетку подбросили 100 раз. Мария Антуанетта помнит, что в первых 70-и бросках было 30 орлов.
+А графиня де Полиньяк помнит, что в последних 60-и бросках было 20 орлов.
+
+
+\begin{enumerate}
+  \item Постройте GMM оценку вероятности орла с единичной взвешивающей матрицей.
+  \item Постройте оптимальную GMM оценку.
+  \item Постройте 95\% доверительный интервал, используя каждую из оценок
+\end{enumerate}
+
+\newpage
+\item Подарок для тех, кто прорешал прошлогодний вариант :)
+
+
+   Исследовательница Несмеяна вывела хитрую формулу для $\hat a$ — несмещённой оценки неизвестного векторного параметра $a$.
+    Обозначим $s(a)$ — вектор-столбец градиент логарифмической функции правдоподобия. Докажите, что для оценки Несмеяны выполнено неравенство Крамера-Рао,
+    а именно, что матрица $M$  положительна определена.
+
+\[
+M = \Var(s(a))\cdot \Var(\hat a) - I_{k\times k}.
+\]
+
+
+Подсказки:
+
+    \begin{enumerate}
+      \item Вспомните, чему равно $\E(s(a))$. Достаточно просто вспомнить, доказывать не требуется!
+      \item Найдите скаляры $\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_1}\right)$,
+	$\Cov\left(\hat a_1, \frac{\partial \ell}{\partial a_2}\right)$
+	и матрицу $\Cov\left(\hat a, s(a) \right)$.
+      \item Рассмотрим два произвольных случайных вектора $R$ и $S$ и два вектора констант подходящей длины $\alpha$ и $\beta$.
+	Найдите минимум функции $f(\alpha, \beta) = \Var(\alpha^T R + \beta^T S)$ по $\beta$.
+	Выпишите явно $\beta^*(\alpha)$ и $f^*(\alpha)$.
+      \item Докажите, что для произвольных случайных векторов положительно определена матрица
+	\[
+          \Var(R) - \Cov(R, S) \Var^{-1}(S)\Cov(S, R)
+	\]
+      \item Завершите доказательство векторного неравенства Крамера-Рао.
+
+
+    \end{enumerate}
+
+  Без угрызений совести можно храбро переставлять интегралы и производные :)
+
+
+  \item
+  Докажите, что в методе главных компонент с масштабированием переменных средняя величина $R^2$ по всем парным
+  регрессиям исходных переменных на первую главную компоненту равна наибольшему сингулярному значению
+  матрицы исходных переменных.
+
+\item Докажите закон больших чисел в форме Бернштайна.
+
+Если величины $y_1$, $y_2$, \ldots, $y_n$ имеют одинаковое ожидание, $\E(y_i) = \mu$, ограниченную дисперсию и $\Cov(y_j, y_j) \to 0$ при $|i - j|\to \infty$, то $\bar y$ сходится по вероятности к $\mu$.
+
+\end{enumerate}
+
+\end{document}
