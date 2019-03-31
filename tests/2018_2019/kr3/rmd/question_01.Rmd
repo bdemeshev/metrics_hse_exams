@@ -1,0 +1,24 @@
+Question
+========
+Рассмотрим модель $Y_i= \beta_0 + \beta_z Z_{i} + \beta_w W_{i} + \varepsilon$ при гетероскедастичности.
+Стандартная ошибка МНК-оценки, рассчитываемая по формуле $se(\hat\beta_w)=\sqrt{RSS \cdot (X'X)^{-1}_{33}/(n-3)}$,
+является
+
+Answerlist
+----------
+* смещённой 
+* смещённой вниз
+* смещённой вверх
+* несмещённой
+* состоятельной
+
+Solution
+========
+
+
+Meta-information
+================
+exname: homo_se_formula
+extype: schoice
+exsolution: 10000
+exshuffle: 5

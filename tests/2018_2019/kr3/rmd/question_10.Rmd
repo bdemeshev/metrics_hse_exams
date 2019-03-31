@@ -1,0 +1,27 @@
+Question
+========
+Для модели $Y_i = \beta X_i + \varepsilon_i$ c $\E(\varepsilon_i) = 0$ известно,
+что оценка $\hat \beta = \frac{\sum_{i=1}^n Y_i}{\sum_{i=1}^n X_i}$ обладает наименьшей дисперсией 
+среди линейных несмещённых оценок. 
+
+Дисперсии $\Var(\varepsilon_i)$ пропорциональны
+
+Answerlist
+----------
+* $X_i$
+* $1/X_i$
+* $X_i^2$
+* $1/X_i^2$
+* $\sqrt{X_i}$
+
+
+Solution
+========
+
+
+Meta-information
+================
+exname: hetero
+extype: schoice
+exsolution: 10000
+exshuffle: 5
