@@ -124,7 +124,7 @@ notall_files = head(all_files, 10)
 
 sol = make_variants2(notall_files, n_variants = 4)
 
-print(sol[[1]], 1)
+print(sol[[3]], 1)
 
 
 
