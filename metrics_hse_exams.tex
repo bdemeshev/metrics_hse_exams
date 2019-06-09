@@ -1,4 +1,4 @@
-% !TEX options = -xelatex -synctex=1 -interaction=nonstopmode -file-line-error "%DOC%"
+% !TEX options = --shell-escape -xelatex -synctex=1 -interaction=nonstopmode -file-line-error "%DOC%"
 % !TEX program = xelatex
 \documentclass[12pt, a4paper]{article}
 
@@ -6167,7 +6167,7 @@ P_{t+1}^e - P_{t}^e = \lambda (P_t - P_t^e) \\
 \begin{align*}
 & \lambda^2 - \lambda + 0.4 = 0 \\
 & \lambda_{1,2} = \frac{1 \pm \sqrt{0.6} i}{2} \\
-& |\lambda_1| = \left| \frac{1}{2} + \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} - \frac{0.6}{4}} = \sqrt{\frac{1}{10}} < 1 \\
+& |\lambda_1| = \left| \frac{1}{2} + \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} + \frac{0.6}{4}} = 0.2 < 1 \\
 & |\lambda_2| = \left| \frac{1}{2} - \frac{\sqrt{0.6}}{2} i \right| = \sqrt{\frac{1}{4} + \frac{0.6}{4}} = 0.2 < 1
 \end{align*}
 Поскольку оба корня по модулю не превосходят единицы, то существует не смотрящее в будущее
