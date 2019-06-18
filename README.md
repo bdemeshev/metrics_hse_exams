@@ -6,3 +6,5 @@
 Материалы [семинаров](https://bdemeshev.github.io/em301/)
 
 Блог [pokrovka11](https://pokrovka11.wordpress.com)
+
+Мне кажется, я нашёл ошибку в заданиях и хочу [сообщить об этом](https://github.com/bdemeshev/metrics_hse_exams/issues/new) :)
