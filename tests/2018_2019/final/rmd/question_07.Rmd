@@ -1,0 +1,23 @@
+Question
+========
+Основная гипотеза модели адаптивных ожиданий состоит в том, что 
+
+Answerlist
+----------
+* $Y_t - Y_{t-1} = \delta (Y_t^e - Y_{t-1}), \; 0 < \delta \leq 1$
+* $Y_t^e = \left(1 - \frac{1}{\delta}\right) Y_{t-1} + \frac{1}{\delta} Y_{t}, \; 0 < \delta \leq 1$
+* $Y_t - Y_{t-1}^e = \delta (Y_t^e - Y_{t-1}), \; 0 < \delta \leq 1$
+* $X_{t+1}^e - X_{t}^e = \lambda (X_{t} - X_{t}^e), \; 0 \leq \lambda < 1$
+* $X_t^e - X_{t-1}^e = (1-\lambda) (X_t - X_{t-1}), \; 0 \leq \lambda < 1$
+
+
+Solution
+========
+
+
+Meta-information
+================
+exname: adapt_model
+extype: schoice
+exsolution: 10000
+exshuffle: 5

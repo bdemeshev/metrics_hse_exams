@@ -1,0 +1,22 @@
+Question
+========
+Выберите стационарный процесс (уравнение, которое имеет стационарное решение, не заглядывающее в будущее), если $u_t$ — белый шум.
+
+Answerlist
+----------
+* $y_t = 1.2 y_{t-1} + u_t$
+* $y_t = 1.2 + 0.8 y_{t-1} - 0.12 y_{t-2} + u_t - 3u_{t-1}$
+* $y_t = 2 + 3t + u_t + u_{t-1}$
+* $y_t = tu_{t}$
+* $y_t = u_1 + u_2 + \ldots + u_t$
+
+
+Solution
+========
+
+Meta-information
+================
+exname: stationarity
+extype: schoice
+exsolution: 10000
+exshuffle: 5
