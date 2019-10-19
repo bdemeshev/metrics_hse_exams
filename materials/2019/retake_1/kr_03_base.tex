@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+
+\usepackage{comment} % для комментирования целых окружений
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amssymb, amsthm} % куча стандартных математических плюшек
+
+\usepackage{amsfonts}
+
+\usepackage[top=2cm, left=1cm, right=1cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Эконометрика, ВШЭ}
+\chead{Доп задачи}
+\rhead{2019-09-25}
+\lfoot{Вариант $\mu$}
+\cfoot{Паниковать запрещается!}
+\rfoot{Тест}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{ifthen} % для написания условий
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+\def \P{\mathbb{P}}
+
+
+\def \putyourname{\fbox{
+    \begin{minipage}{42em}
+      Фамилия, имя, номер группы:\vspace*{3ex}\par
+      \noindent\dotfill\vspace{2mm}
+    \end{minipage}
+  }
+}
+
+\def \checktable{
+
+	\vspace{5pt}
+	Табличка для проверяющих работу:
+
+\vspace{5pt}
+
+	\begin{tabular}{|m{2cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{2cm}|}
+\toprule
+		Тест & 1 &  2 & 3 & 4 & 5 & Итого \\
+\midrule
+		&  &  & & & & \\
+		&  &  & & & & \\
+ \bottomrule
+\end{tabular}
+}
+
+
+
+\def \testtable{
+
+	\vspace{5pt}
+	Внесите сюда ответы на тест:
+
+\vspace{5pt}
+
+\begin{tabular}{|m{2cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|m{0.6cm}|}
+\toprule
+		Вопрос & 1 &  2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\midrule
+		Ответ &  &  & & & & & & & & \\
+ \bottomrule
+\end{tabular}
+}
+
+
+
+\begin{document}
+
+
+
+
+
+\begin{enumerate}
+
+\item
+По 200 фирмам была оценена зависимость выпуска $Y$ от труда $L$ и капитала $K$
+с помощью двух моделей:
+
+Модель Кобба-Дугласа: $\ln{Y_i} = \beta_0 + \beta_1 \ln{L_i} + \beta_2 \ln{K_i} +
+\varepsilon_i$
+
+Транслоговая модель: $\ln{Y_i} = \gamma_0 + \gamma_1 \ln{L_i} + \gamma_2 \ln{K_i} +
+\gamma_3 (0.5 \ln^2{L_i}) + \gamma_4 (0.5 \ln^2{K_i}) + \gamma_5 \ln{K_i} \ln{L_i} +
+\varepsilon_i$
+
+Оценки коэффициентов обеих моделей (в скобках приведены стандартные ошибки):
+
+\begin{tabular}{lcc}
+\toprule
+Переменная & Модель Кобба-Дугласа & Транслоговая модель \\
+\midrule
+константа & $1.1706$ ($0.326$) & $0.9441$ ($2.911$)   \\
+$\ln L$ & $0.6029$ ($0.125$) & $3.613$ ($1.548$)  \\
+$\ln K$ & $0.375$ ($0.085$) & $-1.893$ ($1.016$)  \\
+$0.5 \ln^2 L$ &  & $-0.964$ ($0.707$)  \\
+$0.5 \ln^2 K$ & & $0.0852$ ($0.2922$) \\
+$\ln L \ln K$ & & $0.3123$ ($0.4389$)  \\
+$R^2$ & $0.9$ & $0.954$  \\
+\bottomrule
+\end{tabular}
+
+В модели Кобба-Дугласа $\hCov(\hb_1, \hb_2)= 0.01$.
+
+На уровне значимости $\alpha = 0.05$ проверьте следующие гипотезы:
+\begin{enumerate}
+\item В модели Кобба-Дугласа эластичность выпуска по капиталу равна единице.
+\item В модели Кобба-Дугласа эластичности выпуска по труду и капиталу одинаковы.
+\item В транслоговой модели $\gamma_3 = 0$.
+\item В транслоговой модели $\gamma_3 = \gamma_4 = \gamma_5 = 0$.
+\end{enumerate}
+
+
+
+\item
+Исследователь Д'Артаньян стандартизировал (центрировал и нормировал) все
+имеющиеся регрессоры и поместил их в столбцы матрицы $\tilde X$. Выборочная
+корреляционная матрица регрессоров равна:
+\[
+\begin{pmatrix}
+1 & -0.85 & 0  \\
+-0.85 & 1 & 0  \\
+0 & 0 & 1 \\
+\end{pmatrix}.
+\]
+\begin{enumerate}
+    \item Найдите параметр обусловленности (condition number) матрицы
+    $\tilde X^T \tilde X$.
+    \item Вычислите одну или две главные компоненты, объясняющие не менее
+    $70$\% суммарной дисперсии стандартизированных регрессоров. Выпишите
+    найденные компоненты как линейные комбинации столбцов матрицы $\tilde X$.
+\end{enumerate}
+
+\newpage
+
+
+
+\item Для регрессии в отклонениях $y = \beta_1 x + \beta_2 z + \varepsilon$, оцененной по 100 наблюдениям, известны следующие суммы:
+\[
+\sum y^2_i = \frac{493}{3}, \sum x_i^2 = 30, \sum z_i^2 = 3, \sum x_i y_i = 30, \sum z_i y_i = 20, \sum x_i z_i = 0
+\]
+
+Найдите оценки МНК коэффициентов $\beta_1, \beta_2$ и коэффициент детерминации $R^2$.
+
+
+\item По ежегодным данным за 25 лет была оценена зависимость расходов на жилье $Y$ от доходов индивидуумов $I$ и относительного индекса цен $P$ с помощью трёх моделей:
+
+$\hY = \underset{(46.9)}{-39.9} + \underset{(0.009)}{0.179} P + \underset{(0.409)}{0.113} I, R^2 = 0.987$
+
+$\hY = \underset{(3.34)}{-27.03} + \underset{(0.004)}{0.177} I, R^2 = 0.987$
+
+$\hY = \underset{(24.2)}{813.3} + \underset{(0.019)}{-7.08} P, R^2 = 0.76$
+
+Известно, что $\hCorr (P, I) = -0.88$, в скобках указаны стандартные отклонения коэффициентов.
+
+Какую модель Вы предпочтёте и почему?
+
+\item Выпишите целевую функцию алгоритма LASSO. Объясните, как алгоритм LASSO заменяет проверку гипотез
+о значимости коэффициентов в классическом МНК.
+
+
+\end{enumerate}
+
+
+
+
+
+\end{document}
