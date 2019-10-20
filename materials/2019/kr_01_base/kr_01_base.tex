@@ -1,0 +1,410 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amssymb, amsthm} % куча стандартных математических плюшек
+
+\usepackage{amsfonts}
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Эконометрика, НИУ-ВШЭ}
+\chead{контрольная работа №1}
+\rhead{2019-10-19}
+\lfoot{Вариант $\xi$}
+\cfoot{Ни пуха, ни пера!}
+\rfoot{\thepage/3}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\let\P\relax
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\tr}{trace}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+
+
+
+\def \putyourname{\fbox{
+    \begin{minipage}{42em}
+      Фамилия, имя, номер группы:\vspace*{3ex}\par
+      \noindent\dotfill\vspace{2mm}
+    \end{minipage}
+  }
+}
+
+\def \checktable{
+\begin{minipage}{42em}
+\begin{tabular}{|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+\hline
+Тест & 1 &  2 & 3 & Итого \\ \hline
+&  &  &  & \\
+ &  &   & & \\
+ \hline
+\end{tabular} $\longleftarrow$ для проверяющего!
+\end{minipage}
+}
+
+\def \testtable{
+\begin{minipage}{42em}
+\vspace{4pt}
+
+Ответы на тест:
+
+\vspace{2pt}
+\begin{tabular}{|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+\hline
+1 & 2 &  3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ 
+\hline
+ &  &   &  &  &  &  &  &  &  \\ 
+ &  &   &  &  &  &  &  &  &  \\ 
+\hline
+\end{tabular}
+\end{minipage}
+
+}
+
+
+
+
+
+% [1][3] 1 = one argument, 3 = value if missing
+% эта магия создаёт окружение answerlist
+% именно в окружении answerlist записаны варианты ответов в подключаемых exerciseXX
+% просто \begin{answerlist} сделает ответы в три столбца
+% если ответы длинные, то надо в них руками сделать
+% \begin{answerlist}[1] чтобы они шли в один столбец
+\newenvironment{answerlist}[1][3]{
+\begin{multicols}{#1}
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+\end{multicols}
+}
+
+\newenvironment{answerlist1}{
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+}
+
+
+
+\excludecomment{solution} % without solutions
+
+\theoremstyle{definition}
+\newtheorem{question}{Вопрос}
+
+
+
+
+\begin{document}
+
+\checktable
+
+\putyourname
+
+\testtable
+
+\subsection*{Тест}
+
+\begin{question}
+Случайные величины $X$ и $Y$ независимы и имеют нормальное распределение с $\E(X) = 0$, $\Var(X)=1$, $\E(Y)=5$, $\Var(Y) = 4$. 
+Величина $Z = 2X + Y$ имеет распределение
+\begin{answerlist}
+  \item $\cN(5;5)$
+  \item $\cN(5;8)$
+  \item $\chi^2_2$
+  \item $t_2$
+  \item $F_{1,1}$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Оценка $T_n = T(X_1, X_2, \ldots, X_n)$ называется несмещённой оценкой параметра $\theta$, если
+\begin{answerlist}[2]
+  \item $\E(T_n) = T_n$
+  \item $T_n = 0$
+  \item $\lim_{n\to\infty} \P(|T_n - \theta|>\e) = 0$ при $\e>0$
+  \item $\E(T_n) = 0$
+  \item $\E(T_n) = \theta$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+
+\begin{question}
+Оценена регрессия $\hat Y = 300 + 6W$, где $R^2 = 0.85$ и $W_i = X_i / X_{i-1}$.
+
+Если объясняющая переменная будет выражена в процентах, $\tilde W_i = 100(X_i - X_{i-1})/X_{i-1}$, то результаты оценки регрессии примут вид
+\begin{answerlist}
+  \item $\hat Y_i = 3 + 6 \tilde W_i$, $R^2= 0.85$
+  \item $\hat Y_i = 300 + 600 \tilde W_i$, $R^2= 0.85$
+  \item $\hat Y_i = 306 + 0.06 \tilde W_i$, $R^2= 0.85$
+  \item $\hat Y_i = 300 + 6 \tilde W_i$, $R^2= 0.085$
+  \item $\hat Y_i = 300 + 6 \tilde W_i$, $R^2= 0.85$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Оценка ковариационной матрицы оценок коэффициентов регрессии $Y=X\beta + \e$ пропорциональна
+\begin{answerlist}
+  \item $(XX^T)^{-1}$
+  \item $X^TX$
+  \item $(X^TX)^{-1}$
+  \item $XX^T$
+  \item $X^TY$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\newpage
+\begin{question}
+Среди предпосылок теоремы Гаусса-Маркова фигурирует условие
+\begin{answerlist}
+  \item $\E(Y_i)=0$
+  \item $\e_i \sim \cN(0;\sigma^2)$
+  \item $\E(\e_i)=1$
+  \item $\Var(\e_i)=const$
+  \item $\Var(\e_i)=1$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Оценено уравнение парной регрессии $Y_i = \beta_0 + \beta_1 X_i + \e_i$, причём МНК-оценка
+коэффициента $\beta_1$ равна 5, а стандартная ошибка оценки равна $0.25$.
+
+Значение $t$-статистики для проверки гипотезы, что этот коэффициент равен 4, есть
+\begin{answerlist}
+  \item $-2$
+  \item $4$
+  \item $-4$
+  \item $2$
+  \item $20$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+P-значение при проверке некоторой гипотезы $H_0$ оказалось равно $0.002$.
+
+Гипотеза $H_0$ не отвергается при уровне значимости
+\begin{answerlist}
+    \item 10\%
+    \item 0.1\%  
+    \item 1\%
+  \item 5\%
+  \item всех перечисленных
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Известно, что выборочный коэффициент корреляции между $X$ и $Y$ равен $0.25$. 
+В регрессии $Y$ на константу и $X$ коэффициент $R^2$ равен
+\begin{answerlist}
+  \item $25$
+  \item $0.25$
+  \item $0.5$
+  \item $0.0625$
+  \item $\sqrt{0.5}$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+
+\begin{question}
+Исследователь оценил регрессию $\hat Y_i = 90 + 3 X_i$. Если увеличить переменную $X$ на 10\%,
+а $Y$ — на 10 единиц, то 
+
+\begin{answerlist}[2]
+  \item оценка коэффициента $\beta_0$ уменьшится, а $\beta_1$ — увеличится
+  \item оценка коэффициента $\beta_0$ увеличится, а $\beta_1$ — уменьшится
+  \item оценки коэффициентов $\beta_0$, $\beta_1$ не изменятся
+  \item оценки коэффициентов $\beta_0$, $\beta_1$ уменьшатся
+  \item оценки коэффициентов $\beta_0$, $\beta_1$ увеличатся
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+Исследователь оценил регрессию $\hat Y_i = \underset{(0.1)}{30} + \underset{(0.5)}{6} X_i$, причём $\sum_i (X_i - \bar X)^2=4$. Все предпосылки теоремы Гаусса-Маркова выполнены. 
+
+В скобках приведены стандартные ошибки коэффициентов. 
+Несмещённая оценка дисперсии ошибок регрессии равна 
+\begin{answerlist}
+  \item $0.25$
+  \item $2$
+  \item $1$
+  \item $0.125$
+  \item $2\sqrt{0.5}$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\newpage
+\putyourname
+
+\subsection*{Задачи}
+
+\begin{enumerate}
+\item Найдите величины Q1, \ldots, Q10, пропущенные в таблицах: 
+
+\begin{tabular}{lr} \toprule
+Indicator & Value \\
+\midrule
+Multiple R          & Q1 \\
+$R^2$     			& Q2 \\
+Adjusted $R^2$     	& 0.54 \\
+Standart error 		& Q3 \\
+Observations		& 800 \\
+\bottomrule
+\end{tabular}\hspace{2cm}
+\begin{tabular}{lrrrrr} \toprule
+ANOVA     	 &  df 	& SS		& MS 	& F & Significance F \\
+\midrule
+Regression   & Q4   	& 42.9  	& 42.9	&  923 	& 	0	\\
+Residual     & 798  	& 37.0  	& 46	&  	&     	\\
+Total        & 799  	& Q5        &    	&  	&     	\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{rrrrrrr}
+\toprule
+ 			& Coef. 	& St. error	& t-stat & P-value	& Lower 95\% 	& Upper 95\% \\
+\midrule
+Intercept 	& -25.24 	& 2.0 	& Q6 		& 0 	&  Q7		& -21.31 \\
+totspan		& 1.7		& Q8    & 30.4 	    & 0 	&  Q9	    & Q10 \\
+\bottomrule
+\end{tabular}
+
+
+\item Грета Тунберг оценила зависимость средней температуры на Земном шаре в градусах, $Y_i$, 
+от количества своих постов в твиттере в соответствующий день, $X_i$, по 52 дням:
+
+\[
+\hat Y_i = \underset{(1.24)}{-1.53} + \underset{(0.12)}{0.14} X_i, \text{ где } \sum_i (X_i - \bar X)^2 =52.4 \text{ и } \bar X = 10
+\]
+
+\begin{enumerate}
+\item Проверьте гипотезы о незначимости каждого коэффициента при уровне значимости $\alpha = 0.01$.
+\item Проверьте гипотезу о равенстве углового коэффициента 2 при альтернативной гипотезе, что 
+коэффициент больше 2 и уровне значимости $\alpha = 0.01$.
+\item Найдите оценку дисперсии $\e_i$ в модели $Y_i = \beta_0 + \beta_1 X_i + \e_i$.
+\item Постройте 95\%-ый доверительный интервал для индивидуального прогноза $Y$, если $X=10$.
+
+
+\end{enumerate}
+
+
+
+
+\item Рассмотрим парную регрессию $\hat Y_i = \hat\beta_0 + \hat\beta_1 X_i$.
+
+\begin{enumerate}
+\item Дайте определение коэффициента детерминации $R^2$.
+\item В каких пределах может лежать $R^2$ в указанной парной регрессии? Докажите сформулированное утверждение.
+\item Как связан коэффициент $R^2$ и выборочная корреляция зависимой переменной и регрессора? Докажите сформулированное утверждение. 
+\end{enumerate}
+
+% Примечание: при доказательстве можно использовать условия первого порядка, важно их аккуратно сформулировать. 
+
+
+
+\end{enumerate}
+
+
+
+\end{document}
