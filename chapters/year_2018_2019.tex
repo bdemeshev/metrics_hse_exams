@@ -689,7 +689,7 @@ $\ln \widehat{Sales}_i = \underset{(0.21)}{10.08} - \underset{(0.043)}{0.31}\ln 
   \Var(\beta_1 - \beta_2) = 0.125^2 + 0.085^2 - 2 \cdot (-0.0096) = 0.04025 \Rightarrow
   s.e.(\beta_1 - \beta_2) \approx 0.205
   \]
-  Тогда $t_{obs} = (0.125 - 0.085) / 0.205 \approx 0.195$, $t_{0.975; 197} = \pm 1.97$.
+  Тогда $t_{obs} = (0.6029 - 0.375) / 0.205 \approx 1.11$, $t_{0.975; 197} = \pm 1.97$.
   Основная гипотеза не отвергается.
   \item $t_{obs} = -0.964 / 0.707 \approx -1.3635$, $t_{crit} = \pm 1.97$.
   Основная гипотеза не отвергается.
@@ -702,7 +702,7 @@ $\ln \widehat{Sales}_i = \underset{(0.21)}{10.08} - \underset{(0.043)}{0.31}\ln 
 \item Выпишем ограниченную и неограниченную модели:
 \begin{align*}
   &R: Y_i = \beta_0 + \beta_1 X_i + \beta_2 Z_i + \varepsilon_i \\
-  &UR: Y_i = \beta_0 + \Delta_0 d_i + (\beta_1 + \Delta_1) X_i + (\beta_2 + \Delta_2) Z_i + \varepsilon_i,
+  &UR: Y_i = \beta_0 + \Delta_0 d_i + (\beta_1 + \Delta_1 d_i) X_i + (\beta_2 + \Delta_2 d_i) Z_i + \varepsilon_i,
 \end{align*}
 где $d_i$ дамми-перменная, обозначающая городских жителей:
 \[
