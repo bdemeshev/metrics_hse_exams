@@ -1,0 +1,389 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amssymb, amsthm} % куча стандартных математических плюшек
+
+\usepackage{amsfonts}
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Эконометрика, НИУ-ВШЭ}
+\chead{контрольная работа №4}
+\rhead{2020-06-xx}
+\lfoot{Вариант $\xi$}
+\cfoot{Ни пуха, ни пера!}
+\rfoot{\thepage/3}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\let\P\relax
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+\DeclareMathOperator{\tr}{trace}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+
+
+
+\def \putyourname{\fbox{
+    \begin{minipage}{42em}
+      Фамилия, имя, номер группы:\vspace*{3ex}\par
+      \noindent\dotfill\vspace{2mm}
+    \end{minipage}
+  }
+}
+
+\def \checktable{
+\begin{minipage}{42em}
+\begin{tabular}{|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+\hline
+Тест & 1 &  2 & 3 & Итого \\ \hline
+&  &  &  & \\
+ &  &   & & \\
+ \hline
+\end{tabular} $\longleftarrow$ для проверяющего!
+\end{minipage}
+}
+
+\def \testtable{
+\begin{minipage}{42em}
+\vspace{4pt}
+
+Ответы на тест:
+
+\vspace{2pt}
+\begin{tabular}{|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+\hline
+1 & 2 &  3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ 
+\hline
+ &  &   &  &  &  &  &  &  &  \\ 
+ &  &   &  &  &  &  &  &  &  \\ 
+\hline
+\end{tabular}
+\end{minipage}
+
+}
+
+
+
+
+
+% [1][3] 1 = one argument, 3 = value if missing
+% эта магия создаёт окружение answerlist
+% именно в окружении answerlist записаны варианты ответов в подключаемых exerciseXX
+% просто \begin{answerlist} сделает ответы в три столбца
+% если ответы длинные, то надо в них руками сделать
+% \begin{answerlist}[1] чтобы они шли в один столбец
+\newenvironment{answerlist}[1][3]{
+\begin{multicols}{#1}
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+\end{multicols}
+}
+
+\newenvironment{answerlist1}{
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+}
+
+
+
+\excludecomment{solution} % without solutions
+
+\theoremstyle{definition}
+\newtheorem{question}{Вопрос}
+
+
+
+
+\begin{document}
+
+\checktable
+
+\putyourname
+
+\testtable
+
+\subsection*{Тест}
+
+\begin{question}
+Величина $Y_i$ зависит от регрессора $W_i$, $Y_i = 2 + 3W_i +\e_i$ 
+и все предпосылки теоремы Гаусса-Маркова на $\e_i$ выполнены. 
+Однако Илон Маск строит регрессию $\hat Y_i =\hb_0 + \hb_1 X_i$.
+Какая будет дисперсия у $\hb_1$?
+\begin{answerlist}
+  \item $\sigma^2 /\sum (X_i - \bar X)^2$
+  \item $\sigma^2 /\sum (W_i - \bar W)^2$  
+  \item $\sigma^2 /\sum (W_i - \bar W)(X_i - \bar X)$  
+  \item $\sigma^2 \sum (W_i - \bar W)^2/\sum (X_i - \bar X)^2$
+  \item $\sigma^2 \sum (X_i - \bar X)^2/\sum (W_i - \bar W)^2$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+Илон Маск проверяет гипотезу $H_0$, состоящую из трёх уравнений, $\beta_1 + \beta_2 = 0$, 
+$\beta_1 = -5$, $\beta_2 = +5$. Всего в модели оценивается 5 коэффициентов бета по 500 наблюдениям.
+$F$-тест для проверки гипотезы $H_0$ имеет распределение:
+\begin{answerlist}
+    \item $F_{2, 495}$
+    \item $F_{3, 495}$
+    \item $F_{5, 497}$
+    \item $F_{3, 497}$
+    \item $F_{3, 492}$
+    \item нет верного ответа
+\end{answerlist}
+\end{question}
+  
+\begin{question}
+Рассмотрим модели $A$: $Y_i = \beta_0 + \beta_1 X_i + \e_i$, $B$: $Y_i = \beta_0 + \beta_1 \ln X_i + \e_i$ 
+и $С$: $\ln Y_i = \beta_0 + \beta_1 X_i + \e_i$. Выберите верное утверждение.
+\begin{answerlist}
+      \item модели можно сравнить с помощью $AIC$
+      \item модели можно сравнить с помощью попарных $F$-тестов
+      \item модели можно сравнить с помощью $\hat \sigma^2$
+      \item модели можно сравнить с помощью $R^2_{adj}$
+      \item модели можно сравнить с помощью $RSS$
+      \item нет верного ответа
+\end{answerlist}
+\end{question}
+  
+
+\begin{question}
+Старик оценил модель $\hat Y_i = \underset{(1)}{3} + \underset{(2)}{6}X_i$ по 100 наблюдениям.
+В скобках указаны стандартные ошибки, $\hat\sigma^2 = 5$. 
+Однако Золотая Рыбка сказала Старику, что истинная константа $\beta_0$ равна 2.
+Помогите Старику построить 95\%-ый доверительный интервал для индивидуального $Y$ (предиктивный интервал) для $X=1$
+с учётом всей имеющейся информации. 
+
+\begin{answerlist}
+  \item $[0; 16]$
+  \item $[1; 15]$
+  \item $[2; 14]$
+  \item $[3; 13]$
+  \item $[4; 12]$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+  
+
+
+
+\newpage
+\putyourname
+
+\subsection*{Задачи}
+\begin{enumerate}
+\item Рассмотрим модель $Y_i = 5 + 6Y_{i-1} + 3X_{i-1} + u_i$, 
+где $u_i$ независимы и нормально распределены $\cN(0; 9)$.
+
+Известно, что $Y_{100} = 10$, $X_{100} = 2$ и $X_{t} = 1$ при $t\geq 101$.
+\begin{enumerate}
+  \item Постройте 95\%-ый предиктивный интервал (доверительный интервал для индивидуального значения) для $Y_{101}$.
+  \item Постройте 95\%-ый предиктивный интервал (доверительный интервал для индивидуального значения) для $Y_{102}$.
+  \item Постройте 95\%-ый предиктивный интервал (доверительный интервал для индивидуального значения) произвольного $Y_{t}$, $t\geq 101$.
+\end{enumerate}
+
+\item Рассмотрим систему одновременных уравнений
+\[
+\begin{cases}
+D_i = \alpha_0 + \alpha_1 W_i + \alpha_2 T_i + \alpha_3 P_i + \alpha_5 Z_i + \e_i^D \\
+S_i = \beta_0 + \beta_1 W_i + \beta_3 P_i + \beta_4 N_i + \e_i^S \\
+W_i = \gamma_0 + \gamma_1 P_i + \e_i^W \\
+D_i = S_i 
+\end{cases}
+\]
+Эндогенными являются переменные $D_i$, $S_i$, $P_i$ и $W_i$. Все остальные переменные являются экзогенными.
+
+\begin{enumerate}
+  \item Проверьте идентифицируемость первого уравнения с помощью условия порядка.
+  \item Проверьте идентифицируемость второго уравнения с помощью условия порядка и условия ранга.
+  Если уравнение идентифицируемо, то кратко опишите способ идентификации.
+\end{enumerate}
+
+
+\item Рассмотрим систему одновременных уравнений
+\[
+\begin{cases}
+A_i = \alpha_0 + \alpha_1 W_i + \alpha_3 P_i + \alpha_4 N_i + \e_i^A \\
+B_i = \beta_0 + \beta_1 W_i + \beta_2 T_i + \beta_3 P_i + \beta_5 Z_i + \e_i^B \\
+W_i = \gamma_0 + \gamma_1 P_i + \e_i^W \\
+A_i = B_i 
+\end{cases}
+\]
+Эндогенными являются переменные $A_i$, $B_i$, $P_i$ и $W_i$. Все остальные переменные являются экзогенными.
+
+\begin{enumerate}
+  \item Проверьте идентифицируемость второго уравнения с помощью условия порядка.
+  \item Проверьте идентифицируемость первого уравнения с помощью условия порядка и условия ранга.
+  Если уравнение идентифицируемо, то кратко опишите способ идентификации.
+\end{enumerate}
+
+
+\newpage
+
+\item Рассмотрим модель 
+\[
+\begin{cases}
+  a_t = a_{t-1} + b_{t-1} + u_t, \, u_t \sim \cN(0; 4) \\
+  b_t = b_{t-1} + \nu_t, \, \nu_t \sim \cN(0;1) \\
+\end{cases}
+\]
+
+Ошибки $(u_t)$ и $(\nu_t)$ независимы. Известно, что $a_{100}=100$, $b_{100}=2$. 
+\begin{enumerate}
+  \item Постройте точечный прогноз для $a_{101}$ и $a_{102}$.
+  \item Постройте 95\%-й предиктивный интервал для $a_{101}$.
+  \item Постройте 95\%-й предиктивный интервал для $a_{102}$.
+\end{enumerate}
+
+
+\item Рассмотрим модель 
+\[
+\begin{cases}
+  a_t = a_{t-1} + b_{t-1} + u_t, \, u_t \sim \cN(0; 4) \\
+  b_t = b_{t-1} + \nu_t, \, \nu_t \sim \cN(0;1) \\
+\end{cases}
+\]
+
+Ошибки $(u_t)$ и $(\nu_t)$ независимы. Известно, что $a_{100}=200$, $b_{100}=1$. 
+\begin{enumerate}
+  \item Постройте точечный прогноз для $a_{101}$ и $a_{102}$.
+  \item Постройте 95\%-й предиктивный интервал для $a_{101}$.
+  \item Постройте 95\%-й предиктивный интервал для $a_{102}$.
+\end{enumerate}
+
+\item Рассмотрим систему одновременных уравнений
+\[
+\begin{cases}
+A_i = \alpha_1 + \alpha_2 P_i + u_i^A \\
+B_i = \beta_1 + \beta_2 P_i + \beta_3 W_i + u_i^B \\
+A_i = B_i
+\end{cases}
+\]
+
+Переменные $A_i$, $B_i$, $P_i$ являются эндогенными, $W_i$ — экзогенная. 
+
+Известны результаты оценивания регрессий:
+  \begin{align*}
+    \hat A_i = 2 + 3 W_i \\
+    \hat P_i = 3 - 2 W_i  
+  \end{align*}
+
+\begin{enumerate}
+  \item Проверьте идентифицируемость каждого уравнения с помощью условия порядка. 
+  \item Найдите оценки коэффициентов идентифицируемого уравнения. 
+\end{enumerate}
+
+\item Рассмотрим систему одновременных уравнений
+\[
+\begin{cases}
+A_i = \alpha_1 + \alpha_2 P_i + \alpha_3 W_i + u_i^A \\
+B_i = \beta_1 + \beta_2 P_i + u_i^B \\
+A_i = B_i
+\end{cases}
+\]
+
+Переменные $A_i$, $B_i$, $P_i$ являются эндогенными, $W_i$ — экзогенная. 
+
+Известны результаты оценивания регрессий:
+  \begin{align*}
+    \hat A_i = 2 + 3 W_i \\
+    \hat P_i = 3 - 2 W_i     
+  \end{align*}
+
+\begin{enumerate}
+  \item Проверьте идентифицируемость каждого уравнения с помощью условия порядка. 
+  \item Найдите оценки коэффициентов идентифицируемого уравнения. 
+\end{enumerate}
+
+
+
+
+\end{enumerate}
+
+
+
+\end{document}

@@ -1,0 +1,467 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amssymb, amsthm} % куча стандартных математических плюшек
+
+\usepackage{amsfonts}
+
+\usepackage{comment}
+
+\usepackage{physics} % \abs \norm, переопределяет \cos, \sin...
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Эконометрика, НИУ-ВШЭ}
+\chead{контрольная работа №3, шанс №2}
+\rhead{2020-06-03}
+\lfoot{Вариант $\xi$}
+\cfoot{Ни пуха, ни пера!}
+\rfoot{\thepage/3}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\let\P\relax
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\P}{\mathbb{P}}
+%\DeclareMathOperator{\tr}{trace}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+
+
+
+\def \putyourname{\fbox{
+    \begin{minipage}{42em}
+      Фамилия, имя, номер группы:\vspace*{3ex}\par
+      \noindent\dotfill\vspace{2mm}
+    \end{minipage}
+  }
+}
+
+\def \checktable{
+\begin{minipage}{42em}
+\begin{tabular}{|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+\hline
+Тест & 1 &  2 & 3 & Итого \\ \hline
+&  &  &  & \\
+ &  &   & & \\
+ \hline
+\end{tabular} $\longleftarrow$ для проверяющего!
+\end{minipage}
+}
+
+\def \testtable{
+\begin{minipage}{42em}
+\vspace{4pt}
+
+Ответы на тест:
+
+\vspace{2pt}
+\begin{tabular}{|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+\hline
+1 & 2 &  3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ 
+\hline
+ &  &   &  &  &  &  &  &  &  \\ 
+ &  &   &  &  &  &  &  &  &  \\ 
+\hline
+\end{tabular}
+\end{minipage}
+
+}
+
+
+
+
+
+% [1][3] 1 = one argument, 3 = value if missing
+% эта магия создаёт окружение answerlist
+% именно в окружении answerlist записаны варианты ответов в подключаемых exerciseXX
+% просто \begin{answerlist} сделает ответы в три столбца
+% если ответы длинные, то надо в них руками сделать
+% \begin{answerlist}[1] чтобы они шли в один столбец
+\newenvironment{answerlist}[1][3]{
+\begin{multicols}{#1}
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+\end{multicols}
+}
+
+\newenvironment{answerlist1}{
+\begin{enumerate}[label=\fbox{\emph{\Alph*}},ref=\emph{\alph*}]
+}
+{
+\end{enumerate}
+}
+
+
+
+\excludecomment{solution} % without solutions
+
+\theoremstyle{definition}
+\newtheorem{question}{Вопрос}
+
+
+
+
+\begin{document}
+
+\checktable
+
+\putyourname
+
+\testtable
+
+\subsection*{Тест}
+
+\begin{comment}
+
+
+\begin{question}
+  Использование МНК к регрессии с бинарной зависимой переменной приведет к возникновению:
+\begin{answerlist}
+  \item Гетероскедастичности остатков
+  \item Незначимости всей регрессии
+  \item Мультиколлинеарности в модели
+  \item Остатки модели будут иметь нормальное распределение  
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+  В качестве функции правдоподобия для оценки ММП парной регрессионной модели выступает функция:
+\begin{answerlist}[2]
+  \item \( L( \beta_0 ;\beta_1)= \Pi_{i=1}^{n}{(p_{i}^{y_i}+(1-p_i)^{1-y_i})} \)
+  \item \( L( \beta_0 ;\beta_1)= \Pi_{i=1}^{n}{(p_{i}^{y_i} \cdot (1-p_i)^{1-y_i})} \)
+  \item \( L( \beta_0 ;\beta_1) = \Pi_{i=1}^{n}{(p_{i}^{y_i} – (1-p_i)^{1-y_i})} \)
+  \item\( L( \beta_0 ;\beta_1) = \Pi_{i=1}^{n}{(1-p_i)^{1-y_i}}) \)
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+
+\begin{question}
+
+Была оценена логистическая регрессия зависимости вероятности просрочки (1 — есть просрочка, 0 — нет) по кредиту в зависимости от возраста заемщика (Age):
+
+\[
+  \P(Y = 1) = F (Z), Z = -2,101 - 0,025 \cdot Age+ u 
+\]
+   
+Абсолютная разница в вероятности просрочки для заемщика 36 лет и заемщика 55 лет, округленная до сотых, составляет:
+\begin{answerlist}
+  \item нельзя найти по имеющимся данным
+  \item $0$, отсутствует
+  \item $0.5$
+  \item $0.02$
+  \item $0.38$
+  \item $0.05$
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Истинная зависимость имеет вид  \( Y_i = \beta_0 + \beta_1 \cdot Z_i + v_i \). 
+При этом \( Z_i \) измеряется с ошибкой: \( Z^{obs}_i= Z_i + w_i \). 
+Известно, что \( \beta_1= -0,4, \sigma^2_{w} = 6 \), \( \sigma^2_{z} = 3 \), 
+\(\Cov(w_i, v_i) = 0\). 
+Исследователь оценивает регрессию  $\hat Y_i = \hat\beta_0 + \hat\beta_1 \cdot Z^{obs}_i$. 
+Предел по вероятности оценки $\hat\beta_1$ будет отличаться от истинного значения параметра на
+\begin{answerlist}
+  \item $-0.1(3)$
+  \item $0.1(3)$
+  \item $0.2(6)$
+  \item $-0.2(6)$
+  \item Оценка не будет асимптотически смещена
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+Валидность инструмента \( Z_i \) в модели \( Y_i = \beta_0 + \beta_1 \cdot X_i + \epsilon_i \) обозначает:
+\begin{answerlist}
+  \item Инструмент \( Z_i \) коррелирует с \( X_i \)
+  \item Инструмент \( Z_i \) не коррелирует с ошибкой
+  \item Инструмент \( Z_i \) не коррелирует с \( X_i \)
+  \item Инструмент \( Z_i \) коррелирует с ошибкой
+  \item В модели есть эндогенность
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+В линейной модели \( Y_i = \beta_0 + \beta_1 \cdot X_i + \epsilon_i \) регрессор \( X_i \) 
+является эндогенным. 
+Состоятельные оценки коэффициентов можно получить с помощью
+\begin{answerlist}
+  \item МНК
+  \item Обобщенного МНК
+  \item Взвешенного МНК   
+  \item Метода инструментальных переменных  
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+
+
+
+\begin{question}
+Известно, что \( Y_i = \beta_0 + \epsilon_i \), при этом \( \Var(\epsilon_i)=i^2 \). 
+Какая из этих оценок  \( \beta_0 \) будет эффективной?
+
+\begin{answerlist}[2]
+  \item \( \frac{\sum_{i=1}^{n} \frac{Y_i}{i^2}}{\sum_{i=1}^{n} \frac{1}{i^2}} \)
+  \item \( \frac{\sum_{i=1}^{n} \frac{Y_i}{i}}{\sum_{i=1}^{n} \frac{1}{i}} \)
+  \item \( \overline{(\frac{1}{i}}) \)
+  \item \( \overline{(\frac{1}{i^2})} \)
+  \item \( \overline Y \)
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+Какой из этих тестов на гетероскедастичность не требует выбора переменной, 
+  по которой подозревается гетероскедастичность:
+\begin{answerlist}
+  \item Тест Уайта
+  \item Тест Голдфелда-Куандта
+  \item Тест Глейзера
+  \item Тест Дарбина-Уотсона
+  \item Тест Хаусмана
+  \item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+При использовании МНК оценок параметров регрессионного уравнения и робастных ошибок в форме Уайта,
+\begin{answerlist1}
+\item Оценки \( \widehat{\beta} \)  будут состоятельными и неэффективными, доверительные интервалы, 
+полученные по \( \widehat{Var_{HCE}} (\widehat{\beta}) \) можно использовать
+\item Оценки \( \widehat{\beta} \) будут состоятельными и эффективными, доверительные интервалы, 
+полученные по  \( \widehat{Var_{HCE}} (\widehat{\beta}) \)  можно использовать
+\item Оценки \( \widehat{\beta} \)  будут несостоятельными и неэффективными, доверительные интервалы, 
+полученные по  \( \widehat{Var_{HCE}} (\widehat{\beta}) \)   нельзя использовать
+\item Оценки \( \widehat{\beta} \)  будут несостоятельными и неэффективными, доверительные интервалы, 
+полученные по  \( \widehat{Var_{HCE}} (\widehat{\beta}) \)   можно использовать
+\item Оценки \( \widehat{\beta} \)  будут состоятельными и эффективными, доверительные интервалы, 
+полученные по  \( \widehat{Var_{HCE}} (\widehat{\beta}) \)   нельзя использовать
+\item нет верного ответа
+\end{answerlist1}
+\end{question}
+
+\begin{question}
+Для модели \( Y=X\beta + \epsilon \) с \( \Var(\epsilon) = \Omega \neq \sigma_{\epsilon}^{2}I \)
+где $I$ – единичная матрица,
+эффективные оценки параметров $\beta$ можно получить с помощью критерия:
+\begin{answerlist}
+\item \( \min (Y – X \beta)' \Omega (Y – X \beta ) \) 
+\item \( \min (Y – X \beta)' \Omega^{-1} (Y – X \beta ) \) 
+\item \( \min (Y – X \beta)'  (Y – X \beta ) \) 
+\item \( \min (Y – X \beta)^2 \) 
+\item Минимизация невозможна
+\item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+Если функция плотности удовлетворяет условиям регулярности, 
+  то оценки метода максимального правдоподобия являются
+\begin{answerlist}
+\item несмещенными
+\item несостоятельными
+\item неотрицательными
+\item инвариантными
+\item равномерно распределенными
+\item нет верного ответа
+\end{answerlist}
+\end{question}
+
+\begin{question}
+Тест Саргана для проверки валидности инструментов можно использовать, 
+  если число эндогенных переменных среди объясняющих
+\begin{answerlist}
+\item Больше числа экзогенных переменных
+\item Больше числа инструментов
+\item Меньше числа инструментов
+\item Не превышает 10
+\item Меньше 3
+\item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+\begin{question}
+  Если обобщенный метод моментов будет применен в случае, когда число используемых моментов 
+  совпадает с числом оцениваемых параметров, то минимизируемая функция в точке оптимума 
+\begin{answerlist}
+\item Равна нулю
+\item Больше нуля
+\item Меньше нуля
+\item Может быть как больше нуля, так и меньше нуля
+\item Равна числу моментных тождеств
+\item нет верного ответа
+\end{answerlist}
+\end{question}
+
+
+
+\begin{question}
+При проверке гипотезы \( H_0\): \(g(\beta)=0 \) 
+для параметров модели \( Y_i=\beta_0+\beta_1 X_{i} + \beta_2 Z_i + \beta_3 W_i + \epsilon_i\), 
+\(\epsilon \sim \cN(0,\sigma^2) \) 
+с помощью теста множителей Лагранжа, необходимо знать оценки параметров
+  \begin{answerlist}
+  \item Регрессии на константу   
+  \item Регрессии на все факторы, кроме константы   
+  \item Только модели без ограничений
+  \item Только модели с ограничениями
+  \item Как модели с ограничениями, так и модели без ограничений 
+  \item нет верного ответа
+\end{answerlist}
+  \end{question}
+
+  
+  \begin{question}
+  Для проверки значимости коэффициента регрессии \( Y_i=\beta_0+\beta_1 X_{i} + \beta_2 Z_i + \beta_3 W_i + \epsilon_i\), 
+  \(\epsilon \sim \cN(0,\sigma_\epsilon^2) \), 
+  оцененной с помощью ММП по \( n \) наблюдениям, 
+  исследователь использует LR статистику. Она имеет распределение
+    \begin{answerlist}
+    \item точно \( \cN(0, 1) \)
+    \item асимптотически \( \cN(0, 1) \)
+    \item $t_{n-4}$
+    \item асимптотически $\chi^2_{1}$
+    \item асимптотически $\chi^2_{n-4}$
+    \item нет верного ответа
+    \end{answerlist}
+    \end{question}
+    
+
+
+
+
+
+\end{comment}
+
+
+
+
+
+
+
+\newpage
+\putyourname
+
+\subsection*{Задачи}
+
+\begin{enumerate}
+\item  
+
+Винни-Пух качает пресс на карантине, а также есть блины с мёдом и бутерброды со сгущёнкой. 
+Количество подъемов туловища в разные дни равно $X_i$, $\E(X_i) = \mu$ и $\Var(X_i) = \sigma^2$.
+Количество блинов с мёдом, $M_i$, равно  $M_i = X_i + u_i$, где $\E(u_i) = 0$ и $\Var(u_i)= 2\sigma^2$. 
+Количество бутербродов со сгущенкой, $S_i$, равно  $S_i = X_i + w_i$, где $\E(w_i) = 0$ и $\Var(w_i)= 3\sigma^2$. 
+Винни-Пух себя ведёт независимо в разные дни, кроме того, $X_i$, $w_i$ и $u_i$ независимы.
+
+
+За 100 дней карантина Винни-Пух съел 600 бутербродов и 800 блинов. 
+
+\begin{enumerate}
+  \item Оцените ожидаемое количество подъемов туловища в день $\mu$ обобщённым методом моментов 
+с матрицей весов 
+$W= \begin{pmatrix}
+1 & 0 \\
+0 & 3 \\
+\end{pmatrix}.$
+
+\item Найдите оптимальную матрицу весов.
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+\end{document}
