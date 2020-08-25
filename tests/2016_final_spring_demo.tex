@@ -109,10 +109,11 @@
 \element{2016_final_spring_demo}{ % в фигурных скобках название группы вопросов
 %  %\AMCnoCompleteMulti
 \begin{questionmult}{7} % тип вопроса (questionmult — множественный выбор) и в фигурных — номер вопроса
-Инструмент $Z_t$ для оценивания динамической модели $Y_t = \beta_1 + \beta_2 X_t + \beta_3 Y_{t-1} + u_t$ с экзогенным вектором $X$ и AR(1) процессом в ошибках $u_t$ должен удовлетворять требованию
+Инструмент $Z_t$ для оценивания динамической модели $Y_t = \beta_1 + \beta_2 X_t + \beta_3 Y_{t-1} + u_t$ 
+с экзогенным вектором $X$ и AR(1) процессом в ошибках $u_t$ должен удовлетворять требованию
 \begin{multicols}{3} % располагаем ответы в 3 колонки
 \begin{choices} % опция [o] не рандомизирует порядок ответов
-       \correctchoice{$\Corr(Y_{t-1}, Z_t) \to 1$}
+       \correctchoice{$\Corr(Y_{t-1}, Z_t) \neq 0$}
        \wrongchoice{$\Corr(Y_{t-1}, Z_t)=0$}
        \wrongchoice{$\Corr(X_t, Z_t)=0$}
        \wrongchoice{$\Corr(u_t, Z_t)=0$}
