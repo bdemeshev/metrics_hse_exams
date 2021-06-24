@@ -895,8 +895,45 @@ b_i = \beta x_i + \varepsilon_i, \varepsilon_i \sim \cN(0; \sigma^2) \\
     \]
     Отсюда находим ковариацию помня, что $u_2$ зависимо с $u_1$ и $u_3$.
 
-    \item 
-    Вытаскиваем $\varepsilon_{100}$ из имеющейся информации.
+    \item Обозначим:
+    \[
+    x = \begin{pmatrix}
+        Y_{100} \\
+        Y_{99} \\
+        \varepsilon_{99}
+    \end{pmatrix}    
+    \]
+    Считаем условное ожидание:
+    \[
+    \E(Y_{101} \mid x) = 0.3 + 0.8 \cdot 3 + 0 -0.5 \E(\varepsilon_{100} \mid x)    
+    \]
+    Ба, да это же теоретическая регрессия!
+    \[
+    \E(\varepsilon_{100} \mid x) =  \Cov(\varepsilon_{100}, x) \Var^{-1}(x) (x - \E(x)),
+    \]
+    где
+    \[
+        \Cov(\varepsilon_{100}, x) = \begin{pmatrix}
+            4 & 0 & 0
+        \end{pmatrix}, \quad \Var(x) = \begin{pmatrix}
+            500/36 & -10 & -2 \\
+            -10 & 500/36 & 4 \\
+            -2 & 4 & 4 \\
+        \end{pmatrix}, \quad
+        \E(x) = \begin{pmatrix}
+            1.5 \\
+            1.5 \\
+            0 
+        \end{pmatrix}
+    \]
+
+    С дисперсией:
+    \[
+    \Var(Y_{101} \mid x) = 4 + 0.25 \Var(\varepsilon_{100} \mid x) = 
+    4  + 0.25 (\Var(\varepsilon_{100}) - \Cov(\varepsilon_{100}, x) \Var^{-1}(x) \Cov(x, \varepsilon_{100}))   
+    \]
+
+
     Строим предиктивный интервал пользуясь нормальностью ошибок.
     \end{enumerate}
     \item \begin{enumerate}
