@@ -1,0 +1,129 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+% Edit these as appropriate
+\newcommand\course{HSE University}
+\newcommand\testnumber{1}                  % <-- homework number
+\newcommand\testdate{September 2021}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+
+\chead{\textbf{\Large Sample Test \testnumber}}
+\lhead{\testdate}
+\rhead{\course}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Problem 1}
+
+We have a classical linear model 
+\begin{equation*}
+    Y_i = \beta_1 + \beta_2 X_i + u_i
+\end{equation*}
+
+where $\beta_1$ and $\beta_2$ are fixed parameters, $u_i$ is a disturbance term that is independently and identically distributed with expected value 0 and population variance $\sigma_u^2$ and $i = {1, ..., n}$ is the observation index. The OLS estimation helps us to obtain the following coefficient $\beta_2$ estimator: 
+\begin{equation*}
+    \hat\beta_2 = \frac{\overline {XY} - \bar {X} \bar Y}
+    {\overline {X^2} - (\bar X)^2} = 
+    \frac{n \sum \limits_{i=1}^n X_i Y_i - \sum \limits_{i=1}^n X_i \sum \limits_{i=1}^n Y_i}
+    {n \sum \limits_{i=1}^n X_i^2 - (\sum \limits_{i=1}^n X_i)^2}.
+\end{equation*}
+
+However, some algebraic transformations allow to show that 
+\begin{equation*}
+    \hat\beta_2 = \frac{\sum \limits_{i=1}^n (X_i - \bar X)(Y_i - \bar Y)}
+    {\sum \limits_{i=1}^n (X_i - \bar X)^2}.
+\end{equation*}
+
+Prove this is true. \\
+{\itshape Hint: you can try to solve backwards (going from what you are given to prove to the OLS estimator)}
+
+
+\section*{Problem 2}
+A variable $Y_i$ is generated as: 
+\begin{equation*}
+    Y_i = \beta_1 + u_i
+\end{equation*}
+
+where $\beta_1$ is a fixed parameter, $u_i$ is a disturbance term that is independently and identically distributed with expected value 0 and population variance $\sigma_u^2$ and $i = {1, ..., n}$ is the observation index. The least squares estimator of $\beta_1$ is $\bar Y$, the sample mean of $Y$. However, a researcher believes that $Y$ is a linear function of another variable $X$ and uses ordinary least squares to fit the relationship:
+\begin{equation*}
+    \hat Y_i = \hat \beta_1 + \hat \beta_2 X
+\end{equation*}
+
+calculating $\hat \beta_1$ as $\hat Y - \hat \beta_2 \bar X$, where $\bar X$ is the sample mean of $X$. $X$ may be assumed to be a nonstochastic variable. Determine whether the researcher’s estimator ̂$\hat \beta_1$ is biased or unbiased, and if biased, determine the direction of the bias.
+
+
+\section*{Problem 3}
+The output below gives the result of regressing $FDHO$, annual household expenditure on food consumed at home, on $EXP$, total annual household expenditure, both measured in dollars, using the Consumer Expenditure Survey data set. 
+
+\includegraphics[scale=0.44]{Stata-sample.png}
+
+Unfortunately, some things are missing. Looking at this output, do the following tasks:
+
+\begin{enumerate}
+    \item 
+    Give an interpretation of the coefficients estimations
+    
+    \item
+    Find the number of observations
+    
+    \item
+    Find the values of TSS, ESS and RSS
+    
+    \item
+    Explain in your own words what TSS, ESS and RSS are or provide formulas for them
+\end{enumerate}
+
+
+\section*{Problem 4}
+We have a classical linear model 
+\begin{equation*}
+    Y_i = \beta_1 + \beta_2 X_i + u_i
+\end{equation*}
+
+where $\beta_1$ and $\beta_2$ are fixed parameters, $u_i$ is a disturbance term that is independently and identically distributed with expected value 0 and population variance $\sigma_u^2$ and $i = {1, ..., n}$ is the observation index.
+
+Derive the OLS  $\hat \beta_1$ and $\hat \beta_2$ estimators. Answers without a solution will not be accepted. You need to provide a full solution.
+
+
+\end{document}

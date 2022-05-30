@@ -1,5 +1,7 @@
-% !TEX options = --shell-escape -xelatex -synctex=1 -interaction=nonstopmode -file-line-error "%DOC%"
-% !TEX program = xelatex
+% arara: xelatex: {shell: yes}
+% arara: biber
+% arara: xelatex: {shell: yes}
+% arara: xelatex: {shell: yes}
 \documentclass[12pt, a4paper]{article}
 
  
@@ -6424,6 +6426,10 @@ $c_t$, $i_t$.
 
 \input{chapters/year_2020_2021.tex}
 
+
+\section{2021-2022}
+
+\input{chapters/year_2021_2022.tex}
 
 
 \end{document}

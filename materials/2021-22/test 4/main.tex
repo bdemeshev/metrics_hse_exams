@@ -1,0 +1,112 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.4}
+
+% Edit these as appropriate
+\newcommand\course{Econometrics, HSE}
+\newcommand\testnumber{4}                  
+\newcommand\testdate{December 24, 2021}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+
+\chead{\textbf{\Large Test \testnumber}}
+\lhead{\testdate}
+\rhead{\course}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+You have 40 minutes to complete the test. Please explain each step of your derivations and state all the assumptions employed. Note that different problems can give you different points. Maximum for the test is 10 points.  
+
+\bigskip
+\section*{Problem 1} 
+A researcher wants to estimate the impact of students' previous achievements on their final grade for the econometrics course. He is planning to estimate the following model:
+\begin{equation*}
+    Metrics_i = \beta_0 + \beta_1 Maths_i + \beta_2 LinearAlgebra_i + \beta_3 ProbabilityTheory_i + \beta_4 Statistics_i + \epsilon_i
+\end{equation*}
+The researcher has the total of $N$ observations ($N$ students who have finished the metrics course). He assumes that:
+\begin{itemize}
+    \item an extra math point is twice more important than an extra statistics point;
+    \item linear algebra knowledge has the same impact as probability theory knowledge.
+\end{itemize}
+
+How to test these two statements simultaneously? Which models should be estimated? Write down both models. State the null hypothesis the researcher wants to examine. Show how the F-statistics will look like indicating and explaining the numbers of degrees of freedom. [2 points]
+
+\medskip
+\section*{Problem 2}
+The researcher wants to estimate the way person's expenditures on coffee ($COFFEE$) depend on his/her income ($INCOME$) and believes that it is necessary to control for a season of the year. The season variable ($SEASON$) has the following values: 1 for winter, 2 for spring, 3 for summer and 4 for autumn. The researcher assumes that a different linear relationship can correspond to each season.
+
+Write out the equation of the model to be estimated. Indicate the meaning of all variables included in the model. [2 points]
+
+How to test the hypothesis of a uniform (same) linear relationship between income and expenditures for all seasons? Carefully write out the main hypothesis, the alternative hypothesis, the formula for calculating the test statistics. [1,5 points]
+
+\section*{Problem 3}
+The teacher asked you to find out which factors influence the total number of pages of a student's book a person reads during a week's preparation for an exam. You want to include the following explanatory variables:
+
+\begin{itemize}
+    \item $FREE$ - hours of free time on the week before an exam;
+    \item $TRIP$ - duration of the trip from home to university (if the trip is long, a person might use this time for reading);
+    \item $GRADES$ - grades for home assignments that a person received before the exam.
+\end{itemize}
+
+Your groupmate, who is doing the same task, likes the variables that you have suggested, but he decides to include some additional factors and his explanatory variables are:
+
+\begin{itemize}
+    \item the same factors that were suggested by you;
+    \item $SEX$ - dummy on sex (females are usually more diligent and will spend more time on preparation);
+    \item $BURGERS$ - the number of burgers a person has eaten during this week.
+\end{itemize}
+
+The teacher says that the first model lacks an important factor ($SEX$), while the second model has an unnecessary factor ($BURGERS$). All in all, both students have made some mistakes while specifying their models.
+What will be the consequences of each mistake? Which mistake is more dangerous for a researcher and why? [3 points]
+
+\medskip
+\section*{Problem 4}
+
+Choose one paper that was presented during the course (not the one you presented!) and write down its title or authors. What is the main research question of the paper? What data do authors use to answer the research question? [1,5 points]
+
+Having studied different aspects of econometric models, what can you say about potential problems with the modelling that can arise here? [extra points]
+
+\end{document}
