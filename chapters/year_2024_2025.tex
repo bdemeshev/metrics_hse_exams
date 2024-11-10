@@ -213,16 +213,90 @@ All topics before (and including) bootstrap may be included.
 
 \end{enumerate}
 
-\end{document}
+\section*{Demo variant «Pumpkin» solution}
+\begin{enumerate}
+    \item 
+    \begin{enumerate}
+        \item The confidence interval for $\beta_x$ is $[0.2 - 1.96 \cdot \sqrt{4.5}, 0.2 + 1.96 \cdot \sqrt{4.5}]$.
+        \item The confidence interval for conditional expected value of dependent variable is centered at conditional expected value:
+        \[
+        \hat\mu = \E(y \mid x = 1, b = -1, c = 2) = 3 + 0.2 \cdot 1 + 0.5 \cdot (-1) - 0.7 \cdot 2
+        \]
+        \[
+        \hat v =
+        \]
+        Confidence interval is 
+        \[
+            [\hat\mu - 1.96 \sqrt{\hat v}, \hat\mu + 1.96 \sqrt{\hat v}].
+        \]
+        \item The test statistic is $t = \frac{\hb_x + \hb_b - 1}{\sqrt{\hVar(\hb_x) + \hVar(\hb_b) - 2 \hCov(\hb_x, \hb_b)}}$.
+    \end{enumerate}
 
-%Из определения условного ожидания, $\E(X \mid A) = \E(X \cdot I_A) / \P(A)$, 
-%легко получаются определения условной дисперсии, $\Var(X \mid A) = \E(X^2 \mid A) - (\E(X \mid A))^2$,
-%условной ковариации $\Cov(X, Y \mid A) = \E(XY \mid A) - \E(X \mid A) \E(Y \mid A)$ и даже корреляции, 
-%$\Corr(X, Y \mid A) = \Cov(X, Y \mid A) / \sqrt{\Var(X \mid A)\Var(Y \mid A)}$.
+    \item 
+    \begin{enumerate}
+        \item $\E(\hb_1' \mid x) = \beta_1$
+        \item $\hb_1'$ is consistent.
+    \end{enumerate}
 
-% здесь проектируемая часть
+    \item 
+    \begin{enumerate}
+        \item $F = \frac{(500 - 300) / 3}{300 / (300 - 4)}$.
+        \item $F = \frac{(300 - 250) / 2}{250 / (300 - 4)}$.
+        \item $F = \frac{(300 - 150) / 100}{150 / (300 - 4 - 100)}$.
+    \end{enumerate}
+
+    \item 
+    \begin{enumerate}
+        \item % $\hb_0 = 1$, $\hb_1 = 2$.
+        \item % $\SSR = 2$, $\SSE = 8$, $\SST = 10$, $R^2 = 1 - 0.2 = 0.8$.
+        \item % $\hat \sigma^2 = 2/3$.
+    \end{enumerate}
+    \item
+    \begin{enumerate}
+        \item $\E(\hb \mid X) = \beta$, $\E(\hb) = \beta$.
+        \item $\Var(\hb \mid X) = \sigma^2 (X'X)^{-1} X' W X (X'X)^{-1}$.
+        \item No, it will not be valid as it is based on different covariance matrix of $\hb$.
+        \item $\Cov(y, \hb \mid X) = ...$.
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Estimators $\hb_2$ and $\hat \gamma$ are equal.
+        \item Residuals in both regressions are equal.
+    \end{enumerate}
+\end{enumerate}
 
 
 
-\end{document}
+\subsection{Demo variant «Pumpkin» solution}
+\begin{enumerate}
+\item 
+\item 
+\item 
+\item 
+\begin{enumerate}
+    \item $\E(\hat y' \mid X, X') = X' \beta$.
+    \item $\Var(y' - \hat y' \mid X, X') = ...$.
+    \item $\Cov(\hb, y' - \hat y' \mid X, X') = -\Cov(\hb, X' \hb \mid X, X') = -(X^T X)^{-1}(X')^T$.
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+    \item $\dim V = 1$, $\dim W = 2$.
+    \item $H = \begin{pmatrix}
+        1/2 & 1/2 & 0 \\
+        1/2 & 1/2 & 0 \\
+        0 & 0 & 0 \\
+    \end{pmatrix}$.
+    \item $v^Tv \sim \chi^2_1$, $\norm{w}^2 \sim \chi^2_2$.
+    \item $2v^Tv/(w^Tw) \sim F_{1,2}$.
+\end{enumerate}
+\item 
+\begin{enumerate}
+    \item $\E(\hat\beta_1) = 0$, $\E(\hat\beta_1 \mid x) = 0$.
+    \item $\E(R^2) = ...$. Should be positive :)
+    \item $\E(R^2_{adj}) = 0$.
+\end{enumerate}
+
+\end{enumerate}
+
 
